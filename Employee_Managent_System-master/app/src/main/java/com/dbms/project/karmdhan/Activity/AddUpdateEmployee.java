@@ -1,9 +1,9 @@
-package com.example.soc_macmini_15.sqlitepractice.Activity;
+package com.dbms.project.karmdhan.Activity;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,10 +13,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import com.example.soc_macmini_15.sqlitepractice.DB.EmployeeOperations;
-import com.example.soc_macmini_15.sqlitepractice.Fragments.DatePickerFragment;
-import com.example.soc_macmini_15.sqlitepractice.Model.Employee;
-import com.example.soc_macmini_15.sqlitepractice.R;
+import com.dbms.project.karmdhan.DB.EmployeeOperations;
+import com.dbms.project.karmdhan.Fragments.DatePickerFragment;
+import com.dbms.project.karmdhan.Model.Employee;
+import com.dbms.project.karmdhan.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

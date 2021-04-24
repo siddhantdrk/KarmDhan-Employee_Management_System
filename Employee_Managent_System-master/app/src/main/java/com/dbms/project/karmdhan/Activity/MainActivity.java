@@ -1,11 +1,10 @@
-package com.example.soc_macmini_15.sqlitepractice.Activity;
+package com.dbms.project.karmdhan.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.transition.Transition;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.soc_macmini_15.sqlitepractice.DB.EmployeeOperations;
-import com.example.soc_macmini_15.sqlitepractice.Model.Employee;
-import com.example.soc_macmini_15.sqlitepractice.R;
+import com.dbms.project.karmdhan.DB.EmployeeOperations;
+import com.dbms.project.karmdhan.Model.Employee;
+import com.dbms.project.karmdhan.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 

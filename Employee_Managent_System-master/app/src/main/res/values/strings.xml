@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SQLitePractice</string>
+    <string name="app_name">KarmDhan</string>
     <string name="date_picker_title">Hire Date</string>
     <string name="new_employee">New Employee</string>
     <string name="show_subtitle">Show Subtitle</string>

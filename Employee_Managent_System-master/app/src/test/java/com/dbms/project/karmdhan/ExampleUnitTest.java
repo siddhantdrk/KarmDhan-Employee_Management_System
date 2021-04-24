@@ -1,8 +1,8 @@
-package com.example.soc_macmini_15.sqlitepractice;
+package com.dbms.project.karmdhan;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Example local unit test, which will execute on the development machine (host).

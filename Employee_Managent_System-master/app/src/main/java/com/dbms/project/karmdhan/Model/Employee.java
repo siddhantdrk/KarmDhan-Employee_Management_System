@@ -1,4 +1,4 @@
-package com.example.soc_macmini_15.sqlitepractice.Model;
+package com.dbms.project.karmdhan.Model;
 
 public class Employee {
 

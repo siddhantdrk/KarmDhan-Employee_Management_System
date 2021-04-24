@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.example.soc_macmini_15.sqlitepractice"
+        applicationId "com.dbms.project.karmdhan"
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1

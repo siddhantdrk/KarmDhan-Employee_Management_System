@@ -1,4 +1,4 @@
-package com.example.soc_macmini_15.sqlitepractice.DB;
+package com.dbms.project.karmdhan.DB;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

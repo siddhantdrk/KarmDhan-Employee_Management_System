@@ -1,4 +1,4 @@
-package com.example.soc_macmini_15.sqlitepractice.DB;
+package com.dbms.project.karmdhan.DB;
 
 
 import android.content.ContentValues;
@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.soc_macmini_15.sqlitepractice.Model.Employee;
+import com.dbms.project.karmdhan.Model.Employee;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +62,7 @@ public class EmployeeOperations {
     public Employee getEmployee(long id) {
         Employee e;
         open();
-        Log.d(TAG, "getEmployee: " + String.valueOf(id));
+        Log.d(TAG, "getEmployee: " + id);
         Cursor cursor = database.query(EmployeeDBHandler.TABLE_EMPLOYEES, allColumns,
                 EmployeeDBHandler.COLUMN_ID + "=?", new String[]{String.valueOf(id)},
                 null, null, null, null);

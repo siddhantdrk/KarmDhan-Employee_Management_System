@@ -1,4 +1,4 @@
-package com.example.soc_macmini_15.sqlitepractice.Fragments;
+package com.dbms.project.karmdhan.Fragments;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -10,7 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
 
-import com.example.soc_macmini_15.sqlitepractice.R;
+import com.dbms.project.karmdhan.R;
 
 import java.util.Date;
 import java.util.GregorianCalendar;
