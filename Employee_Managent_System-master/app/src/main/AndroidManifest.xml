@@ -9,15 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.dbms.project.karmdhan.Activity.MainActivity">
+        <activity android:name=".Activity.WelcomeActivity"></activity>
+        <activity android:name=".Activity.Login.AdminLoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.dbms.project.karmdhan.Activity.AddUpdateEmployee" />
-        <activity android:name="com.dbms.project.karmdhan.Activity.ViewAllEmployees"></activity>
+        <activity android:name=".Activity.Login.EmployeeLoginActivity" />
+        <activity android:name=".Activity.MainActivity"></activity>
+        <activity android:name=".Activity.AddUpdateEmployee" />
+        <activity android:name=".Activity.ViewAllEmployees" />
     </application>
 
 </manifest>
