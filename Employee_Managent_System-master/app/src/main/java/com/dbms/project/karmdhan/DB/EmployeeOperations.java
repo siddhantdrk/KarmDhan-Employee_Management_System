@@ -22,16 +22,16 @@ public class EmployeeOperations {
     SQLiteDatabase database;
 
     private static final String[] allColumns = {
-            EmployeeDBHandler.COLUMN_ID,
-            EmployeeDBHandler.COLUMN_FIRST_NAME,
-            EmployeeDBHandler.COLUMN_LAST_NAME,
-            EmployeeDBHandler.COLUMN_GENDER,
-            EmployeeDBHandler.COLUMN_HIRE_DATE,
-            EmployeeDBHandler.COLUMN_DEPT
+            KarmDhanDBHandler.COLUMN_ID,
+            KarmDhanDBHandler.COLUMN_FIRST_NAME,
+            KarmDhanDBHandler.COLUMN_LAST_NAME,
+            KarmDhanDBHandler.COLUMN_GENDER,
+            KarmDhanDBHandler.COLUMN_HIRE_DATE,
+            KarmDhanDBHandler.COLUMN_DEPT
     };
 
     public EmployeeOperations(Context context) {
-        dbHandler = new EmployeeDBHandler(context);
+        dbHandler = new KarmDhanDBHandler(context);
     }
 
     public void open() {
@@ -47,13 +47,13 @@ public class EmployeeOperations {
     //inserting the employee
     public Employee addEmployee(Employee employee) {
         ContentValues values = new ContentValues();
-        values.put(EmployeeDBHandler.COLUMN_FIRST_NAME, employee.getFirstName());
-        values.put(EmployeeDBHandler.COLUMN_LAST_NAME, employee.getLastName());
-        values.put(EmployeeDBHandler.COLUMN_GENDER, employee.getGender());
-        values.put(EmployeeDBHandler.COLUMN_HIRE_DATE, employee.getHireDate());
-        values.put(EmployeeDBHandler.COLUMN_DEPT, employee.getDept());
+        values.put(KarmDhanDBHandler.COLUMN_FIRST_NAME, employee.getFirstName());
+        values.put(KarmDhanDBHandler.COLUMN_LAST_NAME, employee.getLastName());
+        values.put(KarmDhanDBHandler.COLUMN_GENDER, employee.getGender());
+        values.put(KarmDhanDBHandler.COLUMN_HIRE_DATE, employee.getHireDate());
+        values.put(KarmDhanDBHandler.COLUMN_DEPT, employee.getDept());
 
-        long insertId = database.insert(EmployeeDBHandler.TABLE_EMPLOYEES, null, values);
+        long insertId = database.insert(KarmDhanDBHandler.TABLE_EMPLOYEES, null, values);
         employee.setEmpId(insertId);
         return employee;
     }
@@ -63,8 +63,8 @@ public class EmployeeOperations {
         Employee e;
         open();
         Log.d(TAG, "getEmployee: " + id);
-        Cursor cursor = database.query(EmployeeDBHandler.TABLE_EMPLOYEES, allColumns,
-                EmployeeDBHandler.COLUMN_ID + "=?", new String[]{String.valueOf(id)},
+        Cursor cursor = database.query(KarmDhanDBHandler.TABLE_EMPLOYEES, allColumns,
+                KarmDhanDBHandler.COLUMN_ID + "=?", new String[]{String.valueOf(id)},
                 null, null, null, null);
         try {
             if (cursor != null) {
@@ -83,18 +83,18 @@ public class EmployeeOperations {
     //fetching all the employees
     public List<Employee> getAllEmployees() {
         open();
-        Cursor cursor = database.query(EmployeeDBHandler.TABLE_EMPLOYEES, allColumns,
+        Cursor cursor = database.query(KarmDhanDBHandler.TABLE_EMPLOYEES, allColumns,
                 null, null, null, null, null);
         List<Employee> employees = new ArrayList<>();
         if (cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
                 Employee employee = new Employee();
-                employee.setEmpId(cursor.getLong(cursor.getColumnIndex(EmployeeDBHandler.COLUMN_ID)));
-                employee.setFirstName(cursor.getString(cursor.getColumnIndex(EmployeeDBHandler.COLUMN_FIRST_NAME)));
-                employee.setLastName(cursor.getString(cursor.getColumnIndex(EmployeeDBHandler.COLUMN_LAST_NAME)));
-                employee.setGender(cursor.getString(cursor.getColumnIndex(EmployeeDBHandler.COLUMN_GENDER)));
-                employee.setHireDate(cursor.getString(cursor.getColumnIndex(EmployeeDBHandler.COLUMN_HIRE_DATE)));
-                employee.setDept(cursor.getString(cursor.getColumnIndex(EmployeeDBHandler.COLUMN_DEPT)));
+                employee.setEmpId(cursor.getLong(cursor.getColumnIndex(KarmDhanDBHandler.COLUMN_ID)));
+                employee.setFirstName(cursor.getString(cursor.getColumnIndex(KarmDhanDBHandler.COLUMN_FIRST_NAME)));
+                employee.setLastName(cursor.getString(cursor.getColumnIndex(KarmDhanDBHandler.COLUMN_LAST_NAME)));
+                employee.setGender(cursor.getString(cursor.getColumnIndex(KarmDhanDBHandler.COLUMN_GENDER)));
+                employee.setHireDate(cursor.getString(cursor.getColumnIndex(KarmDhanDBHandler.COLUMN_HIRE_DATE)));
+                employee.setDept(cursor.getString(cursor.getColumnIndex(KarmDhanDBHandler.COLUMN_DEPT)));
                 employees.add(employee);
             }
         }
@@ -106,22 +106,22 @@ public class EmployeeOperations {
     public int updateEmployee(Employee employee) {
         open();
         ContentValues values = new ContentValues();
-        values.put(EmployeeDBHandler.COLUMN_FIRST_NAME, employee.getFirstName());
-        values.put(EmployeeDBHandler.COLUMN_LAST_NAME, employee.getLastName());
-        values.put(EmployeeDBHandler.COLUMN_GENDER, employee.getGender());
-        values.put(EmployeeDBHandler.COLUMN_HIRE_DATE, employee.getHireDate());
-        values.put(EmployeeDBHandler.COLUMN_DEPT, employee.getDept());
+        values.put(KarmDhanDBHandler.COLUMN_FIRST_NAME, employee.getFirstName());
+        values.put(KarmDhanDBHandler.COLUMN_LAST_NAME, employee.getLastName());
+        values.put(KarmDhanDBHandler.COLUMN_GENDER, employee.getGender());
+        values.put(KarmDhanDBHandler.COLUMN_HIRE_DATE, employee.getHireDate());
+        values.put(KarmDhanDBHandler.COLUMN_DEPT, employee.getDept());
 
         //Updating Row
-        return database.update(EmployeeDBHandler.TABLE_EMPLOYEES, values,
-                EmployeeDBHandler.COLUMN_ID + "=?", new String[]{String.valueOf(employee.getEmpId())});
+        return database.update(KarmDhanDBHandler.TABLE_EMPLOYEES, values,
+                KarmDhanDBHandler.COLUMN_ID + "=?", new String[]{String.valueOf(employee.getEmpId())});
     }
 
     //Deleting Employee
     public void removeEmployee(Employee employee) {
         open();
-        database.delete(EmployeeDBHandler.TABLE_EMPLOYEES,
-                EmployeeDBHandler.COLUMN_ID + "=" + employee.getEmpId(), null);
+        database.delete(KarmDhanDBHandler.TABLE_EMPLOYEES,
+                KarmDhanDBHandler.COLUMN_ID + "=" + employee.getEmpId(), null);
         close();
     }
 
