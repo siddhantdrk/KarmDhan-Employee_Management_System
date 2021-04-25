@@ -8,7 +8,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.dbms.project.karmdhan.Activity.MainActivity;
 import com.dbms.project.karmdhan.DB.AdminOperations;
 import com.dbms.project.karmdhan.Model.Admin;
 import com.dbms.project.karmdhan.R;
@@ -47,7 +46,7 @@ public class AdminLoginActivity extends AppCompatActivity {
                 if (adminOperations.checkLoginCredentials(admin)) {
                     Toast.makeText(this, "Logged In successfully", Toast.LENGTH_SHORT).show();
                     SharedPreferenceManager.getInstance(this).saveToken(userId);
-                    Intent intent = new Intent(this, MainActivity.class);
+                    Intent intent = new Intent(this, AdminLoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
                             Intent.FLAG_ACTIVITY_CLEAR_TASK |
                             Intent.FLAG_ACTIVITY_NEW_TASK);

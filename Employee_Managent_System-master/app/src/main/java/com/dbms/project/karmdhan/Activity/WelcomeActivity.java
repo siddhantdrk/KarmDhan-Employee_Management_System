@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dbms.project.karmdhan.Activity.Dashboard.AdminDashboardActivity;
 import com.dbms.project.karmdhan.Activity.Login.AdminLoginActivity;
 import com.dbms.project.karmdhan.Activity.Login.EmployeeLoginActivity;
 import com.dbms.project.karmdhan.R;
@@ -30,10 +30,9 @@ public class WelcomeActivity extends AppCompatActivity {
     private void checkIfUserExists() {
         if (SharedPreferenceManager.getInstance(this).getToken() != null) {
             if (SharedPreferenceManager.getInstance(this).isAdmin())
-                startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
+                startActivity(new Intent(WelcomeActivity.this, AdminDashboardActivity.class));
             else
-                Toast.makeText(this, "Employee", Toast.LENGTH_SHORT).show();
-            //startActivity(new Intent(WelcomeActivity.this, GuestDashBoardActivity.class));
+                startActivity(new Intent(WelcomeActivity.this, EmployeeLoginActivity.class));
             finish();
         } else {
             setContentView(binding.getRoot());
