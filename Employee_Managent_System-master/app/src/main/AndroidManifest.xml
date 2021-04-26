@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.Dashboard.EmployeeDashboardActivity"></activity>
+        <activity android:name=".Activity.ForgotPasswordActivity"></activity>
+        <activity android:name=".Activity.RenewPasswordActivity" />
+        <activity android:name=".Activity.PasswordResetActivity" />
+        <activity android:name=".Activity.Dashboard.EmployeeDashboardActivity" />
         <activity android:name=".Activity.Dashboard.AdminDashboardActivity" />
         <activity android:name=".Activity.WelcomeActivity">
             <intent-filter>

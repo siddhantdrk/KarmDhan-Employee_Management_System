@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dbms.project.karmdhan.Activity.PasswordResetActivity;
 import com.dbms.project.karmdhan.DB.AdminOperations;
 import com.dbms.project.karmdhan.Model.Admin;
 import com.dbms.project.karmdhan.R;
@@ -25,11 +26,18 @@ public class AdminLoginActivity extends AppCompatActivity {
         adminOperations = new AdminOperations(this);
         adminOperations.addAdmin(new Admin("12345678", "12345678"));
         binding.loginBtn.setOnClickListener(this::onClick);
+        binding.forgotPasswordTv.setOnClickListener(this::onClick);
     }
 
     private void onClick(View view) {
-        if (view.getId()==R.id.login_btn) {
+        switch (view.getId()) {
+            case R.id.login_btn:
                 login();
+                break;
+            case R.id.forgot_password_tv:
+                Intent intent = new Intent(AdminLoginActivity.this, PasswordResetActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 
@@ -47,9 +55,7 @@ public class AdminLoginActivity extends AppCompatActivity {
                     Toast.makeText(this, "Logged In successfully", Toast.LENGTH_SHORT).show();
                     SharedPreferenceManager.getInstance(this).saveToken(userId);
                     Intent intent = new Intent(this, AdminLoginActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP |
-                            Intent.FLAG_ACTIVITY_CLEAR_TASK |
-                            Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 } else {
                     Toast.makeText(this, "Wrong credentials !! Please fill the correct details", Toast.LENGTH_SHORT).show();
