@@ -45,10 +45,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         if(!password.isEmpty()){
             if(!confPassword.isEmpty()){
                 if (password.equals(confPassword)){
-                    SQLiteDatabase database = myDbHelper.getWritableDatabase();
                     String userId = getIntent().getStringExtra("USERID");
-                    String strSQL = "UPDATE myTable SET COLUMN_ADMIN_PASSWORD = "+ password+"someValue WHERE COLUMN_ADMIN_ID = "+ userId;
-                    database.execSQL(strSQL);
+                    adminOperations.update(userId,password);
                     Intent intent = new Intent(ForgotPasswordActivity.this, AdminLoginActivity.class);
                     startActivity(intent);
                 }else{

@@ -42,10 +42,8 @@ public class RenewPasswordActivity extends AppCompatActivity {
 
         if(!oldPassword.isEmpty()){
             if(!newPassword.isEmpty()){
-                SQLiteDatabase database = myDbHelper.getWritableDatabase();
                 String userId = getIntent().getStringExtra("USERID");
-                String strSQL = "UPDATE myTable SET COLUMN_ADMIN_PASSWORD = "+ newPassword+"someValue WHERE COLUMN_ADMIN_ID = "+ userId;
-                database.execSQL(strSQL);
+                adminOperations.update(userId,newPassword);
                 Intent intent = new Intent(RenewPasswordActivity.this, AdminLoginActivity.class);
                 startActivity(intent);
             }else{
