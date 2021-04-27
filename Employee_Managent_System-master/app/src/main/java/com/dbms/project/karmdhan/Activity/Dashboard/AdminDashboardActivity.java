@@ -23,6 +23,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
         binding = ActivityAdminDashboardBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
         binding.logoutBtn.setOnClickListener(this::OnClick);
+        binding.addEmployee.setOnClickListener(this::OnClick);
     }
 
     private void OnClick(View view) {
@@ -33,6 +34,9 @@ public class AdminDashboardActivity extends AppCompatActivity {
                 Toast.makeText(this, "Logged out Successfully", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
                 finish();
+                break;
+            case R.id.add_employee:
+
                 break;
         }
     }
