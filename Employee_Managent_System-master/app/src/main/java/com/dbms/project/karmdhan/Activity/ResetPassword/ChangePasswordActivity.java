@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.dbms.project.karmdhan.Activity.Login.AdminLoginActivity;
 import com.dbms.project.karmdhan.DB.AdminOperations;
+import com.dbms.project.karmdhan.Model.Admin;
 import com.dbms.project.karmdhan.R;
 import com.dbms.project.karmdhan.databinding.ActivityChangePasswordBinding;
 
@@ -38,18 +39,26 @@ public class ChangePasswordActivity extends AppCompatActivity {
         String oldPassword = binding.oldPasswordEdt.getText().toString().trim();
         String newPassword = binding.newPasswordEdt.getText().toString().trim();
 
-        if(!oldPassword.isEmpty()){
-            if(!newPassword.isEmpty()){
-                String userId = getIntent().getStringExtra("USERID");
-                adminOperations.updatePassword(Integer.parseInt(userId), newPassword);
-                Intent intent = new Intent(ChangePasswordActivity.this, AdminLoginActivity.class);
-                startActivity(intent);
-            }else{
-                binding.newPasswordTil.setError("new password field should not kept empty");
-                Toast.makeText(this, "new Password is empty", Toast.LENGTH_SHORT).show();
+        if(!oldPassword.isEmpty()) {
+            String userId = getIntent().getStringExtra("USERID");
+            if (adminOperations.checkAdminLoginCredentials(new Admin(Integer.parseInt(userId), oldPassword))) {
+                if (!newPassword.isEmpty()) {
+                    if (adminOperations.updatePassword(Integer.parseInt(userId), newPassword)) {
+                        Toast.makeText(this, "Password Updated successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(ChangePasswordActivity.this, AdminLoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                } else {
+                    binding.newPasswordTil.setError("Required!!");
+                    Toast.makeText(this, "new Password is empty", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                binding.oldPasswordTil.setError("Incorrect Old Password !!");
+                Toast.makeText(this, "old Password is Incorrect", Toast.LENGTH_SHORT).show();
             }
         }else{
-            binding.oldPasswordTil.setError("old password field should not kept empty");
+            binding.oldPasswordTil.setError("Required!!");
             Toast.makeText(this, "old Password is empty", Toast.LENGTH_SHORT).show();
         }
     }

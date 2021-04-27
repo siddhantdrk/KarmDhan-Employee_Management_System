@@ -44,18 +44,21 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             if(!confPassword.isEmpty()){
                 if (password.equals(confPassword)){
                     String userId = getIntent().getStringExtra("USERID");
-                    adminOperations.updatePassword(Integer.parseInt(userId), password);
-                    Intent intent = new Intent(ForgotPasswordActivity.this, AdminLoginActivity.class);
-                    startActivity(intent);
+                    if (adminOperations.updatePassword(Integer.parseInt(userId), confPassword)) {
+                        Toast.makeText(this, "Password Updated successfully", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(ForgotPasswordActivity.this, AdminLoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
                 }else{
                     Toast.makeText(this, "Password does not match", Toast.LENGTH_SHORT).show();
                 }
             }else{
-                binding.confPasswordTil.setError("password field should not kept empty");
+                binding.confPasswordTil.setError("Required!!");
                 Toast.makeText(this, "Confirm Password is empty", Toast.LENGTH_SHORT).show();
             }
         }else{
-            binding.newPasswordTil.setError("Confirm password field should not kept empty");
+            binding.newPasswordTil.setError("Required!!");
             Toast.makeText(this, "Password is empty", Toast.LENGTH_SHORT).show();
         }
     }

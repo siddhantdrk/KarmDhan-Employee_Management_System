@@ -1,13 +1,11 @@
 package com.dbms.project.karmdhan.Activity.Login;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dbms.project.karmdhan.Activity.Dashboard.AdminDashboardActivity;
@@ -24,7 +22,6 @@ public class AdminLoginActivity extends AppCompatActivity {
     private AdminOperations adminOperations;
     private PasswordAuthentication passwordAuthentication;
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,18 +29,15 @@ public class AdminLoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         adminOperations = new AdminOperations(this);
         passwordAuthentication = new PasswordAuthentication();
-        String password = "12345678";
-        if (adminOperations.addAdmin(new Admin(12345678, passwordAuthentication.hash(password.toCharArray())))) {
+        if (adminOperations.addAdmin(new Admin(12345678, "12345678"))) {
             Toast.makeText(this, "Admin added successfully", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(this, "User ID already exists", Toast.LENGTH_SHORT).show();
         }
-        adminOperations.addAdmin(new Admin(98765432, passwordAuthentication.hash(password.toCharArray())));
         binding.loginBtn.setOnClickListener(this::onClick);
         binding.forgotPasswordTv.setOnClickListener(this::onClick);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private void onClick(View view) {
         switch (view.getId()) {
             case R.id.login_btn:
@@ -56,17 +50,17 @@ public class AdminLoginActivity extends AppCompatActivity {
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private void login() {
         String userId = binding.userIdEdt.getText().toString().trim();
         String password = binding.passwordEdt.getText().toString().trim();
 
         if (!userId.isEmpty()) {
             if (!adminOperations.checkAdminIDExist(Integer.parseInt(userId))) {
+                binding.userIdTil.setError("Invalid User ID !!");
                 Toast.makeText(this, "User ID doesn't exist", Toast.LENGTH_SHORT).show();
             } else if (!password.isEmpty()) {
                 Admin admin = new Admin(Integer.parseInt(userId), password);
-                if (adminOperations.checkLoginCredentials(admin)) {
+                if (adminOperations.checkAdminLoginCredentials(admin)) {
                     Toast.makeText(this, "Logged In successfully", Toast.LENGTH_SHORT).show();
                     SharedPreferenceManager.getInstance(this).saveToken(userId);
                     Intent intent = new Intent(this, AdminDashboardActivity.class);
@@ -76,11 +70,11 @@ public class AdminLoginActivity extends AppCompatActivity {
                     Toast.makeText(this, "Wrong credentials !! Please fill the correct details", Toast.LENGTH_SHORT).show();
                 }
             }else{
-                binding.passwordTil.setError("password field should not kept empty");
+                binding.passwordTil.setError("Required!!");
                 Toast.makeText(AdminLoginActivity.this, "password is empty", Toast.LENGTH_SHORT).show();
             }
         }else{
-            binding.userIdTil.setError("UserId field should not kept empty");
+            binding.userIdTil.setError("Required !!");
             Toast.makeText(AdminLoginActivity.this, "UserId is empty", Toast.LENGTH_SHORT).show();
         }
     }

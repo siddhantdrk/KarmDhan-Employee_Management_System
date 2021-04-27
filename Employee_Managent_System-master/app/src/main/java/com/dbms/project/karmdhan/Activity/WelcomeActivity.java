@@ -9,6 +9,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dbms.project.karmdhan.Activity.Dashboard.AdminDashboardActivity;
+import com.dbms.project.karmdhan.Activity.Dashboard.EmployeeDashboardActivity;
 import com.dbms.project.karmdhan.Activity.Login.AdminLoginActivity;
 import com.dbms.project.karmdhan.Activity.Login.EmployeeLoginActivity;
 import com.dbms.project.karmdhan.R;
@@ -32,7 +33,7 @@ public class WelcomeActivity extends AppCompatActivity {
             if (SharedPreferenceManager.getInstance(this).isAdmin())
                 startActivity(new Intent(WelcomeActivity.this, AdminDashboardActivity.class));
             else
-                startActivity(new Intent(WelcomeActivity.this, EmployeeLoginActivity.class));
+                startActivity(new Intent(WelcomeActivity.this, EmployeeDashboardActivity.class));
             finish();
         } else {
             setContentView(binding.getRoot());

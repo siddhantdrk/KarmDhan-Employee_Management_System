@@ -1,5 +1,6 @@
 package com.dbms.project.karmdhan.Activity.Login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,11 +8,15 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dbms.project.karmdhan.Activity.Dashboard.EmployeeDashboardActivity;
+import com.dbms.project.karmdhan.DB.EmployeeOperations;
+import com.dbms.project.karmdhan.Model.NewEmployee;
 import com.dbms.project.karmdhan.R;
+import com.dbms.project.karmdhan.Storage.SharedPreferenceManager;
 import com.dbms.project.karmdhan.databinding.ActivityEmployeeLoginBinding;
 
 public class EmployeeLoginActivity extends AppCompatActivity {
-
+    private EmployeeOperations employeeOperations;
     private ActivityEmployeeLoginBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,17 +33,31 @@ public class EmployeeLoginActivity extends AppCompatActivity {
     }
 
     private void login() {
-        String name = binding.userIdEdt.getText().toString().trim();
+        String employeeNumber = binding.userIdEdt.getText().toString().trim();
         String password = binding.passwordEdt.getText().toString().trim();
 
-        if(!name.isEmpty()){
-            if(!password.isEmpty()){
-
-            }else{
-                Toast.makeText(EmployeeLoginActivity.this, "password is empty", Toast.LENGTH_SHORT).show();
+        if (!employeeNumber.isEmpty()) {
+            employeeOperations = new EmployeeOperations(this);
+            if (employeeOperations.checkIfEmployeeNumberExist(Integer.parseInt(employeeNumber))) {
+                if (!password.isEmpty()) {
+                    if (employeeOperations.checkEmployeeLoginCredentials(new NewEmployee(Integer.parseInt(employeeNumber), password))) {
+                        Toast.makeText(this, "Logged In successfully!", Toast.LENGTH_SHORT).show();
+                        SharedPreferenceManager.getInstance(this).saveToken(employeeNumber);
+                        Intent intent = new Intent(this, EmployeeDashboardActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                    }
+                } else {
+                    binding.passwordTil.setError("Required!!");
+                    Toast.makeText(EmployeeLoginActivity.this, "password is empty", Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                binding.userIdTil.setError("Invalid User ID !!");
+                Toast.makeText(this, "User ID doesn't Exist !", Toast.LENGTH_SHORT).show();
             }
-        }else{
-            Toast.makeText(EmployeeLoginActivity.this, "userName is empty", Toast.LENGTH_SHORT).show();
+        } else {
+            binding.passwordTil.setError("Required!!");
+            Toast.makeText(EmployeeLoginActivity.this, "userID is empty", Toast.LENGTH_SHORT).show();
         }
     }
 }

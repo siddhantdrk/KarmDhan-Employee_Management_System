@@ -6,9 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
 
 import com.dbms.project.karmdhan.Authentication.PasswordAuthentication;
 import com.dbms.project.karmdhan.Model.Admin;
@@ -48,21 +45,21 @@ public class AdminOperations {
         return cursor.getCount() > 0;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    public boolean checkLoginCredentials(Admin admin) {
+    public boolean checkAdminLoginCredentials(Admin admin) {
         passwordAuthentication = new PasswordAuthentication();
         SQLiteDatabase database = adminDbHelper.getWritableDatabase();
-        Cursor cursor = database.rawQuery("select * from " + TABLE_ADMIN + " where " + COLUMN_ADMIN_ID + " = " + admin.getAdminId(), null);
-        if (cursor.getCount() > 0 && cursor.moveToFirst()) {
-            return passwordAuthentication.authenticate(admin.getAdminPassword().toCharArray(), cursor.getString(cursor.getColumnIndex(COLUMN_ADMIN_PASSWORD)));
-        }
-        return false;
+        Cursor cursor = database.rawQuery("select * from " + TABLE_ADMIN + " where " + COLUMN_ADMIN_ID + " = ?" + " and " + COLUMN_ADMIN_PASSWORD + " = ?", new String[]{String.valueOf(admin.getAdminId()), admin.getAdminPassword()});
+        return cursor.getCount() > 0;
     }
 
-    public void updatePassword(int userId, String password) {
+    public boolean updatePassword(int userId, String password) {
         SQLiteDatabase database = adminDbHelper.getWritableDatabase();
-        String strSQL = "UPDATE " + TABLE_ADMIN + " SET " + COLUMN_ADMIN_PASSWORD + " =" + "'" + password + "'" + " WHERE " + COLUMN_ADMIN_ID + " = " + "'" + userId + "'";
-        database.execSQL(strSQL);
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_ADMIN_PASSWORD, password);
+        long result = database.update(TABLE_ADMIN, contentValues, COLUMN_ADMIN_ID + " = ?", new String[]{String.valueOf(userId)});
+////      String strSQL = "UPDATE " + TABLE_ADMIN + " SET " + COLUMN_ADMIN_PASSWORD + " =" + "'" + password + "'" + " WHERE " + COLUMN_ADMIN_ID + " = " + "'" + userId + "'";
+//        database.execSQL(strSQL);
+        return result != -1;
     }
 
     public boolean addEmployee(NewEmployee newEmployee) throws SQLiteConstraintException {

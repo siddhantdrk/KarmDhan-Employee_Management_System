@@ -35,9 +35,8 @@
             android:id="@+id/employee_number_edt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="8-digit Employee Number"
-            android:inputType="number"
-            android:maxLength="8" />
+            android:hint="Employee Number"
+            android:inputType="number" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -59,8 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Employee Name"
-            android:inputType="textCapWords"
-            android:maxLength="8" />
+            android:inputType="textCapWords" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

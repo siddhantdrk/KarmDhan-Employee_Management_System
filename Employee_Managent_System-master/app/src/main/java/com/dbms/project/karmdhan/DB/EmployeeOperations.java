@@ -9,16 +9,23 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.dbms.project.karmdhan.Authentication.PasswordAuthentication;
 import com.dbms.project.karmdhan.Model.Employee;
+import com.dbms.project.karmdhan.Model.NewEmployee;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_EMPLOYEE_NUMBER;
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_EMPLOYEE_PASSWORD;
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_EMPLOYEE_PASSWORD;
 
 public class EmployeeOperations {
 
     public static final String TAG = "EMP_MNGMNT_SYS";
 
-    SQLiteOpenHelper dbHandler;
+    private final SQLiteOpenHelper employeeDbHelper;
+    private PasswordAuthentication passwordAuthentication;
     SQLiteDatabase database;
 
     private static final String[] allColumns = {
@@ -31,17 +38,17 @@ public class EmployeeOperations {
     };
 
     public EmployeeOperations(Context context) {
-        dbHandler = new KarmDhanDBHandler(context);
+        employeeDbHelper = new KarmDhanDBHandler(context);
     }
 
     public void open() {
         Log.i(TAG, "Database Opened ");
-        database = dbHandler.getWritableDatabase();
+        database = employeeDbHelper.getWritableDatabase();
     }
 
     public void close() {
         Log.i(TAG, "Database Closed ");
-        dbHandler.close();
+        employeeDbHelper.close();
     }
 
     //inserting the employee
@@ -123,6 +130,19 @@ public class EmployeeOperations {
         database.delete(KarmDhanDBHandler.TABLE_EMPLOYEES,
                 KarmDhanDBHandler.COLUMN_ID + "=" + employee.getEmpId(), null);
         close();
+    }
+
+    public boolean checkIfEmployeeNumberExist(int empNum) {
+        SQLiteDatabase database = employeeDbHelper.getWritableDatabase();
+        Cursor cursor = database.rawQuery("select * from " + TABLE_EMPLOYEE_PASSWORD + " where " + COLUMN_EMPLOYEE_NUMBER + " = " + empNum, null);
+        return cursor.getCount() > 0;
+    }
+
+    public boolean checkEmployeeLoginCredentials(NewEmployee employee) {
+        passwordAuthentication = new PasswordAuthentication();
+        SQLiteDatabase database = employeeDbHelper.getWritableDatabase();
+        Cursor cursor = database.rawQuery("select * from " + TABLE_EMPLOYEE_PASSWORD + " where " + COLUMN_EMPLOYEE_NUMBER + " = ?" + " and " + COLUMN_EMPLOYEE_PASSWORD + " = ?", new String[]{String.valueOf(employee.getEmployeeNumber()), employee.getEmployeePassword()});
+        return cursor.getCount() > 0;
     }
 
 }
