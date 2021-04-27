@@ -1,12 +1,12 @@
 package com.dbms.project.karmdhan.Activity.ResetPassword;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.dbms.project.karmdhan.DB.AdminOperations;
 import com.dbms.project.karmdhan.R;
@@ -40,11 +40,11 @@ public class ChangeOrResetPasswordActivity extends AppCompatActivity {
     private void checkUserIdForRenewPassword() {
         String userId = binding.userIdEdt.getText().toString().trim();
         if(!userId.isEmpty()){
-            if(!adminOperations.checkAdminIDExist(userId)){
+            if (!adminOperations.checkAdminIDExist(Integer.parseInt(userId))) {
                 Toast.makeText(this, "User ID doesn't exist", Toast.LENGTH_SHORT).show();
-            }else{
-                Intent intent =new Intent(ChangeOrResetPasswordActivity.this, RenewPasswordActivity.class);
-                intent.putExtra("USERID",userId);
+            } else {
+                Intent intent = new Intent(ChangeOrResetPasswordActivity.this, RenewPasswordActivity.class);
+                intent.putExtra("USERID", userId);
                 startActivity(intent);
             }
         }else{
@@ -55,11 +55,11 @@ public class ChangeOrResetPasswordActivity extends AppCompatActivity {
     private void checkUserIdForForgotPassword() {
         String userId = binding.userIdEdt.getText().toString().trim();
         if(!userId.isEmpty()){
-            if(!adminOperations.checkAdminIDExist(userId)){
+            if (!adminOperations.checkAdminIDExist(Integer.parseInt(userId))) {
                 Toast.makeText(this, "User ID doesn't exist", Toast.LENGTH_SHORT).show();
-            }else{
-                Intent intent =new Intent(ChangeOrResetPasswordActivity.this, ForgotPasswordActivity.class);
-                intent.putExtra("USERID",userId);
+            } else {
+                Intent intent = new Intent(ChangeOrResetPasswordActivity.this, ForgotPasswordActivity.class);
+                intent.putExtra("USERID", userId);
                 startActivity(intent);
             }
         }else{

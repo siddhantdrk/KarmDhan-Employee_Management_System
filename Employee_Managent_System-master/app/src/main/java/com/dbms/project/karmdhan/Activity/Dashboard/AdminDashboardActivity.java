@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dbms.project.karmdhan.Activity.AddEmployeeActivity;
 import com.dbms.project.karmdhan.Activity.WelcomeActivity;
 import com.dbms.project.karmdhan.R;
 import com.dbms.project.karmdhan.Storage.SharedPreferenceManager;
@@ -36,12 +37,8 @@ public class AdminDashboardActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.add_employee:
-                addEmployee();
+                startActivity(new Intent(this, AddEmployeeActivity.class));
                 break;
         }
-    }
-
-    private void addEmployee() {
-        
     }
 }

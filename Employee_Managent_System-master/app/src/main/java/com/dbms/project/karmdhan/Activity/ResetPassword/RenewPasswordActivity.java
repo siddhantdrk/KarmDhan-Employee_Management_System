@@ -41,7 +41,7 @@ public class RenewPasswordActivity extends AppCompatActivity {
         if(!oldPassword.isEmpty()){
             if(!newPassword.isEmpty()){
                 String userId = getIntent().getStringExtra("USERID");
-                adminOperations.updatePassword(userId, newPassword);
+                adminOperations.updatePassword(Integer.parseInt(userId), newPassword);
                 Intent intent = new Intent(RenewPasswordActivity.this, AdminLoginActivity.class);
                 startActivity(intent);
             }else{

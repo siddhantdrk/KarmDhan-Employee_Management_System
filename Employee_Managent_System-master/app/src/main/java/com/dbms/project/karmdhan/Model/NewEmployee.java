@@ -4,11 +4,14 @@ public class NewEmployee {
     int employeeNumber;
     String employeeName;
     String employeeJobClass;
+    String employeePassword;
 
-    public NewEmployee(int employeeNumber, String employeeName, String employeeJobClass) {
+
+    public NewEmployee(int employeeNumber, String employeeName, String employeeJobClass, String employeePassword) {
         this.employeeNumber = employeeNumber;
         this.employeeName = employeeName;
         this.employeeJobClass = employeeJobClass;
+        this.employeePassword = employeePassword;
     }
 
     public int getEmployeeNumber() {
@@ -33,5 +36,13 @@ public class NewEmployee {
 
     public void setEmployeeJobClass(String employeeJobClass) {
         this.employeeJobClass = employeeJobClass;
+    }
+
+    public String getEmployeePassword() {
+        return employeePassword;
+    }
+
+    public void setEmployeePassword(String employeePassword) {
+        this.employeePassword = employeePassword;
     }
 }

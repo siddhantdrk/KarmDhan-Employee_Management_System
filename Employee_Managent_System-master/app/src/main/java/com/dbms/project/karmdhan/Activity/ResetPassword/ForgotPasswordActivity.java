@@ -44,7 +44,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             if(!confPassword.isEmpty()){
                 if (password.equals(confPassword)){
                     String userId = getIntent().getStringExtra("USERID");
-                    adminOperations.updatePassword(userId, password);
+                    adminOperations.updatePassword(Integer.parseInt(userId), password);
                     Intent intent = new Intent(ForgotPasswordActivity.this, AdminLoginActivity.class);
                     startActivity(intent);
                 }else{
