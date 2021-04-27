@@ -36,8 +36,12 @@ public class AdminDashboardActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.add_employee:
-
+                addEmployee();
                 break;
         }
+    }
+
+    private void addEmployee() {
+        
     }
 }

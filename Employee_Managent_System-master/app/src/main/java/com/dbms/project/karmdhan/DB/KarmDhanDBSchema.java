@@ -26,7 +26,7 @@ public class KarmDhanDBSchema {
 
 
     //Admin Table
-    public static final String TABLE_ADMIN_CREATE = "CREATE TABLE " + TABLE_ADMIN + " (" + COLUMN_ADMIN_ID + " TEXT PRIMARY KEY, " +
+    public static final String TABLE_ADMIN_CREATE = "CREATE TABLE " + TABLE_ADMIN + " (" + COLUMN_ADMIN_ID + " INTEGER PRIMARY KEY, " +
             COLUMN_ADMIN_PASSWORD + " TEXT " + ")";
 
     //Project Table

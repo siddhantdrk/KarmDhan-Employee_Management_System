@@ -19,4 +19,17 @@
     <string name="add_dept">Department</string>
     <string name="enter_employee_id">Enter Your Employee Id</string>
     <string name="settings">Settings</string>
+
+    <string-array name="job_class_spinner_entries">
+        <item>Select</item>
+        <item>Programmer</item>
+        <item>Electrical Engineer</item>
+        <item>Database Designer</item>
+        <item>System Analyst</item>
+        <item>Application Designer</item>
+        <item>General Support</item>
+        <item>DSS Analyst</item>
+        <item>Clerical Support</item>
+    </string-array>
+
 </resources>

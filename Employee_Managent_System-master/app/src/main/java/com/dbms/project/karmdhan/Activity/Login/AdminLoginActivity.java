@@ -25,7 +25,11 @@ public class AdminLoginActivity extends AppCompatActivity {
         binding = ActivityAdminLoginBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
         adminOperations = new AdminOperations(this);
-        adminOperations.addAdmin(new Admin("12345678", "12345678"));
+        if (adminOperations.addAdmin(new Admin(12345678, "12345678"))) {
+            Toast.makeText(this, "Admin added successfully", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "User ID already exists", Toast.LENGTH_SHORT).show();
+        }
         binding.loginBtn.setOnClickListener(this::onClick);
         binding.forgotPasswordTv.setOnClickListener(this::onClick);
     }
@@ -47,10 +51,10 @@ public class AdminLoginActivity extends AppCompatActivity {
         String password = binding.passwordEdt.getText().toString().trim();
 
         if (!userId.isEmpty()) {
-            if (!adminOperations.checkAdminIDExist(userId)) {
+            if (!adminOperations.checkAdminIDExist(Integer.parseInt(userId))) {
                 Toast.makeText(this, "User ID doesn't exist", Toast.LENGTH_SHORT).show();
             } else if (!password.isEmpty()) {
-                Admin admin = new Admin(userId, password);
+                Admin admin = new Admin(Integer.parseInt(userId), password);
                 if (adminOperations.checkLoginCredentials(admin)) {
                     Toast.makeText(this, "Logged In successfully", Toast.LENGTH_SHORT).show();
                     SharedPreferenceManager.getInstance(this).saveToken(userId);
