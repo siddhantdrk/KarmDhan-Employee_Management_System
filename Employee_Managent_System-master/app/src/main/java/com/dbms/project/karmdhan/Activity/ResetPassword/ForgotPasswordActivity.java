@@ -51,9 +51,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     Toast.makeText(this, "Password does not match", Toast.LENGTH_SHORT).show();
                 }
             }else{
+                binding.confPasswordTil.setError("password field should not kept empty");
                 Toast.makeText(this, "Confirm Password is empty", Toast.LENGTH_SHORT).show();
             }
         }else{
+            binding.newPasswordTil.setError("Confirm password field should not kept empty");
             Toast.makeText(this, "Password is empty", Toast.LENGTH_SHORT).show();
         }
     }

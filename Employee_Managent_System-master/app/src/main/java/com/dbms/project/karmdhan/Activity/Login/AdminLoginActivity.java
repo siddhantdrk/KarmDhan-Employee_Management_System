@@ -11,7 +11,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dbms.project.karmdhan.Activity.Dashboard.AdminDashboardActivity;
-import com.dbms.project.karmdhan.Activity.ResetPassword.ChangeOrResetPasswordActivity;
+import com.dbms.project.karmdhan.Activity.ResetPassword.ChangeOrForgotPasswordActivity;
 import com.dbms.project.karmdhan.Authentication.PasswordAuthentication;
 import com.dbms.project.karmdhan.DB.AdminOperations;
 import com.dbms.project.karmdhan.Model.Admin;
@@ -50,7 +50,7 @@ public class AdminLoginActivity extends AppCompatActivity {
                 login();
                 break;
             case R.id.forgot_password_tv:
-                Intent intent = new Intent(AdminLoginActivity.this, ChangeOrResetPasswordActivity.class);
+                Intent intent = new Intent(AdminLoginActivity.this, ChangeOrForgotPasswordActivity.class);
                 startActivity(intent);
                 break;
         }
@@ -76,10 +76,12 @@ public class AdminLoginActivity extends AppCompatActivity {
                     Toast.makeText(this, "Wrong credentials !! Please fill the correct details", Toast.LENGTH_SHORT).show();
                 }
             }else{
+                binding.passwordTil.setError("password field should not kept empty");
                 Toast.makeText(AdminLoginActivity.this, "password is empty", Toast.LENGTH_SHORT).show();
             }
         }else{
-            Toast.makeText(AdminLoginActivity.this, "userName is empty", Toast.LENGTH_SHORT).show();
+            binding.userIdTil.setError("UserId field should not kept empty");
+            Toast.makeText(AdminLoginActivity.this, "UserId is empty", Toast.LENGTH_SHORT).show();
         }
     }
 

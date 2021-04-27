@@ -12,17 +12,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.dbms.project.karmdhan.Activity.Login.AdminLoginActivity;
 import com.dbms.project.karmdhan.DB.AdminOperations;
 import com.dbms.project.karmdhan.R;
-import com.dbms.project.karmdhan.databinding.ActivityRenewPasswordBinding;
+import com.dbms.project.karmdhan.databinding.ActivityChangePasswordBinding;
 
-public class RenewPasswordActivity extends AppCompatActivity {
-    private ActivityRenewPasswordBinding binding;
+public class ChangePasswordActivity extends AppCompatActivity {
+    private ActivityChangePasswordBinding binding;
     private AdminOperations adminOperations;
     private SQLiteOpenHelper myDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= ActivityRenewPasswordBinding.inflate(LayoutInflater.from(this));
+        binding= ActivityChangePasswordBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
         adminOperations = new AdminOperations(this);
         binding.resetPasswordBtn.setOnClickListener(this::onClick);
@@ -42,12 +42,14 @@ public class RenewPasswordActivity extends AppCompatActivity {
             if(!newPassword.isEmpty()){
                 String userId = getIntent().getStringExtra("USERID");
                 adminOperations.updatePassword(Integer.parseInt(userId), newPassword);
-                Intent intent = new Intent(RenewPasswordActivity.this, AdminLoginActivity.class);
+                Intent intent = new Intent(ChangePasswordActivity.this, AdminLoginActivity.class);
                 startActivity(intent);
             }else{
+                binding.newPasswordTil.setError("new password field should not kept empty");
                 Toast.makeText(this, "new Password is empty", Toast.LENGTH_SHORT).show();
             }
         }else{
+            binding.oldPasswordTil.setError("old password field should not kept empty");
             Toast.makeText(this, "old Password is empty", Toast.LENGTH_SHORT).show();
         }
     }

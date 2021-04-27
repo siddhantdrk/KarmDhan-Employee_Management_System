@@ -11,8 +11,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Activity.AddEmployeeActivity"></activity>
         <activity android:name=".Activity.ResetPassword.ForgotPasswordActivity"></activity>
-        <activity android:name=".Activity.ResetPassword.RenewPasswordActivity" />
-        <activity android:name=".Activity.ResetPassword.ChangeOrResetPasswordActivity" />
+        <activity android:name=".Activity.ResetPassword.ChangePasswordActivity" />
+        <activity android:name=".Activity.ResetPassword.ChangeOrForgotPasswordActivity" />
         <activity android:name=".Activity.Dashboard.EmployeeDashboardActivity" />
         <activity android:name=".Activity.Dashboard.AdminDashboardActivity" />
         <activity android:name=".Activity.WelcomeActivity">
