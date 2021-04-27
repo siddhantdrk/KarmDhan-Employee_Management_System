@@ -9,7 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dbms.project.karmdhan.Activity.Dashboard.AdminDashboardActivity;
-import com.dbms.project.karmdhan.Activity.PasswordResetActivity;
+import com.dbms.project.karmdhan.Activity.ResetPassword.ChangeOrResetPasswordActivity;
 import com.dbms.project.karmdhan.DB.AdminOperations;
 import com.dbms.project.karmdhan.Model.Admin;
 import com.dbms.project.karmdhan.R;
@@ -36,7 +36,7 @@ public class AdminLoginActivity extends AppCompatActivity {
                 login();
                 break;
             case R.id.forgot_password_tv:
-                Intent intent = new Intent(AdminLoginActivity.this, PasswordResetActivity.class);
+                Intent intent = new Intent(AdminLoginActivity.this, ChangeOrResetPasswordActivity.class);
                 startActivity(intent);
                 break;
         }

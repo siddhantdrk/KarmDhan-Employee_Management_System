@@ -1,4 +1,4 @@
-package com.dbms.project.karmdhan.Activity;
+package com.dbms.project.karmdhan.Activity.ResetPassword;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -32,11 +32,11 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
     private void onClick(View view) {
         if(view.getId()== R.id.resetPassword_btn){
-            check();
+            resetPassword();
         }
     }
 
-    private void check() {
+    private void resetPassword() {
         String password = binding.newPasswordEdt.getText().toString().trim();
         String confPassword = binding.cnfPasswordEdt.getText().toString().trim();
 

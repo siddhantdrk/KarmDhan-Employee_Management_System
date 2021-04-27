@@ -1,4 +1,4 @@
-package com.dbms.project.karmdhan.Activity;
+package com.dbms.project.karmdhan.Activity.ResetPassword;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -30,11 +30,11 @@ public class RenewPasswordActivity extends AppCompatActivity {
 
     private void onClick(View view) {
         if(view.getId()== R.id.resetPassword_btn){
-            check();
+            renewPassword();
         }
     }
 
-    private void check() {
+    private void renewPassword() {
         String oldPassword = binding.oldPasswordEdt.getText().toString().trim();
         String newPassword = binding.newPasswordEdt.getText().toString().trim();
 

@@ -1,4 +1,4 @@
-package com.dbms.project.karmdhan.Activity;
+package com.dbms.project.karmdhan.Activity.ResetPassword;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,17 +10,16 @@ import android.widget.Toast;
 
 import com.dbms.project.karmdhan.DB.AdminOperations;
 import com.dbms.project.karmdhan.R;
-import com.dbms.project.karmdhan.databinding.ActivityAdminLoginBinding;
-import com.dbms.project.karmdhan.databinding.ActivityPasswordResetBinding;
+import com.dbms.project.karmdhan.databinding.ActivityChangeOrResetPasswordBinding;
 
-public class PasswordResetActivity extends AppCompatActivity {
-    private ActivityPasswordResetBinding binding;
+public class ChangeOrResetPasswordActivity extends AppCompatActivity {
+    private ActivityChangeOrResetPasswordBinding binding;
     private AdminOperations adminOperations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityPasswordResetBinding.inflate(LayoutInflater.from(this));
+        binding = ActivityChangeOrResetPasswordBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
         adminOperations = new AdminOperations(this);
         binding.forgotPassword.setOnClickListener(this::onClick);
@@ -30,20 +29,21 @@ public class PasswordResetActivity extends AppCompatActivity {
     private void onClick(View view) {
         switch(view.getId()){
             case R.id.forgot_password:
-                check();
+                checkUserIdForForgotPassword();
                 break;
             case R.id.renew_password:
-                check1();
+                checkUserIdForRenewPassword();
+                break;
         }
     }
 
-    private void check1() {
+    private void checkUserIdForRenewPassword() {
         String userId = binding.userIdEdt.getText().toString().trim();
         if(!userId.isEmpty()){
             if(!adminOperations.checkAdminIDExist(userId)){
                 Toast.makeText(this, "User ID doesn't exist", Toast.LENGTH_SHORT).show();
             }else{
-                Intent intent =new Intent(PasswordResetActivity.this,RenewPasswordActivity.class);
+                Intent intent =new Intent(ChangeOrResetPasswordActivity.this, RenewPasswordActivity.class);
                 intent.putExtra("USERID",userId);
                 startActivity(intent);
             }
@@ -52,13 +52,13 @@ public class PasswordResetActivity extends AppCompatActivity {
         }
     }
 
-    private void check() {
+    private void checkUserIdForForgotPassword() {
         String userId = binding.userIdEdt.getText().toString().trim();
         if(!userId.isEmpty()){
             if(!adminOperations.checkAdminIDExist(userId)){
                 Toast.makeText(this, "User ID doesn't exist", Toast.LENGTH_SHORT).show();
             }else{
-                Intent intent =new Intent(PasswordResetActivity.this,ForgotPasswordActivity.class);
+                Intent intent =new Intent(ChangeOrResetPasswordActivity.this, ForgotPasswordActivity.class);
                 intent.putExtra("USERID",userId);
                 startActivity(intent);
             }
