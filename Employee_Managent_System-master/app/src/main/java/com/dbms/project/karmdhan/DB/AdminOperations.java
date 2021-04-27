@@ -8,9 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.dbms.project.karmdhan.Model.Admin;
 
-import static com.dbms.project.karmdhan.DB.KarmDhanDBHandler.COLUMN_ADMIN_ID;
-import static com.dbms.project.karmdhan.DB.KarmDhanDBHandler.COLUMN_ADMIN_PASSWORD;
-import static com.dbms.project.karmdhan.DB.KarmDhanDBHandler.TABLE_ADMIN;
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_ADMIN_ID;
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_ADMIN_PASSWORD;
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_ADMIN;
 
 public class AdminOperations {
     private final SQLiteOpenHelper adminDbHelper;
@@ -40,10 +40,9 @@ public class AdminOperations {
         return cursor.getCount() > 0;
     }
 
-    public void update(String userId,String password){
+    public void updatePassword(String userId, String password) {
         SQLiteDatabase database = adminDbHelper.getWritableDatabase();
-        String strSQL = "UPDATE "+TABLE_ADMIN+" SET "+ COLUMN_ADMIN_PASSWORD +" ="+"'"+password+"'"+ " WHERE " + COLUMN_ADMIN_ID + " =" +"'"+ userId+"'";
+        String strSQL = "UPDATE " + TABLE_ADMIN + " SET " + COLUMN_ADMIN_PASSWORD + " =" + "'" + password + "'" + " WHERE " + COLUMN_ADMIN_ID + " =" + "'" + userId + "'";
         database.execSQL(strSQL);
     }
-
 }

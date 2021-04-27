@@ -1,19 +1,17 @@
 package com.dbms.project.karmdhan.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.dbms.project.karmdhan.Activity.Login.AdminLoginActivity;
 import com.dbms.project.karmdhan.DB.AdminOperations;
 import com.dbms.project.karmdhan.R;
-import com.dbms.project.karmdhan.databinding.ActivityForgotPasswordBinding;
 import com.dbms.project.karmdhan.databinding.ActivityRenewPasswordBinding;
 
 public class RenewPasswordActivity extends AppCompatActivity {
@@ -43,7 +41,7 @@ public class RenewPasswordActivity extends AppCompatActivity {
         if(!oldPassword.isEmpty()){
             if(!newPassword.isEmpty()){
                 String userId = getIntent().getStringExtra("USERID");
-                adminOperations.update(userId,newPassword);
+                adminOperations.updatePassword(userId, newPassword);
                 Intent intent = new Intent(RenewPasswordActivity.this, AdminLoginActivity.class);
                 startActivity(intent);
             }else{

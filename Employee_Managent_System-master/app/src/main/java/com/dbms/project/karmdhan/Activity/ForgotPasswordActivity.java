@@ -1,18 +1,16 @@
 package com.dbms.project.karmdhan.Activity;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.dbms.project.karmdhan.Activity.Login.AdminLoginActivity;
 import com.dbms.project.karmdhan.DB.AdminOperations;
-import com.dbms.project.karmdhan.DB.KarmDhanDBHandler;
 import com.dbms.project.karmdhan.R;
 import com.dbms.project.karmdhan.databinding.ActivityForgotPasswordBinding;
 
@@ -46,7 +44,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
             if(!confPassword.isEmpty()){
                 if (password.equals(confPassword)){
                     String userId = getIntent().getStringExtra("USERID");
-                    adminOperations.update(userId,password);
+                    adminOperations.updatePassword(userId, password);
                     Intent intent = new Intent(ForgotPasswordActivity.this, AdminLoginActivity.class);
                     startActivity(intent);
                 }else{

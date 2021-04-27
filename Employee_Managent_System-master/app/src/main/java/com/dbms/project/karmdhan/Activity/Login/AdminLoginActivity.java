@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dbms.project.karmdhan.Activity.Dashboard.AdminDashboardActivity;
 import com.dbms.project.karmdhan.Activity.PasswordResetActivity;
 import com.dbms.project.karmdhan.DB.AdminOperations;
 import com.dbms.project.karmdhan.Model.Admin;
@@ -48,13 +49,12 @@ public class AdminLoginActivity extends AppCompatActivity {
         if (!userId.isEmpty()) {
             if (!adminOperations.checkAdminIDExist(userId)) {
                 Toast.makeText(this, "User ID doesn't exist", Toast.LENGTH_SHORT).show();
-            }
-            if (!password.isEmpty()) {
+            } else if (!password.isEmpty()) {
                 Admin admin = new Admin(userId, password);
                 if (adminOperations.checkLoginCredentials(admin)) {
                     Toast.makeText(this, "Logged In successfully", Toast.LENGTH_SHORT).show();
                     SharedPreferenceManager.getInstance(this).saveToken(userId);
-                    Intent intent = new Intent(this, AdminLoginActivity.class);
+                    Intent intent = new Intent(this, AdminDashboardActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 } else {
