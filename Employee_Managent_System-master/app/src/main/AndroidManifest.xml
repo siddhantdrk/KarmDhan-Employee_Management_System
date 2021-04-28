@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.AddEmployeeActivity"></activity>
-        <activity android:name=".Activity.ResetPassword.ForgotPasswordActivity"></activity>
+        <activity android:name=".Activity.ViewAllEmployeeActivity"></activity>
+        <activity android:name=".Activity.AddEmployeeActivity" />
+        <activity android:name=".Activity.ResetPassword.ForgotPasswordActivity" />
         <activity android:name=".Activity.ResetPassword.ChangePasswordActivity" />
         <activity android:name=".Activity.ResetPassword.ChangeOrForgotPasswordActivity" />
         <activity android:name=".Activity.Dashboard.EmployeeDashboardActivity" />

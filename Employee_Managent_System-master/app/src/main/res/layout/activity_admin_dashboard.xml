@@ -24,6 +24,16 @@
         app:layout_constraintEnd_toEndOf="@id/logout_btn"
         app:layout_constraintStart_toStartOf="@id/logout_btn"
         app:layout_constraintTop_toBottomOf="@id/logout_btn"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginTop="16dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/view_all_employee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="View All Employee"
+        app:layout_constraintEnd_toEndOf="@id/logout_btn"
+        app:layout_constraintStart_toStartOf="@id/logout_btn"
+        app:layout_constraintTop_toBottomOf="@+id/add_employee" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

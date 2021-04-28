@@ -6,9 +6,13 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.dbms.project.karmdhan.Model.Admin;
 import com.dbms.project.karmdhan.Model.NewEmployee;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_ADMIN_ID;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_ADMIN_PASSWORD;
@@ -80,5 +84,21 @@ public class AdminOperations {
         SQLiteDatabase database = adminDbHelper.getWritableDatabase();
         Cursor cursor = database.rawQuery("select * from " + TABLE_EMPLOYEE + " where " + COLUMN_EMPLOYEE_NUMBER + " = " + empNum, null);
         return cursor.getCount() > 0;
+    }
+
+    public List<NewEmployee> getAllEmployees() {
+        List<NewEmployee> employeeList = new ArrayList<>();
+        SQLiteDatabase database = adminDbHelper.getWritableDatabase();
+        Cursor cursor = database.rawQuery("select * from " + TABLE_EMPLOYEE + " NATURAL JOIN " + TABLE_JOB_CLASS, null);
+        Log.d("getAllEmployees", "" + cursor.getCount());
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    employeeList.add(new NewEmployee(cursor.getInt(cursor.getColumnIndex(COLUMN_EMPLOYEE_NUMBER)), cursor.getString(cursor.getColumnIndex(COLUMN_EMPLOYEE_NAME)), cursor.getString(cursor.getColumnIndex(COLUMN_JOB_CLASS))));
+                } while (cursor.moveToNext());
+            }
+        }
+        Log.d("getAllEmployees", "" + employeeList.size());
+        return employeeList;
     }
 }
