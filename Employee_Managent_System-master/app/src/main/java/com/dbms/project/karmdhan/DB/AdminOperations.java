@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.dbms.project.karmdhan.Authentication.PasswordAuthentication;
 import com.dbms.project.karmdhan.Model.Admin;
 import com.dbms.project.karmdhan.Model.NewEmployee;
 
@@ -24,7 +23,6 @@ import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_JOB_CLASS;
 
 public class AdminOperations {
     private final SQLiteOpenHelper adminDbHelper;
-    private PasswordAuthentication passwordAuthentication;
 
     public AdminOperations(Context context) {
         adminDbHelper = new KarmDhanDBHandler(context);
@@ -46,7 +44,6 @@ public class AdminOperations {
     }
 
     public boolean checkAdminLoginCredentials(Admin admin) {
-        passwordAuthentication = new PasswordAuthentication();
         SQLiteDatabase database = adminDbHelper.getWritableDatabase();
         Cursor cursor = database.rawQuery("select * from " + TABLE_ADMIN + " where " + COLUMN_ADMIN_ID + " = ?" + " and " + COLUMN_ADMIN_PASSWORD + " = ?", new String[]{String.valueOf(admin.getAdminId()), admin.getAdminPassword()});
         return cursor.getCount() > 0;

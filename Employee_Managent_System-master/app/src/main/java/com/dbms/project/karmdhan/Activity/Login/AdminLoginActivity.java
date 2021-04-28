@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.dbms.project.karmdhan.Activity.Dashboard.AdminDashboardActivity;
 import com.dbms.project.karmdhan.Activity.ResetPassword.ChangeOrForgotPasswordActivity;
-import com.dbms.project.karmdhan.Authentication.PasswordAuthentication;
 import com.dbms.project.karmdhan.DB.AdminOperations;
 import com.dbms.project.karmdhan.Model.Admin;
 import com.dbms.project.karmdhan.R;
@@ -20,7 +19,6 @@ import com.dbms.project.karmdhan.databinding.ActivityAdminLoginBinding;
 public class AdminLoginActivity extends AppCompatActivity {
     private ActivityAdminLoginBinding binding;
     private AdminOperations adminOperations;
-    private PasswordAuthentication passwordAuthentication;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +26,6 @@ public class AdminLoginActivity extends AppCompatActivity {
         binding = ActivityAdminLoginBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
         adminOperations = new AdminOperations(this);
-        passwordAuthentication = new PasswordAuthentication();
         if (adminOperations.addAdmin(new Admin(12345678, "12345678"))) {
             Toast.makeText(this, "Admin added successfully", Toast.LENGTH_SHORT).show();
         } else {

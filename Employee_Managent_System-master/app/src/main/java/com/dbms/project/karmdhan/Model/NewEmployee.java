@@ -19,6 +19,12 @@ public class NewEmployee {
         this.employeePassword = employeePassword;
     }
 
+    public NewEmployee(int employeeNumber, String employeeName, String employeeJobClass) {
+        this.employeeNumber = employeeNumber;
+        this.employeeName = employeeName;
+        this.employeeJobClass = employeeJobClass;
+    }
+
     public int getEmployeeNumber() {
         return employeeNumber;
     }

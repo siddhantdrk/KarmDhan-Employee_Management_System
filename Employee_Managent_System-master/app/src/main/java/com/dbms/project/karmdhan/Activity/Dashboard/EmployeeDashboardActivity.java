@@ -9,12 +9,15 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dbms.project.karmdhan.Activity.WelcomeActivity;
+import com.dbms.project.karmdhan.DB.EmployeeOperations;
+import com.dbms.project.karmdhan.Model.NewEmployee;
 import com.dbms.project.karmdhan.R;
 import com.dbms.project.karmdhan.Storage.SharedPreferenceManager;
 import com.dbms.project.karmdhan.databinding.ActivityEmployeeDashboardBinding;
 
 public class EmployeeDashboardActivity extends AppCompatActivity {
     private ActivityEmployeeDashboardBinding binding;
+    private EmployeeOperations employeeOperations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +25,7 @@ public class EmployeeDashboardActivity extends AppCompatActivity {
         binding = ActivityEmployeeDashboardBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
         binding.logoutBtn.setOnClickListener(this::OnClick);
+        setEmployeeDetails();
     }
 
     private void OnClick(View view) {
@@ -34,5 +38,20 @@ public class EmployeeDashboardActivity extends AppCompatActivity {
                 finish();
                 break;
         }
+    }
+
+    private NewEmployee getEmployee() {
+        employeeOperations = new EmployeeOperations(this);
+        return employeeOperations.getEmployeeByNumber(Integer.parseInt(SharedPreferenceManager.getInstance(this).getToken()));
+    }
+
+    private void setEmployeeDetails() {
+        NewEmployee employee = getEmployee();
+        if (employee != null) {
+            binding.employeeNumberValueTv.setText(String.valueOf(employee.getEmployeeNumber()));
+            binding.employeeNameValueTv.setText(employee.getEmployeeName());
+            binding.employeeJobClassValueTv.setText(employee.getEmployeeJobClass());
+        } else
+            Toast.makeText(this, "Unable to fetch Details !!", Toast.LENGTH_SHORT).show();
     }
 }

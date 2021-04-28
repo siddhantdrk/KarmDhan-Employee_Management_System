@@ -9,23 +9,25 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.dbms.project.karmdhan.Authentication.PasswordAuthentication;
 import com.dbms.project.karmdhan.Model.Employee;
 import com.dbms.project.karmdhan.Model.NewEmployee;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_EMPLOYEE_NAME;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_EMPLOYEE_NUMBER;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_EMPLOYEE_PASSWORD;
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_JOB_CLASS;
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_EMPLOYEE;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_EMPLOYEE_PASSWORD;
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_JOB_CLASS;
 
 public class EmployeeOperations {
 
     public static final String TAG = "EMP_MNGMNT_SYS";
 
     private final SQLiteOpenHelper employeeDbHelper;
-    private PasswordAuthentication passwordAuthentication;
     SQLiteDatabase database;
 
     private static final String[] allColumns = {
@@ -139,10 +141,19 @@ public class EmployeeOperations {
     }
 
     public boolean checkEmployeeLoginCredentials(NewEmployee employee) {
-        passwordAuthentication = new PasswordAuthentication();
         SQLiteDatabase database = employeeDbHelper.getWritableDatabase();
         Cursor cursor = database.rawQuery("select * from " + TABLE_EMPLOYEE_PASSWORD + " where " + COLUMN_EMPLOYEE_NUMBER + " = ?" + " and " + COLUMN_EMPLOYEE_PASSWORD + " = ?", new String[]{String.valueOf(employee.getEmployeeNumber()), employee.getEmployeePassword()});
         return cursor.getCount() > 0;
+    }
+
+    public NewEmployee getEmployeeByNumber(int empNum) {
+        NewEmployee newEmployee = null;
+        SQLiteDatabase database = employeeDbHelper.getWritableDatabase();
+        Cursor cursor = database.rawQuery("select * from " + TABLE_EMPLOYEE + " NATURAL JOIN " + TABLE_JOB_CLASS + " where " + COLUMN_EMPLOYEE_NUMBER + " = " + empNum, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            newEmployee = new NewEmployee(empNum, cursor.getString(cursor.getColumnIndex(COLUMN_EMPLOYEE_NAME)), cursor.getString(cursor.getColumnIndex(COLUMN_JOB_CLASS)));
+        }
+        return newEmployee;
     }
 
 }
