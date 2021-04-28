@@ -15,10 +15,13 @@ import com.dbms.project.karmdhan.Model.NewEmployee;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_ADMIN_ID;
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_ADMIN_PASSWORD;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_EMPLOYEE_NAME;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_EMPLOYEE_NUMBER;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_EMPLOYEE_PASSWORD;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_JOB_CLASS;
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_ADMIN;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_EMPLOYEE;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_EMPLOYEE_PASSWORD;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_JOB_CLASS;
@@ -156,4 +159,11 @@ public class EmployeeOperations {
         return newEmployee;
     }
 
+    public boolean updatePassword(int userId, String password) {
+        SQLiteDatabase database = employeeDbHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_EMPLOYEE_PASSWORD, password);
+        long result = database.update(TABLE_EMPLOYEE_PASSWORD, contentValues, COLUMN_EMPLOYEE_NUMBER + " = ?", new String[]{String.valueOf(userId)});
+        return result != -1;
+    }
 }

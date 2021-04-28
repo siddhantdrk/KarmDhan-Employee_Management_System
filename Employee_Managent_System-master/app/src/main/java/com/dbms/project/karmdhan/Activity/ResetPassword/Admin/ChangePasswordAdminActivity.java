@@ -1,4 +1,4 @@
-package com.dbms.project.karmdhan.Activity.ResetPassword;
+package com.dbms.project.karmdhan.Activity.ResetPassword.Admin;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -13,17 +13,17 @@ import com.dbms.project.karmdhan.Activity.Login.AdminLoginActivity;
 import com.dbms.project.karmdhan.DB.AdminOperations;
 import com.dbms.project.karmdhan.Model.Admin;
 import com.dbms.project.karmdhan.R;
-import com.dbms.project.karmdhan.databinding.ActivityChangePasswordBinding;
+import com.dbms.project.karmdhan.databinding.ActivityChangePasswordAdminBinding;
 
-public class ChangePasswordActivity extends AppCompatActivity {
-    private ActivityChangePasswordBinding binding;
+public class ChangePasswordAdminActivity extends AppCompatActivity {
+    private ActivityChangePasswordAdminBinding binding;
     private AdminOperations adminOperations;
     private SQLiteOpenHelper myDbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= ActivityChangePasswordBinding.inflate(LayoutInflater.from(this));
+        binding= ActivityChangePasswordAdminBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
         adminOperations = new AdminOperations(this);
         binding.resetPasswordBtn.setOnClickListener(this::onClick);
@@ -45,7 +45,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 if (!newPassword.isEmpty()) {
                     if (adminOperations.updatePassword(Integer.parseInt(userId), newPassword)) {
                         Toast.makeText(this, "Password Updated successfully", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(ChangePasswordActivity.this, AdminLoginActivity.class);
+                        Intent intent = new Intent(ChangePasswordAdminActivity.this, AdminLoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }

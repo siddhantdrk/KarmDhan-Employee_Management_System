@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.dbms.project.karmdhan.Authentication.PasswordAuthentication;
 import com.dbms.project.karmdhan.DB.AdminOperations;
+import com.dbms.project.karmdhan.DB.DataOperations;
 import com.dbms.project.karmdhan.Model.NewEmployee;
 import com.dbms.project.karmdhan.R;
 import com.dbms.project.karmdhan.databinding.ActivityAddEmployeeBinding;
@@ -19,21 +20,28 @@ public class AddEmployeeActivity extends AppCompatActivity {
     private ActivityAddEmployeeBinding binding;
     private AdminOperations adminOperations;
     private PasswordAuthentication passwordAuthentication;
+    private DataOperations dataOperations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityAddEmployeeBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
+        dataOperations = new DataOperations(this);
         binding.addEmployeeBtn.setOnClickListener(this::OnCLick);
     }
 
     private void OnCLick(View view) {
         switch (view.getId()) {
             case R.id.add_employee_btn:
-                addEmployee();
+                //addEmployee();
+                addData();
                 break;
         }
+    }
+
+    private void addData() {
+        dataOperations.addEmployeeTableData();
     }
 
     private void addEmployee() {

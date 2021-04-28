@@ -9,7 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dbms.project.karmdhan.Activity.Dashboard.AdminDashboardActivity;
-import com.dbms.project.karmdhan.Activity.ResetPassword.ChangeOrForgotPasswordActivity;
+import com.dbms.project.karmdhan.Activity.ResetPassword.Admin.ChangeOrForgotPasswordAdminActivity;
 import com.dbms.project.karmdhan.DB.AdminOperations;
 import com.dbms.project.karmdhan.Model.Admin;
 import com.dbms.project.karmdhan.R;
@@ -29,7 +29,7 @@ public class AdminLoginActivity extends AppCompatActivity {
         if (adminOperations.addAdmin(new Admin(12345678, "12345678"))) {
             Toast.makeText(this, "Admin added successfully", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "User ID already exists", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "User ID already exists", Toast.LENGTH_SHORT).show();
         }
         binding.loginBtn.setOnClickListener(this::onClick);
         binding.forgotPasswordTv.setOnClickListener(this::onClick);
@@ -41,7 +41,7 @@ public class AdminLoginActivity extends AppCompatActivity {
                 login();
                 break;
             case R.id.forgot_password_tv:
-                Intent intent = new Intent(AdminLoginActivity.this, ChangeOrForgotPasswordActivity.class);
+                Intent intent = new Intent(AdminLoginActivity.this, ChangeOrForgotPasswordAdminActivity.class);
                 startActivity(intent);
                 break;
         }

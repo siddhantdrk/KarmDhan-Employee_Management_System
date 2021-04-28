@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dbms.project.karmdhan.Activity.Dashboard.EmployeeDashboardActivity;
+import com.dbms.project.karmdhan.Activity.ResetPassword.Employee.ChangeOrForgotPasswordEmployeeActivity;
 import com.dbms.project.karmdhan.DB.EmployeeOperations;
 import com.dbms.project.karmdhan.Model.NewEmployee;
 import com.dbms.project.karmdhan.R;
@@ -24,11 +25,15 @@ public class EmployeeLoginActivity extends AppCompatActivity {
         binding = com.dbms.project.karmdhan.databinding.ActivityEmployeeLoginBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
         binding.loginBtn.setOnClickListener(this::onClick);
+        binding.forgotPasswordTv.setOnClickListener(this::onClick);
     }
 
     private void onClick(View view) {
         if (view.getId()==R.id.login_btn) {
             login();
+        }else if(view.getId()==R.id.forgot_password_tv){
+            Intent intent = new Intent(EmployeeLoginActivity.this, ChangeOrForgotPasswordEmployeeActivity.class);
+            startActivity(intent);
         }
     }
 

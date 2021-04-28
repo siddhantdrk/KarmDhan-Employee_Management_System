@@ -1,33 +1,29 @@
-package com.dbms.project.karmdhan.Activity.ResetPassword;
+package com.dbms.project.karmdhan.Activity.ResetPassword.Employee;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.dbms.project.karmdhan.Activity.Login.AdminLoginActivity;
-import com.dbms.project.karmdhan.DB.AdminOperations;
+import com.dbms.project.karmdhan.Activity.Login.EmployeeLoginActivity;
+import com.dbms.project.karmdhan.DB.EmployeeOperations;
 import com.dbms.project.karmdhan.R;
-import com.dbms.project.karmdhan.databinding.ActivityForgotPasswordBinding;
+import com.dbms.project.karmdhan.databinding.ActivityForgotPasswordEmployeeBinding;
 
-public class ForgotPasswordActivity extends AppCompatActivity {
-    private ActivityForgotPasswordBinding binding;
-    private AdminOperations adminOperations;
-    private SQLiteOpenHelper myDbHelper;
+public class ForgotPasswordEmployeeActivity extends AppCompatActivity {
+    private ActivityForgotPasswordEmployeeBinding binding;
+    private EmployeeOperations employeeOperations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=ActivityForgotPasswordBinding.inflate(LayoutInflater.from(this));
+        binding = ActivityForgotPasswordEmployeeBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
-        adminOperations = new AdminOperations(this);
+        employeeOperations = new EmployeeOperations(this);
         binding.resetPasswordBtn.setOnClickListener(this::onClick);
-
-
     }
 
     private void onClick(View view) {
@@ -43,10 +39,10 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         if(!password.isEmpty()){
             if(!confPassword.isEmpty()){
                 if (password.equals(confPassword)){
-                    String userId = getIntent().getStringExtra("USERID");
-                    if (adminOperations.updatePassword(Integer.parseInt(userId), confPassword)) {
+                    String userId = getIntent().getStringExtra("EMPLOYEE_NUMBER");
+                    if (employeeOperations.updatePassword(Integer.parseInt(userId), confPassword)) {
                         Toast.makeText(this, "Password Updated successfully", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(ForgotPasswordActivity.this, AdminLoginActivity.class);
+                        Intent intent = new Intent(ForgotPasswordEmployeeActivity.this, EmployeeLoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                     }
