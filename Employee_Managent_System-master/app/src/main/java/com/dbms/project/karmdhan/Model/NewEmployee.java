@@ -1,11 +1,26 @@
 package com.dbms.project.karmdhan.Model;
 
-public class NewEmployee {
-    int employeeNumber;
-    String employeeName;
-    String employeeJobClass;
-    String employeePassword;
+import java.util.List;
 
+public class NewEmployee {
+    private int employeeNumber;
+    private String employeeName;
+    private String employeeJobClass;
+    private String employeePassword;
+    private double chargePerHour;
+    private double hoursBilled;
+    private List<Project> employeeProjectList;
+
+
+    public NewEmployee(int employeeNumber, String employeeName, String employeeJobClass, String employeePassword, double chargePerHour, double hoursBilled, List<Project> employeeProjectList) {
+        this.employeeNumber = employeeNumber;
+        this.employeeName = employeeName;
+        this.employeeJobClass = employeeJobClass;
+        this.employeePassword = employeePassword;
+        this.chargePerHour = chargePerHour;
+        this.hoursBilled = hoursBilled;
+        this.employeeProjectList = employeeProjectList;
+    }
 
     public NewEmployee(int employeeNumber, String employeeName, String employeeJobClass, String employeePassword) {
         this.employeeNumber = employeeNumber;
@@ -23,6 +38,40 @@ public class NewEmployee {
         this.employeeNumber = employeeNumber;
         this.employeeName = employeeName;
         this.employeeJobClass = employeeJobClass;
+    }
+
+
+    public NewEmployee(int employeeNumber, String employeeName, String employeeJobClass, String employeePassword, double chargePerHour, double hoursBilled) {
+        this.employeeNumber = employeeNumber;
+        this.employeeName = employeeName;
+        this.employeeJobClass = employeeJobClass;
+        this.employeePassword = employeePassword;
+        this.chargePerHour = chargePerHour;
+        this.hoursBilled = hoursBilled;
+    }
+
+    public List<Project> getEmployeeProjectList() {
+        return employeeProjectList;
+    }
+
+    public void setEmployeeProjectList(List<Project> employeeProjectList) {
+        this.employeeProjectList = employeeProjectList;
+    }
+
+    public double getChargePerHour() {
+        return chargePerHour;
+    }
+
+    public void setChargePerHour(double chargePerHour) {
+        this.chargePerHour = chargePerHour;
+    }
+
+    public double getHoursBilled() {
+        return hoursBilled;
+    }
+
+    public void setHoursBilled(double hoursBilled) {
+        this.hoursBilled = hoursBilled;
     }
 
     public int getEmployeeNumber() {

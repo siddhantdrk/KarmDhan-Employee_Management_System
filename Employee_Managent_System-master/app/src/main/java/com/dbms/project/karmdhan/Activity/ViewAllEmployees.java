@@ -13,7 +13,6 @@ import java.util.List;
 
 public class ViewAllEmployees extends ListActivity {
 
-
     private EmployeeOperations employeeOperations;
     List<Employee> employees;
     @Override

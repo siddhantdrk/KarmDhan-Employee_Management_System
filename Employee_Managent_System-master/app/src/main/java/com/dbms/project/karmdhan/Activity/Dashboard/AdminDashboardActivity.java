@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.dbms.project.karmdhan.Activity.AddEmployeeActivity;
 import com.dbms.project.karmdhan.Activity.AddProjectActivity;
 import com.dbms.project.karmdhan.Activity.ViewAllEmployeeActivity;
+import com.dbms.project.karmdhan.Activity.ViewAllProjectActivity;
 import com.dbms.project.karmdhan.Activity.WelcomeActivity;
 import com.dbms.project.karmdhan.R;
 import com.dbms.project.karmdhan.Storage.SharedPreferenceManager;
@@ -29,6 +30,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
         binding.addEmployee.setOnClickListener(this::OnClick);
         binding.viewAllEmployeeBtn.setOnClickListener(this::OnClick);
         binding.addProjectBtn.setOnClickListener(this::OnClick);
+        binding.viewAllProjectBtn.setOnClickListener(this::OnClick);
     }
 
     private void OnClick(View view) {
@@ -49,6 +51,9 @@ public class AdminDashboardActivity extends AppCompatActivity {
                 break;
             case R.id.add_project_btn:
                 startActivity(new Intent(this, AddProjectActivity.class));
+                break;
+            case R.id.view_all_project_btn:
+                startActivity(new Intent(this, ViewAllProjectActivity.class));
                 break;
         }
     }
