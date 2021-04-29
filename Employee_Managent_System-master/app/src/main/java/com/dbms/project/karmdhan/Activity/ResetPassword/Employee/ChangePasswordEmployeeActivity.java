@@ -1,16 +1,16 @@
 package com.dbms.project.karmdhan.Activity.ResetPassword.Employee;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.dbms.project.karmdhan.Activity.Login.EmployeeLoginActivity;
 import com.dbms.project.karmdhan.DB.EmployeeOperations;
-import com.dbms.project.karmdhan.Model.NewEmployee;
+import com.dbms.project.karmdhan.Model.Employee;
 import com.dbms.project.karmdhan.R;
 import com.dbms.project.karmdhan.databinding.ActivityChangePasswordEmployeeBinding;
 
@@ -38,7 +38,7 @@ public class ChangePasswordEmployeeActivity extends AppCompatActivity {
 
         if(!oldPassword.isEmpty()) {
             String userId = getIntent().getStringExtra("EMPLOYEE_NUMBER");
-            if (employeeOperations.checkEmployeeLoginCredentials(new NewEmployee(Integer.parseInt(userId), oldPassword))) {
+            if (employeeOperations.checkEmployeeLoginCredentials(new Employee(Integer.parseInt(userId), oldPassword))) {
                 if (!newPassword.isEmpty()) {
                     if (employeeOperations.updatePassword(Integer.parseInt(userId), newPassword)) {
                         Toast.makeText(this, "Password Updated successfully", Toast.LENGTH_SHORT).show();

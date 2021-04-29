@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.dbms.project.karmdhan.Activity.Dashboard.EmployeeDashboardActivity;
 import com.dbms.project.karmdhan.Activity.ResetPassword.Employee.ChangeOrForgotPasswordEmployeeActivity;
 import com.dbms.project.karmdhan.DB.EmployeeOperations;
-import com.dbms.project.karmdhan.Model.NewEmployee;
+import com.dbms.project.karmdhan.Model.Employee;
 import com.dbms.project.karmdhan.R;
 import com.dbms.project.karmdhan.Storage.SharedPreferenceManager;
 import com.dbms.project.karmdhan.databinding.ActivityEmployeeLoginBinding;
@@ -45,7 +45,7 @@ public class EmployeeLoginActivity extends AppCompatActivity {
             employeeOperations = new EmployeeOperations(this);
             if (employeeOperations.checkIfEmployeeNumberExist(Integer.parseInt(employeeNumber))) {
                 if (!password.isEmpty()) {
-                    if (employeeOperations.checkEmployeeLoginCredentials(new NewEmployee(Integer.parseInt(employeeNumber), password))) {
+                    if (employeeOperations.checkEmployeeLoginCredentials(new Employee(Integer.parseInt(employeeNumber), password))) {
                         Toast.makeText(this, "Logged In successfully!", Toast.LENGTH_SHORT).show();
                         SharedPreferenceManager.getInstance(this).saveToken(employeeNumber);
                         Intent intent = new Intent(this, EmployeeDashboardActivity.class);

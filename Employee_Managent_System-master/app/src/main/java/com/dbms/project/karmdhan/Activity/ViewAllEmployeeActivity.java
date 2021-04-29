@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.dbms.project.karmdhan.Adapters.ViewAllEmployeeRvAdapter;
 import com.dbms.project.karmdhan.DB.AdminOperations;
 import com.dbms.project.karmdhan.DB.DataOperations;
-import com.dbms.project.karmdhan.Model.NewEmployee;
+import com.dbms.project.karmdhan.Model.Employee;
 import com.dbms.project.karmdhan.databinding.ActivityViewAllEmployeeBinding;
 
 import java.util.List;
@@ -28,13 +28,13 @@ public class ViewAllEmployeeActivity extends AppCompatActivity {
         setEmployeeListRv();
     }
 
-    private List<NewEmployee> getAllEmployees() {
+    private List<Employee> getAllEmployees() {
         adminOperations = new AdminOperations(this);
         return adminOperations.getAllEmployees();
     }
 
     private void setEmployeeListRv() {
-        List<NewEmployee> employeeList = getAllEmployees();
+        List<Employee> employeeList = getAllEmployees();
         if (employeeList.size() == 0) {
             Toast.makeText(this, "Sorry, No data found", Toast.LENGTH_SHORT).show();
         }

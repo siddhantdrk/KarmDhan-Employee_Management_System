@@ -28,9 +28,6 @@
         </activity>
         <activity android:name=".Activity.Login.AdminLoginActivity" />
         <activity android:name=".Activity.Login.EmployeeLoginActivity" />
-        <activity android:name=".Activity.MainActivity" />
-        <activity android:name=".Activity.AddUpdateEmployee" />
-        <activity android:name=".Activity.ViewAllEmployees" />
     </application>
 
 </manifest>

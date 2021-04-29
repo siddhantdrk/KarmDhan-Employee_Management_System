@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.dbms.project.karmdhan.DB.AdminOperations;
 import com.dbms.project.karmdhan.DB.ProjectEmployeeOperations;
 import com.dbms.project.karmdhan.DB.ProjectOperations;
-import com.dbms.project.karmdhan.Model.NewEmployee;
+import com.dbms.project.karmdhan.Model.Employee;
 import com.dbms.project.karmdhan.Model.Project;
 import com.dbms.project.karmdhan.Model.ProjectEmployee;
 import com.dbms.project.karmdhan.R;
@@ -27,7 +27,7 @@ import java.util.List;
 public class AddProjectActivity extends AppCompatActivity {
     private ActivityAddProjectBinding binding;
     private AdminOperations adminOperations;
-    private List<NewEmployee> employeeList;
+    private List<Employee> employeeList;
     private ProjectOperations projectOperations;
     private TextInputEditText chargePerHourEdt, hoursBilledEdt;
     private TextInputLayout chargePerHourTil, hoursBilledTil;
@@ -81,7 +81,9 @@ public class AddProjectActivity extends AppCompatActivity {
             if (projectOperations.addProject(new Project(Integer.parseInt(projectNumber), projectName, projectLeader), new ProjectEmployee(Integer.parseInt(projectNumber), projectLeaderEmployeeNumber, Double.parseDouble(chargePerHour), Double.parseDouble(hoursBilled)))) {
                 Toast.makeText(this, "Project Added Successfully", Toast.LENGTH_SHORT).show();
                 setFieldsNull();
-                startActivity(new Intent(this, AddEmployeesToProjectActivity.class));
+                Intent intent = new Intent(this, AddEmployeesToProjectActivity.class);
+                intent.putExtra("ProjectNumber", projectNumber);
+                startActivity(intent);
             } else {
                 Toast.makeText(this, "Oops !! something went wrong.", Toast.LENGTH_SHORT).show();
             }
@@ -95,7 +97,7 @@ public class AddProjectActivity extends AppCompatActivity {
     private void setUpProjectLeaderSpinner() {
         adminOperations = new AdminOperations(this);
         employeeList = adminOperations.getAllEmployees();
-        ArrayAdapter<NewEmployee> arrayAdapter = new ArrayAdapter<>(this, R.layout.my_spinner_item, employeeList);
+        ArrayAdapter<Employee> arrayAdapter = new ArrayAdapter<>(this, R.layout.my_spinner_item, employeeList);
         binding.projectLeaderSpinner.setAdapter(arrayAdapter);
     }
 

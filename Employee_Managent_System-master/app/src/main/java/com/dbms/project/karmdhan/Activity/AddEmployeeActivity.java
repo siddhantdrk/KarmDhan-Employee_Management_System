@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.dbms.project.karmdhan.Authentication.PasswordAuthentication;
 import com.dbms.project.karmdhan.DB.AdminOperations;
 import com.dbms.project.karmdhan.DB.DataOperations;
-import com.dbms.project.karmdhan.Model.NewEmployee;
+import com.dbms.project.karmdhan.Model.Employee;
 import com.dbms.project.karmdhan.R;
 import com.dbms.project.karmdhan.databinding.ActivityAddEmployeeBinding;
 
@@ -68,7 +68,7 @@ public class AddEmployeeActivity extends AppCompatActivity {
                 Toast.makeText(this, "Employee Number Already Exist", Toast.LENGTH_SHORT).show();
                 return;
             }
-            if (adminOperations.addEmployee(new NewEmployee(Integer.parseInt(employeeNumber), employeeName, jobClass, employeePassword))) {
+            if (adminOperations.addEmployee(new Employee(Integer.parseInt(employeeNumber), employeeName, jobClass, employeePassword))) {
                 setFieldsNull();
                 Toast.makeText(this, "Employee Added Successfully", Toast.LENGTH_SHORT).show();
             }

@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.dbms.project.karmdhan.Activity.WelcomeActivity;
 import com.dbms.project.karmdhan.DB.EmployeeOperations;
-import com.dbms.project.karmdhan.Model.NewEmployee;
+import com.dbms.project.karmdhan.Model.Employee;
 import com.dbms.project.karmdhan.R;
 import com.dbms.project.karmdhan.Storage.SharedPreferenceManager;
 import com.dbms.project.karmdhan.databinding.ActivityEmployeeDashboardBinding;
@@ -40,13 +40,13 @@ public class EmployeeDashboardActivity extends AppCompatActivity {
         }
     }
 
-    private NewEmployee getEmployee() {
+    private Employee getEmployee() {
         employeeOperations = new EmployeeOperations(this);
         return employeeOperations.getEmployeeByNumber(Integer.parseInt(SharedPreferenceManager.getInstance(this).getToken()));
     }
 
     private void setEmployeeDetails() {
-        NewEmployee employee = getEmployee();
+        Employee employee = getEmployee();
         if (employee != null) {
             binding.employeeNumberValueTv.setText(String.valueOf(employee.getEmployeeNumber()));
             binding.employeeNameValueTv.setText(employee.getEmployeeName());

@@ -1,77 +1,110 @@
 package com.dbms.project.karmdhan.Model;
 
+import java.util.List;
+
 public class Employee {
+    private int employeeNumber;
+    private String employeeName;
+    private String employeeJobClass;
+    private String employeePassword;
+    private double chargePerHour;
+    private double hoursBilled;
+    private List<Project> employeeProjectList;
 
-    private long empId;
-    private String firstName;
-    private String lastName;
-    private String gender;
-    private String hireDate;
-    private String dept;
-
-    public Employee() {
+    public Employee(int employeeNumber, String employeeName, String employeeJobClass, double chargePerHour, double hoursBilled) {
+        this.employeeNumber = employeeNumber;
+        this.employeeName = employeeName;
+        this.employeeJobClass = employeeJobClass;
+        this.chargePerHour = chargePerHour;
+        this.hoursBilled = hoursBilled;
     }
 
-    public Employee(long empId, String firstName, String lastName, String gender, String hireDate, String dept) {
-        this.empId = empId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.hireDate = hireDate;
-        this.dept = dept;
+    public Employee(int employeeNumber, String employeeName, String employeeJobClass, double chargePerHour, double hoursBilled, List<Project> employeeProjectList) {
+        this.employeeNumber = employeeNumber;
+        this.employeeName = employeeName;
+        this.employeeJobClass = employeeJobClass;
+        this.chargePerHour = chargePerHour;
+        this.hoursBilled = hoursBilled;
+        this.employeeProjectList = employeeProjectList;
     }
 
-    public long getEmpId() {
-        return empId;
+    public Employee(int employeeNumber, String employeeName, String employeeJobClass, String employeePassword) {
+        this.employeeNumber = employeeNumber;
+        this.employeeName = employeeName;
+        this.employeeJobClass = employeeJobClass;
+        this.employeePassword = employeePassword;
     }
 
-    public void setEmpId(long empId) {
-        this.empId = empId;
+    public Employee(int employeeNumber, String employeePassword) {
+        this.employeeNumber = employeeNumber;
+        this.employeePassword = employeePassword;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public Employee(int employeeNumber, String employeeName, String employeeJobClass) {
+        this.employeeNumber = employeeNumber;
+        this.employeeName = employeeName;
+        this.employeeJobClass = employeeJobClass;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+
+
+    public List<Project> getEmployeeProjectList() {
+        return employeeProjectList;
     }
 
-    public String getLastName() {
-        return lastName;
+    public void setEmployeeProjectList(List<Project> employeeProjectList) {
+        this.employeeProjectList = employeeProjectList;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public double getChargePerHour() {
+        return chargePerHour;
     }
 
-    public String getGender() {
-        return gender;
+    public void setChargePerHour(double chargePerHour) {
+        this.chargePerHour = chargePerHour;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public double getHoursBilled() {
+        return hoursBilled;
     }
 
-    public String getHireDate() {
-        return hireDate;
+    public void setHoursBilled(double hoursBilled) {
+        this.hoursBilled = hoursBilled;
     }
 
-    public void setHireDate(String hireDate) {
-        this.hireDate = hireDate;
+    public int getEmployeeNumber() {
+        return employeeNumber;
     }
 
-    public String getDept() {
-        return dept;
+    public void setEmployeeNumber(int employeeNumber) {
+        this.employeeNumber = employeeNumber;
     }
 
-    public void setDept(String dept) {
-        this.dept = dept;
+    public String getEmployeeName() {
+        return employeeName;
+    }
+
+    public void setEmployeeName(String employeeName) {
+        this.employeeName = employeeName;
+    }
+
+    public String getEmployeeJobClass() {
+        return employeeJobClass;
+    }
+
+    public void setEmployeeJobClass(String employeeJobClass) {
+        this.employeeJobClass = employeeJobClass;
+    }
+
+    public String getEmployeePassword() {
+        return employeePassword;
+    }
+
+    public void setEmployeePassword(String employeePassword) {
+        this.employeePassword = employeePassword;
     }
 
     public String toString() {
-        return "Emp id: " + getEmpId() + "\n" + "Name: " + getFirstName()+ " " + getLastName() + " \n"+"Gender: "+getGender()
-               +"\n" + "Hire Date: " + getHireDate() + "\n" + "Department: " + getDept();
+        return this.employeeNumber + " : " + this.employeeName + "\n" + this.employeeJobClass;
     }
-
 }

@@ -63,4 +63,16 @@ public class ProjectOperations {
         }
         return projectList;
     }
+
+    public Project getProjectByNumber(int projectNum) {
+        Project project = null;
+        SQLiteDatabase database = projectDbHelper.getWritableDatabase();
+        Cursor cursor = database.rawQuery("select * from " + TABLE_PROJECT + " where " + COLUMN_PROJECT_NUMBER + " = ?", new String[]{String.valueOf(projectNum)});
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                project = new Project(projectNum, cursor.getString(cursor.getColumnIndex(COLUMN_PROJECT_NAME)), cursor.getString(cursor.getColumnIndex(COLUMN_PROJECT_LEADER)));
+            }
+        }
+        return project;
+    }
 }

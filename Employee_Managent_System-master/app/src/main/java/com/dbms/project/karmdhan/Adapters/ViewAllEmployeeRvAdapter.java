@@ -9,16 +9,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.dbms.project.karmdhan.Model.NewEmployee;
+import com.dbms.project.karmdhan.Model.Employee;
 import com.dbms.project.karmdhan.R;
 
 import java.util.List;
 
 public class ViewAllEmployeeRvAdapter extends RecyclerView.Adapter<ViewAllEmployeeRvAdapter.EmployeeViewHolder> {
-    private final List<NewEmployee> employeeList;
+    private final List<Employee> employeeList;
     private final Context context;
 
-    public ViewAllEmployeeRvAdapter(List<NewEmployee> employeeList, Context context) {
+    public ViewAllEmployeeRvAdapter(List<Employee> employeeList, Context context) {
         this.employeeList = employeeList;
         this.context = context;
     }

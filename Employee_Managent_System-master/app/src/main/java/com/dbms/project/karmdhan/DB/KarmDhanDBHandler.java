@@ -19,19 +19,8 @@ import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_PROJECT_EMPLOY
 
 public class KarmDhanDBHandler extends SQLiteOpenHelper {
 
-
-    public static final String TABLE_EMPLOYEES = "employees";
-    public static final String COLUMN_ID = "empID";
-    public static final String COLUMN_FIRST_NAME = "firstname";
-    public static final String COLUMN_LAST_NAME = "lastname";
-    public static final String COLUMN_GENDER = "gender";
-    public static final String COLUMN_HIRE_DATE = "hiredata";
-    public static final String COLUMN_DEPT = "dept";
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "karmdhan.db";
-//    private static final String TABLE_EMPLOYEE_CREATE = "CREATE TABLE " + TABLE_EMPLOYEES + " (" + COLUMN_ID
-//            + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_FIRST_NAME + " TEXT, " + COLUMN_LAST_NAME
-//            + " TEXT, " + COLUMN_GENDER + " TEXT, " + COLUMN_HIRE_DATE + " NUMERIC, " + COLUMN_DEPT + " TEXT " + ")";
 
     public KarmDhanDBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);

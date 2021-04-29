@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.dbms.project.karmdhan.Model.Admin;
-import com.dbms.project.karmdhan.Model.NewEmployee;
+import com.dbms.project.karmdhan.Model.Employee;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,19 +63,19 @@ public class AdminOperations {
         return result != -1;
     }
 
-    public boolean addEmployee(NewEmployee newEmployee) throws SQLiteConstraintException {
+    public boolean addEmployee(Employee employee) throws SQLiteConstraintException {
         SQLiteDatabase database = adminDbHelper.getWritableDatabase();
         ContentValues employeeValues = new ContentValues();
-        employeeValues.put(COLUMN_EMPLOYEE_NUMBER, newEmployee.getEmployeeNumber());
-        employeeValues.put(COLUMN_EMPLOYEE_NAME, newEmployee.getEmployeeName());
+        employeeValues.put(COLUMN_EMPLOYEE_NUMBER, employee.getEmployeeNumber());
+        employeeValues.put(COLUMN_EMPLOYEE_NAME, employee.getEmployeeName());
         long result1 = database.insert(TABLE_EMPLOYEE, null, employeeValues);
         ContentValues jobClassValues = new ContentValues();
-        jobClassValues.put(COLUMN_EMPLOYEE_NUMBER, newEmployee.getEmployeeNumber());
-        jobClassValues.put(COLUMN_JOB_CLASS, newEmployee.getEmployeeJobClass());
+        jobClassValues.put(COLUMN_EMPLOYEE_NUMBER, employee.getEmployeeNumber());
+        jobClassValues.put(COLUMN_JOB_CLASS, employee.getEmployeeJobClass());
         long result2 = database.insert(TABLE_JOB_CLASS, null, jobClassValues);
         ContentValues passwordValues = new ContentValues();
-        passwordValues.put(COLUMN_EMPLOYEE_NUMBER, newEmployee.getEmployeeNumber());
-        passwordValues.put(COLUMN_EMPLOYEE_PASSWORD, newEmployee.getEmployeePassword());
+        passwordValues.put(COLUMN_EMPLOYEE_NUMBER, employee.getEmployeeNumber());
+        passwordValues.put(COLUMN_EMPLOYEE_PASSWORD, employee.getEmployeePassword());
         long result3 = database.insert(TABLE_EMPLOYEE_PASSWORD, null, passwordValues);
         return result1 != -1 && result2 != -1 && result3 != -1;
     }
@@ -86,15 +86,15 @@ public class AdminOperations {
         return cursor.getCount() > 0;
     }
 
-    public List<NewEmployee> getAllEmployees() {
-        List<NewEmployee> employeeList = new ArrayList<>();
+    public List<Employee> getAllEmployees() {
+        List<Employee> employeeList = new ArrayList<>();
         SQLiteDatabase database = adminDbHelper.getWritableDatabase();
         Cursor cursor = database.rawQuery("select * from " + TABLE_EMPLOYEE + " NATURAL JOIN " + TABLE_JOB_CLASS, null);
         Log.d("getAllEmployees", "" + cursor.getCount());
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
-                    employeeList.add(new NewEmployee(cursor.getInt(cursor.getColumnIndex(COLUMN_EMPLOYEE_NUMBER)), cursor.getString(cursor.getColumnIndex(COLUMN_EMPLOYEE_NAME)), cursor.getString(cursor.getColumnIndex(COLUMN_JOB_CLASS))));
+                    employeeList.add(new Employee(cursor.getInt(cursor.getColumnIndex(COLUMN_EMPLOYEE_NUMBER)), cursor.getString(cursor.getColumnIndex(COLUMN_EMPLOYEE_NAME)), cursor.getString(cursor.getColumnIndex(COLUMN_JOB_CLASS))));
                 } while (cursor.moveToNext());
             }
         }
