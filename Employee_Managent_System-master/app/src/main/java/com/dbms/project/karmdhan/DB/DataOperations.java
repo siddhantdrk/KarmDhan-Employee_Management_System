@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.dbms.project.karmdhan.Authentication.PasswordAuthentication;
 import com.dbms.project.karmdhan.Model.Employee;
+import com.dbms.project.karmdhan.Model.Project;
+import com.dbms.project.karmdhan.Model.ProjectEmployee;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +17,12 @@ public class DataOperations {
     private PasswordAuthentication passwordAuthentication;
     private final Context context;
     private AdminOperations adminOperations;
-    private List<Employee> employeeList;
+    private ProjectOperations projectOperations;
+    private ProjectEmployeeOperations projectEmployeeOperations;
 
+    private List<Employee> employeeList;
+    private List<Project> projectList;
+    private List<ProjectEmployee> projectEmployeeList;
     public DataOperations(Context context) {
         this.context=context;
         myDbHelper = new KarmDhanDBHandler(context);
@@ -50,5 +56,44 @@ public class DataOperations {
         }
     }
 
+    public void addProjectTableData(){
+        projectList = new ArrayList<Project>();
+        projectList.add(new Project(15,"Evergreen","Alice K. Johnson"));
+        projectList.add(new Project(18,"Amber Wave","Anne K.Ramoras"));
+        projectList.add(new Project(22,"Lit","Delbert K.Joenbrood"));
+        projectList.add(new Project(25,"Employee","John G.News"));
 
+        projectEmployeeList = new ArrayList<ProjectEmployee>();
+        projectEmployeeList.add(new ProjectEmployee(15,103,84.50,23.8));
+        projectEmployeeList.add(new ProjectEmployee(15,101,105.00,19.4));
+        projectEmployeeList.add(new ProjectEmployee(15,105,105.50,35.7));
+        projectEmployeeList.add(new ProjectEmployee(15,106,35.75,12.6));
+        projectEmployeeList.add(new ProjectEmployee(15,102,96.75,23.8));
+        projectEmployeeList.add(new ProjectEmployee(18,114,48.50,24.6));
+        projectEmployeeList.add(new ProjectEmployee(18,118,18.36,45.3));
+        projectEmployeeList.add(new ProjectEmployee(18,104,96.75,32.4));
+        projectEmployeeList.add(new ProjectEmployee(18,112,45.95,44.0));
+        projectEmployeeList.add(new ProjectEmployee(22,105,105.00,64.7));
+        projectEmployeeList.add(new ProjectEmployee(22,104,96.75,48.4));
+        projectEmployeeList.add(new ProjectEmployee(22,113,48.10,23.6));
+        projectEmployeeList.add(new ProjectEmployee(22,111,26.87,22.0));
+        projectEmployeeList.add(new ProjectEmployee(22,106,35.75,12.8));
+        projectEmployeeList.add(new ProjectEmployee(25,112,35.75,24.6));
+        projectEmployeeList.add(new ProjectEmployee(25,112,96.75,45.8));
+        projectEmployeeList.add(new ProjectEmployee(25,112,105.00,56.3));
+        projectEmployeeList.add(new ProjectEmployee(25,112,48.10,33.1));
+        projectEmployeeList.add(new ProjectEmployee(25,112,96.75,23.6));
+        projectEmployeeList.add(new ProjectEmployee(25,112,18.36,30.5));
+        projectEmployeeList.add(new ProjectEmployee(25,112,45.95,41.4));
+
+        addProjectData(projectList,projectEmployeeList);
+    }
+
+
+    public void addProjectData(List<Project> projectList,List<ProjectEmployee> projectEmployeeList){
+        projectOperations = new ProjectOperations(context);
+        for(int i=0; i<projectList.size(); i++){
+            projectOperations.addProject(projectList.get(i),projectEmployeeList.get(i));
+        }
+    }
 }

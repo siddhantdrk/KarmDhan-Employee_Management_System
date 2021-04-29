@@ -12,6 +12,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dbms.project.karmdhan.DB.AdminOperations;
+import com.dbms.project.karmdhan.DB.DataOperations;
 import com.dbms.project.karmdhan.DB.ProjectEmployeeOperations;
 import com.dbms.project.karmdhan.DB.ProjectOperations;
 import com.dbms.project.karmdhan.Model.Employee;
@@ -33,6 +34,7 @@ public class AddProjectActivity extends AppCompatActivity {
     private TextInputLayout chargePerHourTil, hoursBilledTil;
     private Button addDetailsDialogueBtn;
     private ProjectEmployeeOperations projectEmployeeOperations;
+    private DataOperations dataOperations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +42,13 @@ public class AddProjectActivity extends AppCompatActivity {
         binding = ActivityAddProjectBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
         setUpProjectLeaderSpinner();
+        addGivenProjectData();
         binding.addProjectBtn.setOnClickListener(this::OnClick);
+    }
+
+    private void addGivenProjectData() {
+        dataOperations = new DataOperations(this);
+        dataOperations.addProjectTableData();
     }
 
     private void OnClick(View view) {
