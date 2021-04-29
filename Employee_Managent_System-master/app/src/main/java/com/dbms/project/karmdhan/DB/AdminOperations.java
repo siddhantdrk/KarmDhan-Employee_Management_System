@@ -24,6 +24,7 @@ import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_ADMIN;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_EMPLOYEE;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_EMPLOYEE_PASSWORD;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_JOB_CLASS;
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_PROJECT_EMPLOYEE;
 
 public class AdminOperations {
     private final SQLiteOpenHelper adminDbHelper;
@@ -100,5 +101,14 @@ public class AdminOperations {
         }
         Log.d("getAllEmployees", "" + employeeList.size());
         return employeeList;
+    }
+
+    public boolean removeEmployee(int employeeNum) {
+        SQLiteDatabase database = adminDbHelper.getWritableDatabase();
+        int result1 = database.delete(TABLE_EMPLOYEE_PASSWORD, COLUMN_EMPLOYEE_NUMBER + " = ?", new String[]{String.valueOf(employeeNum)});
+        int result2 = database.delete(TABLE_EMPLOYEE, COLUMN_EMPLOYEE_NUMBER + " = ?", new String[]{String.valueOf(employeeNum)});
+        int result3 = database.delete(TABLE_PROJECT_EMPLOYEE, COLUMN_EMPLOYEE_NUMBER + " = ?", new String[]{String.valueOf(employeeNum)});
+        int result4 = database.delete(TABLE_JOB_CLASS, COLUMN_EMPLOYEE_NUMBER + " = ?", new String[]{String.valueOf(employeeNum)});
+        return result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0;
     }
 }
