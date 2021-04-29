@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dbms.project.karmdhan.Activity.AddEmployeeActivity;
+import com.dbms.project.karmdhan.Activity.AddProjectActivity;
 import com.dbms.project.karmdhan.Activity.ViewAllEmployeeActivity;
 import com.dbms.project.karmdhan.Activity.WelcomeActivity;
 import com.dbms.project.karmdhan.R;
@@ -26,7 +27,8 @@ public class AdminDashboardActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         binding.logoutBtn.setOnClickListener(this::OnClick);
         binding.addEmployee.setOnClickListener(this::OnClick);
-        binding.viewAllEmployee.setOnClickListener(this::OnClick);
+        binding.viewAllEmployeeBtn.setOnClickListener(this::OnClick);
+        binding.addProjectBtn.setOnClickListener(this::OnClick);
     }
 
     private void OnClick(View view) {
@@ -41,9 +43,12 @@ public class AdminDashboardActivity extends AppCompatActivity {
             case R.id.add_employee:
                 startActivity(new Intent(this, AddEmployeeActivity.class));
                 break;
-            case R.id.view_all_employee:
+            case R.id.view_all_employee_btn:
                 Intent viewAllIntent = new Intent(this, ViewAllEmployeeActivity.class);
                 startActivity(viewAllIntent);
+                break;
+            case R.id.add_project_btn:
+                startActivity(new Intent(this, AddProjectActivity.class));
                 break;
         }
     }

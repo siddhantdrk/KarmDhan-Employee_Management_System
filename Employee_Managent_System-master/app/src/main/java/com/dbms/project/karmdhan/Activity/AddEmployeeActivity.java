@@ -27,20 +27,21 @@ public class AddEmployeeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityAddEmployeeBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
-        dataOperations = new DataOperations(this);
+        addGivenEmployeeData();
         binding.addEmployeeBtn.setOnClickListener(this::OnCLick);
     }
 
     private void OnCLick(View view) {
         switch (view.getId()) {
             case R.id.add_employee_btn:
-                //addEmployee();
-                addData();
+                addEmployee();
                 break;
         }
     }
 
-    private void addData() {
+    //add given employee data
+    private void addGivenEmployeeData() {
+        dataOperations = new DataOperations(this);
         dataOperations.addEmployeeTableData();
     }
 
@@ -67,8 +68,8 @@ public class AddEmployeeActivity extends AppCompatActivity {
                 Toast.makeText(this, "Employee Number Already Exist", Toast.LENGTH_SHORT).show();
                 return;
             }
-            passwordAuthentication = new PasswordAuthentication();
             if (adminOperations.addEmployee(new NewEmployee(Integer.parseInt(employeeNumber), employeeName, jobClass, employeePassword))) {
+                setFieldsNull();
                 Toast.makeText(this, "Employee Added Successfully", Toast.LENGTH_SHORT).show();
             }
         }
@@ -78,5 +79,11 @@ public class AddEmployeeActivity extends AppCompatActivity {
         return String.valueOf(charLength < 1 ? 0 : new Random()
                 .nextInt((9 * (int) Math.pow(10, charLength - 1)) - 1)
                 + (int) Math.pow(10, charLength - 1));
+    }
+
+    private void setFieldsNull() {
+        binding.employeeNumberEdt.setText(null);
+        binding.employeeNameEdt.setText(null);
+        binding.jobClassSpinner.setSelection(0);
     }
 }

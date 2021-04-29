@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".Activity.AddEmployeeActivity">
+    tools:context=".Activity.AddProjectActivity">
 
     <TextView
         android:id="@+id/fill_up_details_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Fill up the Employee Details Below"
+        android:text="Fill up the Project Details Below"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/employee_number_til"
+        android:id="@+id/project_number_til"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,17 +32,17 @@
         app:layout_constraintTop_toBottomOf="@+id/fill_up_details_tv">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/employee_number_edt"
+            android:id="@+id/project_number_edt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Employee Number"
+            android:hint="Project Number"
             android:inputType="number" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/employee_name_til"
+        android:id="@+id/project_name_til"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,26 +51,26 @@
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/employee_number_til">
+        app:layout_constraintTop_toBottomOf="@+id/project_number_til">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/employee_name_edt"
+            android:id="@+id/project_name_edt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Employee Name"
+            android:hint="Project Name"
             android:inputType="textCapWords" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/job_class_tv"
+        android:id="@+id/project_leader_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Select Job-Class"
+        android:text="Select Project Leader"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/employee_name_til" />
+        app:layout_constraintTop_toBottomOf="@+id/project_name_til" />
 
 
     <com.google.android.material.card.MaterialCardView
@@ -81,28 +81,28 @@
         app:cardBackgroundColor="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/job_class_tv"
+        app:layout_constraintTop_toBottomOf="@+id/project_leader_tv"
         app:strokeColor="#000"
         app:strokeWidth="0.5dp">
 
 
         <Spinner
-            android:id="@+id/job_class_spinner"
+            android:id="@+id/project_leader_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:entries="@array/job_class_spinner_entries"
             android:paddingHorizontal="8dp"
-            android:paddingVertical="12dp" />
+            android:paddingVertical="12dp"
+            android:spinnerMode="dialog" />
 
     </com.google.android.material.card.MaterialCardView>
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/add_employee_btn"
+        android:id="@+id/add_project_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Employee"
         android:layout_marginTop="32dp"
+        android:text="Add Project"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialCardView" />

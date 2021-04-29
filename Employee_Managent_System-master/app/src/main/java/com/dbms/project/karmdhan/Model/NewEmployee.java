@@ -56,4 +56,8 @@ public class NewEmployee {
     public void setEmployeePassword(String employeePassword) {
         this.employeePassword = employeePassword;
     }
+
+    public String toString() {
+        return this.employeeNumber + " : " + this.employeeName + "\n" + this.employeeJobClass;
+    }
 }

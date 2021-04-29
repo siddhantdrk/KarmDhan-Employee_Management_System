@@ -3,19 +3,13 @@ package com.dbms.project.karmdhan.Model;
 public class Project {
     int projectNumber;
     String projectName;
-    int employeeNumber;
+    String projectLeader;
 
-    public Project(int projectNumber, String projectName) {
+    public Project(int projectNumber, String projectName, String projectLeader) {
         this.projectNumber = projectNumber;
         this.projectName = projectName;
+        this.projectLeader = projectLeader;
     }
-
-    public Project(int projectNumber, String projectName, int employeeNumber) {
-        this.projectNumber = projectNumber;
-        this.projectName = projectName;
-        this.employeeNumber = employeeNumber;
-    }
-
 
     public int getProjectNumber() {
         return projectNumber;
@@ -33,11 +27,11 @@ public class Project {
         this.projectName = projectName;
     }
 
-    public int getEmployeeNumber() {
-        return employeeNumber;
+    public String getProjectLeader() {
+        return projectLeader;
     }
 
-    public void setEmployeeNumber(int employeeNumber) {
-        this.employeeNumber = employeeNumber;
+    public void setProjectLeader(String projectLeader) {
+        this.projectLeader = projectLeader;
     }
 }
