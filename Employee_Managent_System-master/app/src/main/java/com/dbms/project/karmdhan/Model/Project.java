@@ -5,19 +5,19 @@ import java.util.List;
 public class Project {
     private int projectNumber;
     private String projectName;
-    private String projectLeader;
+    private int projectLeaderEmployeeNumber;
     private List<Employee> projectEmployeeList;
 
-    public Project(int projectNumber, String projectName, String projectLeader) {
+    public Project(int projectNumber, String projectName, int projectLeaderEmployeeNumber) {
         this.projectNumber = projectNumber;
         this.projectName = projectName;
-        this.projectLeader = projectLeader;
+        this.projectLeaderEmployeeNumber = projectLeaderEmployeeNumber;
     }
 
-    public Project(int projectNumber, String projectName, String projectLeader, List<Employee> projectEmployeeList) {
+    public Project(int projectNumber, String projectName, int projectLeaderEmployeeNumber, List<Employee> projectEmployeeList) {
         this.projectNumber = projectNumber;
         this.projectName = projectName;
-        this.projectLeader = projectLeader;
+        this.projectLeaderEmployeeNumber = projectLeaderEmployeeNumber;
         this.projectEmployeeList = projectEmployeeList;
     }
 
@@ -45,11 +45,11 @@ public class Project {
         this.projectName = projectName;
     }
 
-    public String getProjectLeader() {
-        return projectLeader;
+    public int getProjectLeaderEmployeeNumber() {
+        return projectLeaderEmployeeNumber;
     }
 
-    public void setProjectLeader(String projectLeader) {
-        this.projectLeader = projectLeader;
+    public void setProjectLeaderEmployeeNumber(int projectLeaderEmployeeNumber) {
+        this.projectLeaderEmployeeNumber = projectLeaderEmployeeNumber;
     }
 }

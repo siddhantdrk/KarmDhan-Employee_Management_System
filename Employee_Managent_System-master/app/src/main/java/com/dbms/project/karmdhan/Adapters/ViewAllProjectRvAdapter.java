@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dbms.project.karmdhan.DB.EmployeeOperations;
 import com.dbms.project.karmdhan.Model.Project;
 import com.dbms.project.karmdhan.R;
 
@@ -17,6 +18,7 @@ import java.util.List;
 public class ViewAllProjectRvAdapter extends RecyclerView.Adapter<ViewAllProjectRvAdapter.ProjectViewHolder> {
     private final Context context;
     private final List<Project> projectList;
+    private EmployeeOperations employeeOperations;
 
     public ViewAllProjectRvAdapter(Context context, List<Project> projectList) {
         this.context = context;
@@ -35,7 +37,8 @@ public class ViewAllProjectRvAdapter extends RecyclerView.Adapter<ViewAllProject
     public void onBindViewHolder(@NonNull ViewAllProjectRvAdapter.ProjectViewHolder holder, int position) {
         holder.projectName.setText(projectList.get(position).getProjectName());
         holder.projectNumber.setText(String.valueOf(projectList.get(position).getProjectNumber()));
-        holder.projectLeader.setText(projectList.get(position).getProjectLeader());
+        employeeOperations = new EmployeeOperations(context);
+        holder.projectLeader.setText(employeeOperations.getEmployeeByNumber(projectList.get(position).getProjectLeaderEmployeeNumber()).getEmployeeName());
     }
 
     @Override

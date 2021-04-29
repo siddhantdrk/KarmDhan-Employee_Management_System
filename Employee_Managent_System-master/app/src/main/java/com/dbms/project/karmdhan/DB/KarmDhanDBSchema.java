@@ -16,7 +16,7 @@ public class KarmDhanDBSchema {
     public static final String COLUMN_ADMIN_PASSWORD = "adminPassword";
     public static final String COLUMN_PROJECT_NUMBER = "projectNumber";
     public static final String COLUMN_PROJECT_NAME = "projectName";
-    public static final String COLUMN_PROJECT_LEADER = "projectLeader";
+    public static final String COLUMN_PROJECT_LEADER_EMPLOYEE_NUMBER = "projectLeaderEmployeeNumber";
     public static final String COLUMN_EMPLOYEE_NUMBER = "employeeNumber";
     public static final String COLUMN_EMPLOYEE_PASSWORD = "employeePassword";
     public static final String COLUMN_EMPLOYEE_NAME = "employeeName";
@@ -31,7 +31,7 @@ public class KarmDhanDBSchema {
 
     //Project Table
     public static final String TABLE_PROJECT_CREATE = "CREATE TABLE " + TABLE_PROJECT + " (" + COLUMN_PROJECT_NUMBER + " INTEGER PRIMARY KEY, " +
-            COLUMN_PROJECT_NAME + " TEXT, " + COLUMN_PROJECT_LEADER + " TEXT " + ")";
+            COLUMN_PROJECT_NAME + " TEXT, " + COLUMN_PROJECT_LEADER_EMPLOYEE_NUMBER + " INTEGER " + ")";
 
     //ProjectEmployee Table
     public static final String TABLE_PROJECT_EMPLOYEE_CREATE = "CREATE TABLE " + TABLE_PROJECT_EMPLOYEE + " (" + COLUMN_PROJECT_NUMBER +

@@ -109,6 +109,18 @@ public class AdminOperations {
         int result2 = database.delete(TABLE_EMPLOYEE, COLUMN_EMPLOYEE_NUMBER + " = ?", new String[]{String.valueOf(employeeNum)});
         int result3 = database.delete(TABLE_PROJECT_EMPLOYEE, COLUMN_EMPLOYEE_NUMBER + " = ?", new String[]{String.valueOf(employeeNum)});
         int result4 = database.delete(TABLE_JOB_CLASS, COLUMN_EMPLOYEE_NUMBER + " = ?", new String[]{String.valueOf(employeeNum)});
-        return result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0;
+        return result1 > 0 && result2 > 0 && result3 >= 0 && result4 > 0;
+    }
+
+    public boolean updateEmployeeDetails(Employee employee) {
+        SQLiteDatabase database = adminDbHelper.getWritableDatabase();
+        ContentValues values1 = new ContentValues();
+        values1.put(COLUMN_EMPLOYEE_NAME, employee.getEmployeeName());
+        int result1 = database.update(TABLE_EMPLOYEE, values1, COLUMN_EMPLOYEE_NUMBER + " = ?", new String[]{String.valueOf(employee.getEmployeeNumber())});
+        ContentValues values2 = new ContentValues();
+        values2.put(COLUMN_JOB_CLASS, employee.getEmployeeJobClass());
+        int result2 = database.update(TABLE_JOB_CLASS, values2, COLUMN_EMPLOYEE_NUMBER + " = ?", new String[]{String.valueOf(employee.getEmployeeNumber())});
+        Cursor cursor = database.rawQuery("select * from " + TABLE_PROJECT_EMPLOYEE + " where " + COLUMN_EMPLOYEE_NUMBER + " = ?", new String[]{String.valueOf(employee.getEmployeeNumber())});
+        return result1 >= 0 && result2 >= 0;
     }
 }

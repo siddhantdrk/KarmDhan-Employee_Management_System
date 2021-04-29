@@ -2,6 +2,7 @@ package com.dbms.project.karmdhan.Activity;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,7 +34,11 @@ public class ViewAllProjectActivity extends AppCompatActivity {
 
     private void setAllProjectsRv() {
         projectList = getAllProjects();
-        adapter = new ViewAllProjectRvAdapter(this, projectList);
-        binding.viewAllProjectRv.setAdapter(adapter);
+        if (projectList != null && projectList.size() != 0) {
+            adapter = new ViewAllProjectRvAdapter(this, projectList);
+            binding.viewAllProjectRv.setAdapter(adapter);
+        } else {
+            Toast.makeText(this, "Sorry, No data found", Toast.LENGTH_SHORT).show();
+        }
     }
 }
