@@ -9,9 +9,12 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dbms.project.karmdhan.DB.ProjectOperations;
+import com.dbms.project.karmdhan.Model.Employee;
 import com.dbms.project.karmdhan.Model.Project;
 import com.dbms.project.karmdhan.R;
 import com.dbms.project.karmdhan.databinding.ActivityProjectDetailsBinding;
+
+import java.util.List;
 
 public class ProjectDetailsActivity extends AppCompatActivity {
     private ActivityProjectDetailsBinding binding;
@@ -25,6 +28,7 @@ public class ProjectDetailsActivity extends AppCompatActivity {
         projectNum = getIntent().getIntExtra("ProjectNumber", -1);
         setContentView(binding.getRoot());
         setProjectDetails();
+        setProjectEmployeeDetails();
         binding.addEmployeeToProjectBtn.setOnClickListener(this::OnClick);
         binding.updateProjectDetails.setOnClickListener(this::OnClick);
     }
@@ -43,6 +47,11 @@ public class ProjectDetailsActivity extends AppCompatActivity {
                 break;
         }
 
+    }
+
+    private void setProjectEmployeeDetails() {
+        List<Employee> employeeList = projectOperations.getAllEmployeeForAProject(projectNum);
+        Toast.makeText(this, "" + employeeList.size(), Toast.LENGTH_SHORT).show();
     }
 
     private void setProjectDetails() {

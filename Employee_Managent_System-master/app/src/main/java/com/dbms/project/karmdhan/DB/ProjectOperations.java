@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.dbms.project.karmdhan.Model.Employee;
 import com.dbms.project.karmdhan.Model.Project;
 import com.dbms.project.karmdhan.Model.ProjectEmployee;
 
@@ -23,9 +24,12 @@ import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_PROJECT_EMPLOY
 
 public class ProjectOperations {
     private final SQLiteOpenHelper projectDbHelper;
+    private EmployeeOperations employeeOperations;
+    private Context context;
 
     public ProjectOperations(Context context) {
         projectDbHelper = new KarmDhanDBHandler(context);
+        this.context = context;
     }
 
     public boolean addProject(Project project, ProjectEmployee projectEmployee) {
@@ -70,9 +74,42 @@ public class ProjectOperations {
         Cursor cursor = database.rawQuery("select * from " + TABLE_PROJECT + " where " + COLUMN_PROJECT_NUMBER + " = ?", new String[]{String.valueOf(projectNum)});
         if (cursor != null) {
             if (cursor.moveToFirst()) {
-                project = new Project(projectNum, cursor.getString(cursor.getColumnIndex(COLUMN_PROJECT_NAME)), cursor.getInt(cursor.getColumnIndex(COLUMN_PROJECT_LEADER_EMPLOYEE_NUMBER)));
+                employeeOperations = new EmployeeOperations(context);
+                String projectLeaderName = employeeOperations.getEmployeeByNumber(cursor.getInt(cursor.getColumnIndex(COLUMN_PROJECT_LEADER_EMPLOYEE_NUMBER))).getEmployeeName();
+                project = new Project(projectNum, cursor.getString(cursor.getColumnIndex(COLUMN_PROJECT_NAME)), cursor.getInt(cursor.getColumnIndex(COLUMN_PROJECT_LEADER_EMPLOYEE_NUMBER)), projectLeaderName);
             }
         }
         return project;
+    }
+
+    public boolean updateProjectDetails(Project project, ProjectEmployee projectEmployee) {
+        SQLiteDatabase database = projectDbHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_PROJECT_NAME, project.getProjectName());
+        contentValues.put(COLUMN_PROJECT_LEADER_EMPLOYEE_NUMBER, project.getProjectLeaderEmployeeNumber());
+        long result = database.update(TABLE_PROJECT, contentValues, COLUMN_PROJECT_NUMBER + " = ?", new String[]{String.valueOf(project.getProjectNumber())});
+        ContentValues contentValues1 = new ContentValues();
+        contentValues1.put(COLUMN_PROJECT_NUMBER, projectEmployee.getProjectNumber());
+        contentValues1.put(COLUMN_EMPLOYEE_NUMBER, projectEmployee.getEmployeeNumber());
+        contentValues1.put(COLUMN_CHARGE_PER_HOUR, projectEmployee.getChargePerHour());
+        contentValues1.put(COLUMN_HOURS_BILLED, projectEmployee.getHoursBilled());
+        long result1 = database.update(TABLE_PROJECT_EMPLOYEE, contentValues1, COLUMN_PROJECT_NUMBER + " = ? and " + COLUMN_EMPLOYEE_NUMBER + " = ?", new String[]{String.valueOf(projectEmployee.getProjectNumber()), String.valueOf(projectEmployee.getEmployeeNumber())});
+        return result >= 0 && result1 >= 0;
+    }
+
+    public List<Employee> getAllEmployeeForAProject(int projectNum) {
+        List<Employee> employeeList = new ArrayList<>();
+        SQLiteDatabase database = projectDbHelper.getWritableDatabase();
+        Cursor cursor = database.rawQuery("select * from " + TABLE_PROJECT_EMPLOYEE + " where " + COLUMN_PROJECT_NUMBER + " = ?", new String[]{String.valueOf(projectNum)});
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    EmployeeOperations employeeOperations = new EmployeeOperations(context);
+                    Employee employee = employeeOperations.getEmployeeByNumber(cursor.getInt(cursor.getColumnIndex(COLUMN_EMPLOYEE_NUMBER)));
+                    employeeList.add(new Employee(employee.getEmployeeNumber(), employee.getEmployeeName(), employee.getEmployeeJobClass(), cursor.getDouble(cursor.getColumnIndex(COLUMN_CHARGE_PER_HOUR)), cursor.getDouble(cursor.getColumnIndex(COLUMN_HOURS_BILLED))));
+                } while (cursor.moveToNext());
+            }
+        }
+        return employeeList;
     }
 }

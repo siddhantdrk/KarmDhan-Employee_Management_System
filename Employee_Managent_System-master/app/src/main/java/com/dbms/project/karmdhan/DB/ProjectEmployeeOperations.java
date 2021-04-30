@@ -62,4 +62,8 @@ public class ProjectEmployeeOperations {
         }
         return remainingEmployeeList;
     }
+
+    public ProjectEmployee getProjectEmployeeByProjectAndEmployeeNum(int projectNum, int employeeNum) {
+        return null;
+    }
 }

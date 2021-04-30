@@ -10,8 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dbms.project.karmdhan.Model.Employee;
-import com.dbms.project.karmdhan.Model.Project;
-import com.dbms.project.karmdhan.Model.ProjectEmployee;
 import com.dbms.project.karmdhan.R;
 
 import java.util.List;
@@ -34,7 +32,6 @@ public class projectEmployeeOnlyRvAdapter extends RecyclerView.Adapter<projectEm
 
     @Override
     public void onBindViewHolder(@NonNull projectEmployeeOnlyRvAdapter.ProjectEmployeeViewHolder holder, int position) {
-
     }
 
     @Override
