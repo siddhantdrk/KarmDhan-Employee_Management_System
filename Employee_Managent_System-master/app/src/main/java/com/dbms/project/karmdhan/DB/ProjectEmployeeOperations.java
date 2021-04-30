@@ -81,4 +81,13 @@ public class ProjectEmployeeOperations {
         }
         return null;
     }
+
+    public boolean updateProjectEmployee(ProjectEmployee projectEmployee) {
+        SQLiteDatabase database = projectEmployeeDbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_CHARGE_PER_HOUR, projectEmployee.getChargePerHour());
+        values.put(COLUMN_HOURS_BILLED, projectEmployee.getHoursBilled());
+        long result = database.update(TABLE_PROJECT_EMPLOYEE, values, COLUMN_PROJECT_NUMBER + " = ? and " + COLUMN_EMPLOYEE_NUMBER + " = ?", new String[]{String.valueOf(projectEmployee.getProjectNumber()), String.valueOf(projectEmployee.getEmployeeNumber())});
+        return result >= 0;
+    }
 }

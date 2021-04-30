@@ -1,5 +1,6 @@
 package com.dbms.project.karmdhan.Adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -46,14 +47,21 @@ public class ViewAllProjectRvAdapter extends RecyclerView.Adapter<ViewAllProject
         employeeOperations = new EmployeeOperations(context);
         holder.projectLeader.setText(employeeOperations.getEmployeeByNumber(projectList.get(position).getProjectLeaderEmployeeNumber()).getEmployeeName());
         holder.removeProjectBtn.setOnClickListener(view -> {
-            adminOperations = new AdminOperations(context);
-            if (adminOperations.removeProject(projectList.get(position).getProjectNumber())) {
-                Toast.makeText(context, "Project Deleted Successfully", Toast.LENGTH_SHORT).show();
-                projectList.remove(position);
-                notifyItemRemoved(position);
-            } else {
-                Toast.makeText(context, "Oops !! something went wrong.", Toast.LENGTH_SHORT).show();
-            }
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setMessage("Are you sure ? you want remove this Project.");
+            builder.setPositiveButton("YES", (dialogInterface, i) -> {
+                adminOperations = new AdminOperations(context);
+                if (adminOperations.removeProject(projectList.get(position).getProjectNumber())) {
+                    Toast.makeText(context, "Project Deleted Successfully", Toast.LENGTH_SHORT).show();
+                    projectList.remove(position);
+                    notifyItemRemoved(position);
+                } else {
+                    Toast.makeText(context, "Oops !! something went wrong.", Toast.LENGTH_SHORT).show();
+                }
+            });
+            builder.setNegativeButton("NO", (dialogInterface, i) -> dialogInterface.dismiss());
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         });
 
         holder.viewProjectBtn.setOnClickListener(view -> {

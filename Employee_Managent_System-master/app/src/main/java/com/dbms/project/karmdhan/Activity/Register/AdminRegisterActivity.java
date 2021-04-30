@@ -1,18 +1,19 @@
 package com.dbms.project.karmdhan.Activity.Register;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.dbms.project.karmdhan.Activity.Dashboard.AdminDashboardActivity;
 import com.dbms.project.karmdhan.Activity.Login.AdminLoginActivity;
 import com.dbms.project.karmdhan.DB.AdminOperations;
 import com.dbms.project.karmdhan.Model.Admin;
 import com.dbms.project.karmdhan.R;
+import com.dbms.project.karmdhan.Storage.SharedPreferenceManager;
 import com.dbms.project.karmdhan.databinding.ActivityAdminRegisterBinding;
 
 public class AdminRegisterActivity extends AppCompatActivity {
@@ -54,7 +55,9 @@ public class AdminRegisterActivity extends AppCompatActivity {
                         if(!adminOperations.checkAdminIDExist(Integer.parseInt(userId))){
                             Admin admin = new Admin(Integer.parseInt(userId),cnfPassword);
                             adminOperations.addAdmin(admin);
+                            SharedPreferenceManager.getInstance(this).saveToken(userId);
                             Intent intent = new Intent(AdminRegisterActivity.this, AdminDashboardActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                             startActivity(intent);
                         }else{
                             binding.userIdTil.setError("Invalid User ID !!");

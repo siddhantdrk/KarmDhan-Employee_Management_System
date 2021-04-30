@@ -106,4 +106,24 @@ public class ProjectOperations {
         }
         return employeeList;
     }
+
+    public boolean removeEmployeeFromProject(int projectNum, int employeeNum) {
+        SQLiteDatabase database = projectDbHelper.getWritableDatabase();
+        long result = database.delete(TABLE_PROJECT_EMPLOYEE, COLUMN_PROJECT_NUMBER + " = ? and " + COLUMN_EMPLOYEE_NUMBER + " = ?", new String[]{String.valueOf(projectNum), String.valueOf(employeeNum)});
+        return result > 0;
+    }
+
+    public double getProjectCost(int projectNum) {
+        Double projectCost = 0.0;
+        SQLiteDatabase database = projectDbHelper.getWritableDatabase();
+        Cursor cursor = database.rawQuery("select * from " + TABLE_PROJECT_EMPLOYEE + " where " + COLUMN_PROJECT_NUMBER + " = ?", new String[]{String.valueOf(projectNum)});
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    projectCost += cursor.getDouble(cursor.getColumnIndex(COLUMN_HOURS_BILLED)) * cursor.getDouble(cursor.getColumnIndex(COLUMN_CHARGE_PER_HOUR));
+                } while (cursor.moveToNext());
+            }
+        }
+        return projectCost;
+    }
 }

@@ -1,6 +1,8 @@
 package com.dbms.project.karmdhan.Adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,8 +45,23 @@ public class ViewAllEmployeeRvAdapter extends RecyclerView.Adapter<ViewAllEmploy
         holder.employeeNumber.setText(String.valueOf(employeeList.get(position).getEmployeeNumber()));
         holder.employeeJobClass.setText(employeeList.get(position).getEmployeeJobClass());
         holder.removeBtn.setOnClickListener(view -> {
-            adminOperations = new AdminOperations(context);
-            removeEmployee(employeeList.get(position).getEmployeeNumber(), position);
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setMessage("Are you sure ? you want remove this employee.");
+            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    adminOperations = new AdminOperations(context);
+                    removeEmployee(employeeList.get(position).getEmployeeNumber(), position);
+                }
+            });
+            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            });
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         });
         holder.bind(employeeList.get(position), onUpdateClickListener);
     }

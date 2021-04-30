@@ -16,9 +16,11 @@ import java.util.List;
 
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_ADMIN_ID;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_ADMIN_PASSWORD;
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_CHARGE_PER_HOUR;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_EMPLOYEE_NAME;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_EMPLOYEE_NUMBER;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_EMPLOYEE_PASSWORD;
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_HOURS_BILLED;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_JOB_CLASS;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_PROJECT_NUMBER;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_ADMIN;
@@ -130,5 +132,19 @@ public class AdminOperations {
         int result1 = database.delete(TABLE_PROJECT, COLUMN_PROJECT_NUMBER + " = ?", new String[]{String.valueOf(projectNum)});
         int result2 = database.delete(TABLE_PROJECT_EMPLOYEE, COLUMN_PROJECT_NUMBER + " = ?", new String[]{String.valueOf(projectNum)});
         return result1 > 0 && result2 > 0;
+    }
+
+    public double getTotalCost() {
+        Double totalCost = 0.0;
+        SQLiteDatabase database = adminDbHelper.getWritableDatabase();
+        Cursor cursor = database.rawQuery("select * from " + TABLE_PROJECT_EMPLOYEE, null);
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    totalCost += cursor.getDouble(cursor.getColumnIndex(COLUMN_HOURS_BILLED)) * cursor.getDouble(cursor.getColumnIndex(COLUMN_CHARGE_PER_HOUR));
+                } while (cursor.moveToNext());
+            }
+        }
+        return totalCost;
     }
 }

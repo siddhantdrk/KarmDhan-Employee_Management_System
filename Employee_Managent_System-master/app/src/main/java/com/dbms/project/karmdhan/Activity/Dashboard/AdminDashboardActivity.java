@@ -13,6 +13,7 @@ import com.dbms.project.karmdhan.Activity.AddProjectActivity;
 import com.dbms.project.karmdhan.Activity.ViewAllEmployeeActivity;
 import com.dbms.project.karmdhan.Activity.ViewAllProjectActivity;
 import com.dbms.project.karmdhan.Activity.WelcomeActivity;
+import com.dbms.project.karmdhan.DB.AdminOperations;
 import com.dbms.project.karmdhan.R;
 import com.dbms.project.karmdhan.Storage.SharedPreferenceManager;
 import com.dbms.project.karmdhan.databinding.ActivityAdminDashboardBinding;
@@ -20,17 +21,25 @@ import com.dbms.project.karmdhan.databinding.ActivityAdminDashboardBinding;
 public class AdminDashboardActivity extends AppCompatActivity {
 
     private ActivityAdminDashboardBinding binding;
+    private AdminOperations adminOperations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityAdminDashboardBinding.inflate(LayoutInflater.from(this));
         setContentView(binding.getRoot());
+        adminOperations = new AdminOperations(this);
         binding.logoutBtn.setOnClickListener(this::OnClick);
         binding.addEmployee.setOnClickListener(this::OnClick);
         binding.viewAllEmployeeBtn.setOnClickListener(this::OnClick);
         binding.addProjectBtn.setOnClickListener(this::OnClick);
         binding.viewAllProjectBtn.setOnClickListener(this::OnClick);
+        setDetails();
+    }
+
+    private void setDetails() {
+        binding.userIdValueTv.setText(SharedPreferenceManager.getInstance(this).getToken());
+        binding.totalCostValueTv.setText("$" + String.format("%1$,.2f", adminOperations.getTotalCost()));
     }
 
     private void OnClick(View view) {
@@ -56,5 +65,11 @@ public class AdminDashboardActivity extends AppCompatActivity {
                 startActivity(new Intent(this, ViewAllProjectActivity.class));
                 break;
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setDetails();
     }
 }
