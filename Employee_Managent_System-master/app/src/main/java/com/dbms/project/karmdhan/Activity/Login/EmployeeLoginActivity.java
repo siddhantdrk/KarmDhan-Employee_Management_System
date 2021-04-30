@@ -51,6 +51,8 @@ public class EmployeeLoginActivity extends AppCompatActivity {
                         Intent intent = new Intent(this, EmployeeDashboardActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
+                    } else {
+                        Toast.makeText(this, "Sorry, you haven't been Registered yet. Please contact to your Admin.", Toast.LENGTH_SHORT).show();
                     }
                 } else {
                     binding.passwordTil.setError("Required!!");

@@ -9,15 +9,21 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dbms.project.karmdhan.Activity.WelcomeActivity;
+import com.dbms.project.karmdhan.Adapters.EmployeeProjectRvAdapter;
 import com.dbms.project.karmdhan.DB.EmployeeOperations;
 import com.dbms.project.karmdhan.Model.Employee;
+import com.dbms.project.karmdhan.Model.Project;
 import com.dbms.project.karmdhan.R;
 import com.dbms.project.karmdhan.Storage.SharedPreferenceManager;
 import com.dbms.project.karmdhan.databinding.ActivityEmployeeDashboardBinding;
 
+import java.util.List;
+
 public class EmployeeDashboardActivity extends AppCompatActivity {
     private ActivityEmployeeDashboardBinding binding;
     private EmployeeOperations employeeOperations;
+    private Employee employee;
+    private EmployeeProjectRvAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +32,19 @@ public class EmployeeDashboardActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         binding.logoutBtn.setOnClickListener(this::OnClick);
         setEmployeeDetails();
+        setEmployeeProjects();
+    }
+
+    private List<Project> getAllEmployeeProjects() {
+        return employeeOperations.getAllProjects(employee.getEmployeeNumber());
+    }
+
+    private void setEmployeeProjects() {
+        List<Project> projectList = getAllEmployeeProjects();
+        if (projectList.size() != 0 && projectList != null) {
+            adapter = new EmployeeProjectRvAdapter(projectList, this);
+            binding.employeeProjectRv.setAdapter(adapter);
+        }
     }
 
     private void OnClick(View view) {
@@ -46,7 +65,7 @@ public class EmployeeDashboardActivity extends AppCompatActivity {
     }
 
     private void setEmployeeDetails() {
-        Employee employee = getEmployee();
+        employee = getEmployee();
         if (employee != null) {
             binding.employeeNumberValueTv.setText(String.valueOf(employee.getEmployeeNumber()));
             binding.employeeNameValueTv.setText(employee.getEmployeeName());

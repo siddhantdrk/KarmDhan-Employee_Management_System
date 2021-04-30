@@ -99,6 +99,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/update_employee_btn"
                 android:layout_width="0dp"
+                app:cornerRadius="8dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_weight="1"
@@ -107,6 +108,7 @@
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/remove_employee_btn"
                 android:layout_width="0dp"
+                app:cornerRadius="8dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_weight="1"

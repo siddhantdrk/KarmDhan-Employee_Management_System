@@ -8,14 +8,25 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.dbms.project.karmdhan.Model.Employee;
+import com.dbms.project.karmdhan.Model.Project;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_CHARGE_PER_HOUR;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_EMPLOYEE_NAME;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_EMPLOYEE_NUMBER;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_EMPLOYEE_PASSWORD;
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_HOURS_BILLED;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_JOB_CLASS;
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_PROJECT_LEADER_EMPLOYEE_NUMBER;
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_PROJECT_NAME;
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_PROJECT_NUMBER;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_EMPLOYEE;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_EMPLOYEE_PASSWORD;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_JOB_CLASS;
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_PROJECT;
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_PROJECT_EMPLOYEE;
 
 public class EmployeeOperations {
 
@@ -55,5 +66,21 @@ public class EmployeeOperations {
         contentValues.put(COLUMN_EMPLOYEE_PASSWORD, password);
         long result = database.update(TABLE_EMPLOYEE_PASSWORD, contentValues, COLUMN_EMPLOYEE_NUMBER + " = ?", new String[]{String.valueOf(userId)});
         return result != -1;
+    }
+
+    public List<Project> getAllProjects(int employeeNum) {
+        List<Project> projectList = new ArrayList<>();
+        SQLiteDatabase database = employeeDbHelper.getWritableDatabase();
+        Cursor cursor1 = database.rawQuery("select * from " + TABLE_PROJECT_EMPLOYEE + " NATURAL JOIN " + TABLE_PROJECT + " where " + COLUMN_EMPLOYEE_NUMBER + " = ?", new String[]{String.valueOf(employeeNum)});
+        if (cursor1 != null) {
+            if (cursor1.moveToFirst()) {
+                do {
+                    String projectLeaderName = getEmployeeByNumber(cursor1.getInt(cursor1.getColumnIndex(COLUMN_PROJECT_LEADER_EMPLOYEE_NUMBER))).getEmployeeName();
+                    projectList.add(new Project(cursor1.getInt(cursor1.getColumnIndex(COLUMN_PROJECT_NUMBER)), cursor1.getString(cursor1.getColumnIndex(COLUMN_PROJECT_NAME)), cursor1.getInt(cursor1.getColumnIndex(COLUMN_PROJECT_LEADER_EMPLOYEE_NUMBER)), cursor1.getDouble(cursor1.getColumnIndex(COLUMN_CHARGE_PER_HOUR)), cursor1.getDouble(cursor1.getColumnIndex(COLUMN_HOURS_BILLED)), projectLeaderName));
+
+                } while (cursor1.moveToNext());
+            }
+        }
+        return projectList;
     }
 }

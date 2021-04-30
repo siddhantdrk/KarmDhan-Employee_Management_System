@@ -101,6 +101,7 @@
         android:id="@+id/add_employee_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cornerRadius="8dp"
         android:text="Add Employee"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"

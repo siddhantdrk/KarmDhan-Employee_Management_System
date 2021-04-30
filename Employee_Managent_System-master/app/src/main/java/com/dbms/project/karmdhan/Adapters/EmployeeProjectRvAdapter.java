@@ -1,5 +1,6 @@
 package com.dbms.project.karmdhan.Adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,9 +32,14 @@ public class EmployeeProjectRvAdapter extends RecyclerView.Adapter<EmployeeProje
         return new EmployeeProjectRvAdapter.EmployeeProjectViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull EmployeeProjectRvAdapter.EmployeeProjectViewHolder holder, int position) {
-
+        holder.projectName.setText(projectList.get(position).getProjectName());
+        holder.projectNumber.setText(String.valueOf(projectList.get(position).getProjectNumber()));
+        holder.projectLeader.setText("Employee : " + projectList.get(position).getProjectLeaderEmployeeNumber() + "\n" + projectList.get(position).getProjectLeaderName());
+        holder.hoursBilled.setText(projectList.get(position).getHoursBilled() + " Hrs");
+        holder.chargePerHour.setText("$" + projectList.get(position).getChargePerHour());
     }
 
     @Override

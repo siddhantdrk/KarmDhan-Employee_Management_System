@@ -135,7 +135,7 @@ public class AddProjectActivity extends AppCompatActivity {
         hoursBilledEdt = dialogView.findViewById(R.id.hrs_billed_edt);
         chargePerHourTil = dialogView.findViewById(R.id.charge_per_hr_til);
         hoursBilledTil = dialogView.findViewById(R.id.hrs_billed_til);
-        addDetailsDialogueBtn = dialogView.findViewById(R.id.add_details_btn);
+        addDetailsDialogueBtn = dialogView.findViewById(R.id.update_employee_project_details_btn);
         dialogBuilder.setView(dialogView);
         AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.setCanceledOnTouchOutside(false);

@@ -6,12 +6,23 @@ public class Project {
     private int projectNumber;
     private String projectName;
     private int projectLeaderEmployeeNumber;
+    private double chargePerHour, hoursBilled;
+    private String projectLeaderName;
     private List<Employee> projectEmployeeList;
 
     public Project(int projectNumber, String projectName, int projectLeaderEmployeeNumber) {
         this.projectNumber = projectNumber;
         this.projectName = projectName;
         this.projectLeaderEmployeeNumber = projectLeaderEmployeeNumber;
+    }
+
+    public Project(int projectNumber, String projectName, int projectLeaderEmployeeNumber, double chargePerHour, double hoursBilled, String projectLeaderName) {
+        this.projectNumber = projectNumber;
+        this.projectName = projectName;
+        this.projectLeaderEmployeeNumber = projectLeaderEmployeeNumber;
+        this.chargePerHour = chargePerHour;
+        this.hoursBilled = hoursBilled;
+        this.projectLeaderName = projectLeaderName;
     }
 
     public Project(int projectNumber, String projectName, int projectLeaderEmployeeNumber, List<Employee> projectEmployeeList) {
@@ -51,5 +62,29 @@ public class Project {
 
     public void setProjectLeaderEmployeeNumber(int projectLeaderEmployeeNumber) {
         this.projectLeaderEmployeeNumber = projectLeaderEmployeeNumber;
+    }
+
+    public double getChargePerHour() {
+        return chargePerHour;
+    }
+
+    public void setChargePerHour(double chargePerHour) {
+        this.chargePerHour = chargePerHour;
+    }
+
+    public double getHoursBilled() {
+        return hoursBilled;
+    }
+
+    public void setHoursBilled(double hoursBilled) {
+        this.hoursBilled = hoursBilled;
+    }
+
+    public String getProjectLeaderName() {
+        return projectLeaderName;
+    }
+
+    public void setProjectLeaderName(String projectLeaderName) {
+        this.projectLeaderName = projectLeaderName;
     }
 }
