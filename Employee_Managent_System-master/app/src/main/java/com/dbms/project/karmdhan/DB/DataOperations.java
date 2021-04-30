@@ -78,12 +78,12 @@ public class DataOperations {
         projectEmployeeList.add(new ProjectEmployee(22,113,48.10,23.6));
         projectEmployeeList.add(new ProjectEmployee(22,111,26.87,22.0));
         projectEmployeeList.add(new ProjectEmployee(22,106,35.75,12.8));
-        projectEmployeeList.add(new ProjectEmployee(25,112,35.75,24.6));
-        projectEmployeeList.add(new ProjectEmployee(25,112,96.75,45.8));
-        projectEmployeeList.add(new ProjectEmployee(25,112,105.00,56.3));
-        projectEmployeeList.add(new ProjectEmployee(25,112,48.10,33.1));
-        projectEmployeeList.add(new ProjectEmployee(25,112,96.75,23.6));
-        projectEmployeeList.add(new ProjectEmployee(25,112,18.36,30.5));
+        projectEmployeeList.add(new ProjectEmployee(25,107,35.75,24.6));
+        projectEmployeeList.add(new ProjectEmployee(25,115,96.75,45.8));
+        projectEmployeeList.add(new ProjectEmployee(25,101,105.00,56.3));
+        projectEmployeeList.add(new ProjectEmployee(25,114,48.10,33.1));
+        projectEmployeeList.add(new ProjectEmployee(25,108,96.75,23.6));
+        projectEmployeeList.add(new ProjectEmployee(25,118,18.36,30.5));
         projectEmployeeList.add(new ProjectEmployee(25,112,45.95,41.4));
 
         addProjectData(projectList,projectEmployeeList);
