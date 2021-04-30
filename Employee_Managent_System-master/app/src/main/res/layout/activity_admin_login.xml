@@ -125,7 +125,7 @@
             android:id="@+id/if_not_register_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Do not registered?"
+            android:text="Don't have an account?"
             android:textSize="16sp"/>
 
         <TextView

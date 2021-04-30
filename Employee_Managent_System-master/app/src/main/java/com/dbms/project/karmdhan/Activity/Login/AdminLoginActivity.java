@@ -49,6 +49,7 @@ public class AdminLoginActivity extends AppCompatActivity {
             case R.id.register_tv:
                 Intent intent1 = new Intent(AdminLoginActivity.this, AdminRegisterActivity.class);
                 startActivity(intent1);
+                finish();
                 break;
         }
     }
@@ -70,6 +71,7 @@ public class AdminLoginActivity extends AppCompatActivity {
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                 } else {
+                    binding.passwordTil.setError("wrong password !");
                     Toast.makeText(this, "Wrong credentials !! Please fill the correct details", Toast.LENGTH_SHORT).show();
                 }
             }else{

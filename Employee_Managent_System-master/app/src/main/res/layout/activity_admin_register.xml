@@ -52,37 +52,7 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/company_name_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Company Name"
-        android:textColor="@color/colorPrimary"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_id_til" />
 
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/company_name_til"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:boxStrokeColor="@color/colorPrimaryDark"
-        app:endIconMode="clear_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/company_name_tv">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/company_name_edt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter your company name"
-            android:inputType="number" />
-
-    </com.google.android.material.textfield.TextInputLayout>
 
 
     <TextView
@@ -94,7 +64,7 @@
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/company_name_til" />
+        app:layout_constraintTop_toBottomOf="@+id/user_id_til" />
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -159,5 +129,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cnfPassword_til" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/register_btn"
+        android:gravity="center"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/if_already_register_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="If already registered."
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/login_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Log-In"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
