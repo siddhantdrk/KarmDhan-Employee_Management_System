@@ -8,11 +8,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.dbms.project.karmdhan.DB.ProjectEmployeeOperations;
 import com.dbms.project.karmdhan.DB.ProjectOperations;
 import com.dbms.project.karmdhan.Model.Employee;
 import com.dbms.project.karmdhan.Model.Project;
-import com.dbms.project.karmdhan.Model.ProjectEmployee;
 import com.dbms.project.karmdhan.R;
 import com.dbms.project.karmdhan.databinding.ActivityAddProjectBinding;
 
@@ -23,6 +21,7 @@ public class UpdateProjectDetailsActivity extends AppCompatActivity {
     private int projectNum;
     private ProjectOperations projectOperations;
     private List<Employee> employeeList;
+    private Project project;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +32,7 @@ public class UpdateProjectDetailsActivity extends AppCompatActivity {
         projectNum = getIntent().getIntExtra("ProjectNumber", -1);
         hideUnNecessaryAndUpdateUI();
         setUpProjectLeaderSpinner();
+        setCurrentDetails();
         binding.addProjectBtn.setOnClickListener(this::OnClick);
     }
 
@@ -45,35 +45,31 @@ public class UpdateProjectDetailsActivity extends AppCompatActivity {
         }
     }
 
+    private void setCurrentDetails() {
+        project = projectOperations.getProjectByNumber(projectNum);
+        binding.projectNameEdt.setText(project.getProjectName());
+        for (int i = 0; i < employeeList.size(); i++) {
+            if (employeeList.get(i).getEmployeeNumber() == project.getProjectLeaderEmployeeNumber()) {
+                binding.projectLeaderSpinner.setSelection(i);
+            }
+        }
+    }
+
 
     private void updateProject() {
         String projectName = binding.projectNameEdt.getText().toString().trim();
         int projectLeaderEmployeeNumber = employeeList.get(binding.projectLeaderSpinner.getSelectedItemPosition()).getEmployeeNumber();
-        Project project = projectOperations.getProjectByNumber(projectNum);
-        ProjectEmployee projectEmployee = new ProjectEmployeeOperations(this).getProjectEmployeeByProjectAndEmployeeNum(projectNum, project.getProjectLeaderEmployeeNumber());
-        if (!projectName.isEmpty()) {
-            project.setProjectName(projectName);
-        }
-        if (projectLeaderEmployeeNumber != project.getProjectLeaderEmployeeNumber()) {
-            project.setProjectLeaderEmployeeNumber(projectLeaderEmployeeNumber);
-        }
-        if (!binding.chargePerHrEdt.getText().toString().trim().isEmpty()) {
-            double chargePerHour = Double.parseDouble(binding.chargePerHrEdt.getText().toString().trim());
-            if (chargePerHour != projectEmployee.getChargePerHour()) {
-                projectEmployee.setChargePerHour(chargePerHour);
-            }
-        }
-        if (!binding.hrsBilledEdt.getText().toString().trim().isEmpty()) {
-            double hoursBilled = Double.parseDouble(binding.hrsBilledEdt.getText().toString().trim());
-            if (hoursBilled != projectEmployee.getHoursBilled()) {
-                projectEmployee.setHoursBilled(hoursBilled);
-            }
-        }
-        if (projectOperations.updateProjectDetails(project, projectEmployee)) {
-            Toast.makeText(this, "Project Details Updated Successfully", Toast.LENGTH_SHORT).show();
+        if (projectName.equals(project.getProjectName()) && projectLeaderEmployeeNumber == project.getProjectLeaderEmployeeNumber()) {
+            Toast.makeText(this, "No Change Found", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "Oops Something went wrong", Toast.LENGTH_SHORT).show();
-            finish();
+            project.setProjectName(projectName);
+            project.setProjectLeaderEmployeeNumber(projectLeaderEmployeeNumber);
+            if (projectOperations.updateProjectDetails(project)) {
+                Toast.makeText(this, "Project Details Updated Successfully", Toast.LENGTH_SHORT).show();
+                finish();
+            } else {
+                Toast.makeText(this, "Oops Something went wrong.", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -87,7 +83,11 @@ public class UpdateProjectDetailsActivity extends AppCompatActivity {
         binding.projectNumberTil.setVisibility(View.GONE);
         binding.projectNumberEdt.setVisibility(View.GONE);
         binding.fillUpDetailsTv.setText("Update the project Details Below");
-        binding.fillUpDetailsProjectLeaderTv.setText("Update the details below for Project Leader");
+        binding.fillUpDetailsProjectLeaderTv.setVisibility(View.GONE);
+        binding.chargePerHrEdt.setVisibility(View.GONE);
+        binding.chargePerHrEdt.setVisibility(View.GONE);
+        binding.chargePerHrTil.setVisibility(View.GONE);
+        binding.hrsBilledTil.setVisibility(View.GONE);
         binding.addProjectBtn.setText("Update");
     }
 }

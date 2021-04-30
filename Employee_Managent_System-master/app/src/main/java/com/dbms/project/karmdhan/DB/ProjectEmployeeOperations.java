@@ -3,8 +3,10 @@ package com.dbms.project.karmdhan.DB;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.dbms.project.karmdhan.Model.Employee;
 import com.dbms.project.karmdhan.Model.ProjectEmployee;
@@ -66,6 +68,17 @@ public class ProjectEmployeeOperations {
     public ProjectEmployee getProjectEmployeeByProjectAndEmployeeNum(int projectNum, int employeeNum) {
         SQLiteDatabase database = projectEmployeeDbHelper.getWritableDatabase();
         Cursor cursor = database.rawQuery("select * from " + TABLE_PROJECT_EMPLOYEE + " where " + COLUMN_PROJECT_NUMBER + " = ? and " + COLUMN_EMPLOYEE_NUMBER + " = ?", new String[]{String.valueOf(projectNum), String.valueOf(employeeNum)});
-        return new ProjectEmployee(cursor.getInt(cursor.getColumnIndex(COLUMN_PROJECT_NUMBER)), cursor.getInt(cursor.getColumnIndex(COLUMN_EMPLOYEE_NUMBER)), cursor.getDouble(cursor.getColumnIndex(COLUMN_CHARGE_PER_HOUR)), cursor.getDouble(cursor.getColumnIndex(COLUMN_HOURS_BILLED)));
+        Log.d("projectNum", "" + cursor.getInt(cursor.getColumnIndex(COLUMN_PROJECT_NUMBER)));
+        Log.d("employeeNum", "" + cursor.getInt(cursor.getColumnIndex(COLUMN_EMPLOYEE_NUMBER)));
+        Log.d("chargePerHour", "" + cursor.getColumnIndex(COLUMN_CHARGE_PER_HOUR));
+        Log.d("chargePerHour", "" + cursor.getDouble(cursor.getColumnIndex(COLUMN_CHARGE_PER_HOUR)));
+        Log.d("hoursBilled", "" + cursor.getColumnIndex(COLUMN_HOURS_BILLED));
+        Log.d("hoursBilled", "" + cursor.getDouble(cursor.getColumnIndex(COLUMN_HOURS_BILLED)));
+        try {
+            return new ProjectEmployee(cursor.getInt(cursor.getColumnIndex(COLUMN_PROJECT_NUMBER)), cursor.getInt(cursor.getColumnIndex(COLUMN_EMPLOYEE_NUMBER)), cursor.getDouble(cursor.getColumnIndex(COLUMN_CHARGE_PER_HOUR)), cursor.getDouble(cursor.getColumnIndex(COLUMN_HOURS_BILLED)));
+        } catch (CursorIndexOutOfBoundsException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

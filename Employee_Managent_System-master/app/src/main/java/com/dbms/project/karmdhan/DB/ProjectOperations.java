@@ -82,19 +82,13 @@ public class ProjectOperations {
         return project;
     }
 
-    public boolean updateProjectDetails(Project project, ProjectEmployee projectEmployee) {
+    public boolean updateProjectDetails(Project project) {
         SQLiteDatabase database = projectDbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_PROJECT_NAME, project.getProjectName());
         contentValues.put(COLUMN_PROJECT_LEADER_EMPLOYEE_NUMBER, project.getProjectLeaderEmployeeNumber());
         long result = database.update(TABLE_PROJECT, contentValues, COLUMN_PROJECT_NUMBER + " = ?", new String[]{String.valueOf(project.getProjectNumber())});
-        ContentValues contentValues1 = new ContentValues();
-        contentValues1.put(COLUMN_PROJECT_NUMBER, projectEmployee.getProjectNumber());
-        contentValues1.put(COLUMN_EMPLOYEE_NUMBER, projectEmployee.getEmployeeNumber());
-        contentValues1.put(COLUMN_CHARGE_PER_HOUR, projectEmployee.getChargePerHour());
-        contentValues1.put(COLUMN_HOURS_BILLED, projectEmployee.getHoursBilled());
-        long result1 = database.update(TABLE_PROJECT_EMPLOYEE, contentValues1, COLUMN_PROJECT_NUMBER + " = ? and " + COLUMN_EMPLOYEE_NUMBER + " = ?", new String[]{String.valueOf(projectEmployee.getProjectNumber()), String.valueOf(projectEmployee.getEmployeeNumber())});
-        return result >= 0 && result1 >= 0;
+        return result >= 0;
     }
 
     public List<Employee> getAllEmployeeForAProject(int projectNum) {

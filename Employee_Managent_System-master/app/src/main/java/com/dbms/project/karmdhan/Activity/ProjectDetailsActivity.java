@@ -8,7 +8,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.dbms.project.karmdhan.Adapters.ViewAllProjectRvAdapter;
 import com.dbms.project.karmdhan.Adapters.projectEmployeeOnlyRvAdapter;
 import com.dbms.project.karmdhan.DB.ProjectOperations;
 import com.dbms.project.karmdhan.Model.Employee;
@@ -86,5 +85,11 @@ public class ProjectDetailsActivity extends AppCompatActivity {
             Toast.makeText(this, "Oops !! something went wrong", Toast.LENGTH_SHORT).show();
             finish();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setProjectDetails();
     }
 }
