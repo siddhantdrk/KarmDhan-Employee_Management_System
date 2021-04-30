@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.dbms.project.karmdhan.Adapters.ViewAllProjectRvAdapter;
+import com.dbms.project.karmdhan.Adapters.projectEmployeeOnlyRvAdapter;
 import com.dbms.project.karmdhan.DB.ProjectOperations;
 import com.dbms.project.karmdhan.Model.Employee;
 import com.dbms.project.karmdhan.Model.Project;
@@ -20,6 +22,8 @@ public class ProjectDetailsActivity extends AppCompatActivity {
     private ActivityProjectDetailsBinding binding;
     private int projectNum;
     private ProjectOperations projectOperations;
+    private projectEmployeeOnlyRvAdapter adapter;
+    private List<Employee> employeeList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +33,25 @@ public class ProjectDetailsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         setProjectDetails();
         setProjectEmployeeDetails();
+        setAllEmployeeRv();
         binding.addEmployeeToProjectBtn.setOnClickListener(this::OnClick);
         binding.updateProjectDetails.setOnClickListener(this::OnClick);
+    }
+
+    private List<Employee> getAllProjects() {
+        projectOperations = new ProjectOperations(this);
+        return projectOperations.getAllEmployeeForAProject(projectNum);
+    }
+
+    private void setAllEmployeeRv() {
+        employeeList = getAllProjects();
+        if (employeeList != null && employeeList.size() != 0) {
+            adapter = new projectEmployeeOnlyRvAdapter(employeeList,this);
+            binding.projectEmployeesOnlyRv.setAdapter(adapter);
+
+        } else {
+            Toast.makeText(this, "Sorry, No data found", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void OnClick(View view) {

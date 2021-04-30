@@ -32,6 +32,11 @@ public class projectEmployeeOnlyRvAdapter extends RecyclerView.Adapter<projectEm
 
     @Override
     public void onBindViewHolder(@NonNull projectEmployeeOnlyRvAdapter.ProjectEmployeeViewHolder holder, int position) {
+        holder.employeeNumber.setText(String.valueOf(employeeList.get(position).getEmployeeNumber()));
+        holder.employeeName.setText(employeeList.get(position).getEmployeeName());
+        holder.jobClass.setText(employeeList.get(position).getEmployeeJobClass());
+        holder.hoursBilled.setText(employeeList.get(position).getHoursBilled() + " Hrs");
+        holder.chargePerHour.setText("$" + employeeList.get(position).getChargePerHour());
     }
 
     @Override
