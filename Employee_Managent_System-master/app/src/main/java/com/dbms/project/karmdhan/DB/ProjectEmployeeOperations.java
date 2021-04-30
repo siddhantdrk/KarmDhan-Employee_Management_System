@@ -64,6 +64,8 @@ public class ProjectEmployeeOperations {
     }
 
     public ProjectEmployee getProjectEmployeeByProjectAndEmployeeNum(int projectNum, int employeeNum) {
-        return null;
+        SQLiteDatabase database = projectEmployeeDbHelper.getWritableDatabase();
+        Cursor cursor = database.rawQuery("select * from " + TABLE_PROJECT_EMPLOYEE + " where " + COLUMN_PROJECT_NUMBER + " = ? and " + COLUMN_EMPLOYEE_NUMBER + " = ?", new String[]{String.valueOf(projectNum), String.valueOf(employeeNum)});
+        return new ProjectEmployee(cursor.getInt(cursor.getColumnIndex(COLUMN_PROJECT_NUMBER)), cursor.getInt(cursor.getColumnIndex(COLUMN_EMPLOYEE_NUMBER)), cursor.getDouble(cursor.getColumnIndex(COLUMN_CHARGE_PER_HOUR)), cursor.getDouble(cursor.getColumnIndex(COLUMN_HOURS_BILLED)));
     }
 }
