@@ -9,25 +9,63 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.ViewAllProjectActivity"></activity>
-        <activity android:name=".Activity.AddEmployeesToProjectActivity" />
-        <activity android:name=".Activity.AddProjectActivity" />
-        <activity android:name=".Activity.ViewAllEmployeeActivity" />
-        <activity android:name=".Activity.AddEmployeeActivity" />
-        <activity android:name=".Activity.ResetPassword.ForgotPasswordActivity" />
-        <activity android:name=".Activity.ResetPassword.ChangePasswordActivity" />
-        <activity android:name=".Activity.ResetPassword.ChangeOrForgotPasswordActivity" />
-        <activity android:name=".Activity.Dashboard.EmployeeDashboardActivity" />
-        <activity android:name=".Activity.Dashboard.AdminDashboardActivity" />
-        <activity android:name=".Activity.WelcomeActivity">
+        <activity
+            android:name=".Activity.ProjectDetailsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.ViewAllProjectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.AddEmployeesToProjectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.AddProjectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.ViewAllEmployeeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.AddEmployeeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.ResetPassword.Admin.ChangeOrForgotPasswordAdminActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.ResetPassword.Admin.ChangePasswordAdminActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.ResetPassword.Admin.ForgotPasswordAdminActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.ResetPassword.Employee.ChangeOrForgotPasswordEmployeeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.ResetPassword.Employee.ChangePasswordEmployeeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.ResetPassword.Employee.ForgotPasswordEmployeeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Dashboard.EmployeeDashboardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Dashboard.AdminDashboardActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.WelcomeActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.Login.AdminLoginActivity" />
-        <activity android:name=".Activity.Login.EmployeeLoginActivity" />
+        <activity
+            android:name=".Activity.Login.AdminLoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.Login.EmployeeLoginActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

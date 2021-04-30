@@ -62,13 +62,12 @@ public class AddProjectActivity extends AppCompatActivity {
     private void addProject() {
         String projectNumber = binding.projectNumberEdt.getText().toString().trim();
         String projectName = binding.projectNameEdt.getText().toString().trim();
-        String projectLeader = employeeList.get(binding.projectLeaderSpinner.getSelectedItemPosition()).getEmployeeName();
+        int projectLeaderEmployeeNumber = employeeList.get(binding.projectLeaderSpinner.getSelectedItemPosition()).getEmployeeNumber();
         String chargePerHour = binding.chargePerHrEdt.getText().toString().trim();
         String hoursBilled = binding.hrsBilledEdt.getText().toString().trim();
         if (hoursBilled.isEmpty()) {
             hoursBilled = "0.00";
         }
-        int projectLeaderEmployeeNumber = employeeList.get(binding.projectLeaderSpinner.getSelectedItemPosition()).getEmployeeNumber();
         if (projectNumber.isEmpty()) {
             binding.projectNumberTil.setError("Required!!");
             Toast.makeText(this, "Project Number is Empty", Toast.LENGTH_SHORT).show();
@@ -86,7 +85,7 @@ public class AddProjectActivity extends AppCompatActivity {
         }
         projectOperations = new ProjectOperations(this);
         if (!projectOperations.checkIfProjectNumberExists(Integer.parseInt(projectNumber))) {
-            if (projectOperations.addProject(new Project(Integer.parseInt(projectNumber), projectName, projectLeader), new ProjectEmployee(Integer.parseInt(projectNumber), projectLeaderEmployeeNumber, Double.parseDouble(chargePerHour), Double.parseDouble(hoursBilled)))) {
+            if (projectOperations.addProject(new Project(Integer.parseInt(projectNumber), projectName, projectLeaderEmployeeNumber), new ProjectEmployee(Integer.parseInt(projectNumber), projectLeaderEmployeeNumber, Double.parseDouble(chargePerHour), Double.parseDouble(hoursBilled)))) {
                 Toast.makeText(this, "Project Added Successfully", Toast.LENGTH_SHORT).show();
                 setFieldsNull();
                 Intent intent = new Intent(this, AddEmployeesToProjectActivity.class);
@@ -131,7 +130,7 @@ public class AddProjectActivity extends AppCompatActivity {
     private void showProjectEmployeeFieldsDialogue() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.project_employe_fields_dialogue, null);
+        View dialogView = inflater.inflate(R.layout.update_project_employe_fields_dialogue, null);
         chargePerHourEdt = dialogView.findViewById(R.id.charge_per_hr_edt);
         hoursBilledEdt = dialogView.findViewById(R.id.hrs_billed_edt);
         chargePerHourTil = dialogView.findViewById(R.id.charge_per_hr_til);

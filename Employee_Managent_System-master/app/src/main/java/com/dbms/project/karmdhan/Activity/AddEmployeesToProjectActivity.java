@@ -70,7 +70,7 @@ public class AddEmployeesToProjectActivity extends AppCompatActivity {
         Project project = projectOperations.getProjectByNumber(projectNum);
         binding.projectNumberValueTv.setText(String.valueOf(project.getProjectNumber()));
         binding.projectNameValueTv.setText(project.getProjectName());
-        binding.projectLeaderValueTv.setText(project.getProjectLeader());
+        binding.projectLeaderValueTv.setText(project.getProjectLeaderEmployeeNumber());
     }
 
     private void setUpProjectLeaderSpinner() {

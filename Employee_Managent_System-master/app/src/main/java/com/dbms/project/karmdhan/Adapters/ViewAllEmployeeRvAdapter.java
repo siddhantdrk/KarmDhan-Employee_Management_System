@@ -18,13 +18,15 @@ import com.dbms.project.karmdhan.R;
 import java.util.List;
 
 public class ViewAllEmployeeRvAdapter extends RecyclerView.Adapter<ViewAllEmployeeRvAdapter.EmployeeViewHolder> {
-    private final List<Employee> employeeList;
-    private final Context context;
+    private List<Employee> employeeList;
+    private Context context;
     private AdminOperations adminOperations;
+    private OnUpdateClickListener onUpdateClickListener;
 
-    public ViewAllEmployeeRvAdapter(List<Employee> employeeList, Context context) {
+    public ViewAllEmployeeRvAdapter(List<Employee> employeeList, Context context, OnUpdateClickListener onUpdateClickListener) {
         this.employeeList = employeeList;
         this.context = context;
+        this.onUpdateClickListener = onUpdateClickListener;
     }
 
     @NonNull
@@ -40,17 +42,13 @@ public class ViewAllEmployeeRvAdapter extends RecyclerView.Adapter<ViewAllEmploy
         holder.employeeName.setText(employeeList.get(position).getEmployeeName());
         holder.employeeNumber.setText(String.valueOf(employeeList.get(position).getEmployeeNumber()));
         holder.employeeJobClass.setText(employeeList.get(position).getEmployeeJobClass());
-        holder.removeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                adminOperations = new AdminOperations(context);
-                removeEmployee(employeeList.get(position).getEmployeeNumber(), position);
-            }
+        holder.removeBtn.setOnClickListener(view -> {
+            adminOperations = new AdminOperations(context);
+            removeEmployee(employeeList.get(position).getEmployeeNumber(), position);
         });
+        holder.bind(employeeList.get(position), onUpdateClickListener);
     }
 
-    private void updateEmployee() {
-    }
 
     private void removeEmployee(int employeeNumber, int position) {
         if (adminOperations.removeEmployee(employeeNumber)) {
@@ -67,13 +65,17 @@ public class ViewAllEmployeeRvAdapter extends RecyclerView.Adapter<ViewAllEmploy
         return employeeList.size();
     }
 
+    public interface OnUpdateClickListener {
+        void onClick(Employee employee);
+    }
+
     public class EmployeeViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView employeeNumber;
-        private final TextView employeeName;
-        private final TextView employeeJobClass;
-        private final Button updateBtn;
-        private final Button removeBtn;
+        private TextView employeeNumber;
+        private TextView employeeName;
+        private TextView employeeJobClass;
+        private Button updateBtn;
+        private Button removeBtn;
 
         public EmployeeViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -82,6 +84,10 @@ public class ViewAllEmployeeRvAdapter extends RecyclerView.Adapter<ViewAllEmploy
             employeeJobClass = itemView.findViewById(R.id.employee_job_class_value_tv);
             updateBtn = itemView.findViewById(R.id.update_employee_btn);
             removeBtn = itemView.findViewById(R.id.remove_employee_btn);
+        }
+
+        public void bind(Employee employee, OnUpdateClickListener listener) {
+            updateBtn.setOnClickListener(v -> listener.onClick(employee));
         }
     }
 }

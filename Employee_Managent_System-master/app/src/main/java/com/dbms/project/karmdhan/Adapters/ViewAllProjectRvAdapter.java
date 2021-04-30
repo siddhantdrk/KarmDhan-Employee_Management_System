@@ -1,22 +1,30 @@
 package com.dbms.project.karmdhan.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dbms.project.karmdhan.Activity.ProjectDetailsActivity;
+import com.dbms.project.karmdhan.DB.AdminOperations;
+import com.dbms.project.karmdhan.DB.EmployeeOperations;
 import com.dbms.project.karmdhan.Model.Project;
 import com.dbms.project.karmdhan.R;
 
 import java.util.List;
 
 public class ViewAllProjectRvAdapter extends RecyclerView.Adapter<ViewAllProjectRvAdapter.ProjectViewHolder> {
-    private final Context context;
-    private final List<Project> projectList;
+    private Context context;
+    private List<Project> projectList;
+    private EmployeeOperations employeeOperations;
+    private AdminOperations adminOperations;
 
     public ViewAllProjectRvAdapter(Context context, List<Project> projectList) {
         this.context = context;
@@ -35,7 +43,24 @@ public class ViewAllProjectRvAdapter extends RecyclerView.Adapter<ViewAllProject
     public void onBindViewHolder(@NonNull ViewAllProjectRvAdapter.ProjectViewHolder holder, int position) {
         holder.projectName.setText(projectList.get(position).getProjectName());
         holder.projectNumber.setText(String.valueOf(projectList.get(position).getProjectNumber()));
-        holder.projectLeader.setText(projectList.get(position).getProjectLeader());
+        employeeOperations = new EmployeeOperations(context);
+        holder.projectLeader.setText(employeeOperations.getEmployeeByNumber(projectList.get(position).getProjectLeaderEmployeeNumber()).getEmployeeName());
+        holder.removeProjectBtn.setOnClickListener(view -> {
+            adminOperations = new AdminOperations(context);
+            if (adminOperations.removeProject(projectList.get(position).getProjectNumber())) {
+                Toast.makeText(context, "Project Deleted Successfully", Toast.LENGTH_SHORT).show();
+                projectList.remove(position);
+                notifyItemRemoved(position);
+            } else {
+                Toast.makeText(context, "Oops !! something went wrong.", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        holder.viewProjectBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(context, ProjectDetailsActivity.class);
+            intent.putExtra("ProjectNUmber", projectList.get(position).getProjectNumber());
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -44,15 +69,18 @@ public class ViewAllProjectRvAdapter extends RecyclerView.Adapter<ViewAllProject
     }
 
     public class ProjectViewHolder extends RecyclerView.ViewHolder {
-        private final TextView projectNumber;
-        private final TextView projectName;
-        private final TextView projectLeader;
+        private TextView projectNumber;
+        private TextView projectName;
+        private TextView projectLeader;
+        private Button removeProjectBtn, viewProjectBtn;
 
         public ProjectViewHolder(@NonNull View itemView) {
             super(itemView);
             projectNumber = itemView.findViewById(R.id.project_number_value_tv);
             projectName = itemView.findViewById(R.id.project_name_value_tv);
             projectLeader = itemView.findViewById(R.id.project_leader_value_tv);
+            removeProjectBtn = itemView.findViewById(R.id.remove_project_btn);
+            viewProjectBtn = itemView.findViewById(R.id.view_project_btn);
         }
     }
 }

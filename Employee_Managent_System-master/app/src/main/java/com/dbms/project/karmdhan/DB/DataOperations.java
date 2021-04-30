@@ -58,20 +58,20 @@ public class DataOperations {
 
     public void addProjectTableData(){
         projectList = new ArrayList<Project>();
-        projectList.add(new Project(15,"Evergreen","Alice K. Johnson"));
-        projectList.add(new Project(18,"Amber Wave","Anne K.Ramoras"));
-        projectList.add(new Project(22,"Lit","Delbert K.Joenbrood"));
-        projectList.add(new Project(25,"Employee","John G.News"));
+        projectList.add(new Project(15, "Evergreen", 105));
+        projectList.add(new Project(18, "Amber Wave", 104));
+        projectList.add(new Project(22, "Lit", 113));
+        projectList.add(new Project(25, "Employee", 101));
 
         projectEmployeeList = new ArrayList<ProjectEmployee>();
-        projectEmployeeList.add(new ProjectEmployee(15,103,84.50,23.8));
-        projectEmployeeList.add(new ProjectEmployee(15,101,105.00,19.4));
-        projectEmployeeList.add(new ProjectEmployee(15,105,105.50,35.7));
-        projectEmployeeList.add(new ProjectEmployee(15,106,35.75,12.6));
-        projectEmployeeList.add(new ProjectEmployee(15,102,96.75,23.8));
-        projectEmployeeList.add(new ProjectEmployee(18,114,48.50,24.6));
-        projectEmployeeList.add(new ProjectEmployee(18,118,18.36,45.3));
-        projectEmployeeList.add(new ProjectEmployee(18,104,96.75,32.4));
+        projectEmployeeList.add(new ProjectEmployee(15, 103, 84.50, 23.8));
+        projectEmployeeList.add(new ProjectEmployee(15, 101, 105.00, 19.4));
+        projectEmployeeList.add(new ProjectEmployee(15, 105, 105.50, 35.7));
+        projectEmployeeList.add(new ProjectEmployee(15, 106, 35.75, 12.6));
+        projectEmployeeList.add(new ProjectEmployee(15, 102, 96.75, 23.8));
+        projectEmployeeList.add(new ProjectEmployee(18, 114, 48.50, 24.6));
+        projectEmployeeList.add(new ProjectEmployee(18, 118, 18.36, 45.3));
+        projectEmployeeList.add(new ProjectEmployee(18, 104, 96.75, 32.4));
         projectEmployeeList.add(new ProjectEmployee(18,112,45.95,44.0));
         projectEmployeeList.add(new ProjectEmployee(22,105,105.00,64.7));
         projectEmployeeList.add(new ProjectEmployee(22,104,96.75,48.4));
@@ -92,8 +92,11 @@ public class DataOperations {
 
     public void addProjectData(List<Project> projectList,List<ProjectEmployee> projectEmployeeList){
         projectOperations = new ProjectOperations(context);
-        for(int i=0; i<projectList.size(); i++){
-            projectOperations.addProject(projectList.get(i),projectEmployeeList.get(i));
+        for (int i = 0, j = 0; i < projectEmployeeList.size(); i++, j++) {
+            if (j >= projectList.size()) {
+                j = 0;
+            }
+            projectOperations.addProject(projectList.get(j), projectEmployeeList.get(i));
         }
     }
 }
