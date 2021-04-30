@@ -58,7 +58,7 @@ public class ViewAllProjectRvAdapter extends RecyclerView.Adapter<ViewAllProject
 
         holder.viewProjectBtn.setOnClickListener(view -> {
             Intent intent = new Intent(context, ProjectDetailsActivity.class);
-            intent.putExtra("ProjectNUmber", projectList.get(position).getProjectNumber());
+            intent.putExtra("ProjectNumber", projectList.get(position).getProjectNumber());
             context.startActivity(intent);
         });
     }

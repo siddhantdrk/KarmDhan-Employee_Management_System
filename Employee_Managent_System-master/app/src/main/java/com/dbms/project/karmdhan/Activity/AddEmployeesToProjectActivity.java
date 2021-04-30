@@ -68,9 +68,14 @@ public class AddEmployeesToProjectActivity extends AppCompatActivity {
         projectOperations = new ProjectOperations(this);
         projectNum = Integer.parseInt(getIntent().getStringExtra("ProjectNumber"));
         Project project = projectOperations.getProjectByNumber(projectNum);
-        binding.projectNumberValueTv.setText(String.valueOf(project.getProjectNumber()));
-        binding.projectNameValueTv.setText(project.getProjectName());
-        binding.projectLeaderValueTv.setText(project.getProjectLeaderEmployeeNumber());
+        if (project != null) {
+            binding.projectNumberValueTv.setText(String.valueOf(project.getProjectNumber()));
+            binding.projectNameValueTv.setText(project.getProjectName());
+            binding.projectLeaderValueTv.setText("Employee : " + project.getProjectLeaderEmployeeNumber() + "\n" + project.getProjectLeaderName());
+        } else {
+            Toast.makeText(this, "Oops !! something went wrong", Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     private void setUpProjectLeaderSpinner() {

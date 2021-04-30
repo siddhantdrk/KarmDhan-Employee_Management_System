@@ -16,6 +16,13 @@ public class Project {
         this.projectLeaderEmployeeNumber = projectLeaderEmployeeNumber;
     }
 
+    public Project(int projectNumber, String projectName, int projectLeaderEmployeeNumber, String projectLeaderName) {
+        this.projectNumber = projectNumber;
+        this.projectName = projectName;
+        this.projectLeaderEmployeeNumber = projectLeaderEmployeeNumber;
+        this.projectLeaderName = projectLeaderName;
+    }
+
     public Project(int projectNumber, String projectName, int projectLeaderEmployeeNumber, double chargePerHour, double hoursBilled, String projectLeaderName) {
         this.projectNumber = projectNumber;
         this.projectName = projectName;
