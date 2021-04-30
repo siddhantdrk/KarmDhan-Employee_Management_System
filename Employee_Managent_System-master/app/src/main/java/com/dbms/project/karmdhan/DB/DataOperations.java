@@ -92,8 +92,11 @@ public class DataOperations {
 
     public void addProjectData(List<Project> projectList,List<ProjectEmployee> projectEmployeeList){
         projectOperations = new ProjectOperations(context);
-        for(int i=0; i<projectList.size(); i++){
-            projectOperations.addProject(projectList.get(i),projectEmployeeList.get(i));
+        for (int i = 0, j = 0; i < projectEmployeeList.size(); i++, j++) {
+            if (j >= projectList.size()) {
+                j = 0;
+            }
+            projectOperations.addProject(projectList.get(j), projectEmployeeList.get(i));
         }
     }
 }

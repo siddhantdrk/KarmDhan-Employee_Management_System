@@ -18,10 +18,10 @@ import com.dbms.project.karmdhan.R;
 import java.util.List;
 
 public class ViewAllEmployeeRvAdapter extends RecyclerView.Adapter<ViewAllEmployeeRvAdapter.EmployeeViewHolder> {
-    private final List<Employee> employeeList;
-    private final Context context;
+    private List<Employee> employeeList;
+    private Context context;
     private AdminOperations adminOperations;
-    private final OnUpdateClickListener onUpdateClickListener;
+    private OnUpdateClickListener onUpdateClickListener;
 
     public ViewAllEmployeeRvAdapter(List<Employee> employeeList, Context context, OnUpdateClickListener onUpdateClickListener) {
         this.employeeList = employeeList;
@@ -71,11 +71,11 @@ public class ViewAllEmployeeRvAdapter extends RecyclerView.Adapter<ViewAllEmploy
 
     public class EmployeeViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView employeeNumber;
-        private final TextView employeeName;
-        private final TextView employeeJobClass;
-        private final Button updateBtn;
-        private final Button removeBtn;
+        private TextView employeeNumber;
+        private TextView employeeName;
+        private TextView employeeJobClass;
+        private Button updateBtn;
+        private Button removeBtn;
 
         public EmployeeViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -70,8 +70,10 @@ public class ViewAllEmployeeActivity extends AppCompatActivity implements ViewAl
             Toast.makeText(this, "No change found to update", Toast.LENGTH_SHORT).show();
             return;
         }
-        employee.setEmployeeName(employeeName);
-        employee.setEmployeeJobClass(jobClass);
+        if (employeeName.length() != 0)
+            employee.setEmployeeName(employeeName);
+        if (position != 0)
+            employee.setEmployeeJobClass(jobClass);
         if (adminOperations.updateEmployeeDetails(employee)) {
             Toast.makeText(this, "Details Updated Successfully", Toast.LENGTH_SHORT).show();
             setEmployeeListRv();

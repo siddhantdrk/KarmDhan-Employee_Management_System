@@ -20,10 +20,12 @@ import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_EMPLOYEE_NAME
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_EMPLOYEE_NUMBER;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_EMPLOYEE_PASSWORD;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_JOB_CLASS;
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.COLUMN_PROJECT_NUMBER;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_ADMIN;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_EMPLOYEE;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_EMPLOYEE_PASSWORD;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_JOB_CLASS;
+import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_PROJECT;
 import static com.dbms.project.karmdhan.DB.KarmDhanDBSchema.TABLE_PROJECT_EMPLOYEE;
 
 public class AdminOperations {
@@ -120,7 +122,13 @@ public class AdminOperations {
         ContentValues values2 = new ContentValues();
         values2.put(COLUMN_JOB_CLASS, employee.getEmployeeJobClass());
         int result2 = database.update(TABLE_JOB_CLASS, values2, COLUMN_EMPLOYEE_NUMBER + " = ?", new String[]{String.valueOf(employee.getEmployeeNumber())});
-        Cursor cursor = database.rawQuery("select * from " + TABLE_PROJECT_EMPLOYEE + " where " + COLUMN_EMPLOYEE_NUMBER + " = ?", new String[]{String.valueOf(employee.getEmployeeNumber())});
         return result1 >= 0 && result2 >= 0;
+    }
+
+    public boolean removeProject(int projectNum) {
+        SQLiteDatabase database = adminDbHelper.getWritableDatabase();
+        int result1 = database.delete(TABLE_PROJECT, COLUMN_PROJECT_NUMBER + " = ?", new String[]{String.valueOf(projectNum)});
+        int result2 = database.delete(TABLE_PROJECT_EMPLOYEE, COLUMN_PROJECT_NUMBER + " = ?", new String[]{String.valueOf(projectNum)});
+        return result1 > 0 && result2 > 0;
     }
 }

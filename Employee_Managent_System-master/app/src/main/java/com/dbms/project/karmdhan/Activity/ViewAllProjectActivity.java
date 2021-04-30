@@ -41,4 +41,10 @@ public class ViewAllProjectActivity extends AppCompatActivity {
             Toast.makeText(this, "Sorry, No data found", Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setAllProjectsRv();
+    }
 }

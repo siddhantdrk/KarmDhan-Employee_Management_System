@@ -130,7 +130,7 @@ public class AddProjectActivity extends AppCompatActivity {
     private void showProjectEmployeeFieldsDialogue() {
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
-        View dialogView = inflater.inflate(R.layout.project_employe_fields_dialogue, null);
+        View dialogView = inflater.inflate(R.layout.update_project_employe_fields_dialogue, null);
         chargePerHourEdt = dialogView.findViewById(R.id.charge_per_hr_edt);
         hoursBilledEdt = dialogView.findViewById(R.id.hrs_billed_edt);
         chargePerHourTil = dialogView.findViewById(R.id.charge_per_hr_til);
