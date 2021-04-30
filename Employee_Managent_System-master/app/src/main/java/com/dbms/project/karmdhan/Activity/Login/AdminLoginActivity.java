@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.dbms.project.karmdhan.Activity.Dashboard.AdminDashboardActivity;
+import com.dbms.project.karmdhan.Activity.Register.AdminRegisterActivity;
 import com.dbms.project.karmdhan.Activity.ResetPassword.Admin.ChangeOrForgotPasswordAdminActivity;
 import com.dbms.project.karmdhan.DB.AdminOperations;
 import com.dbms.project.karmdhan.Model.Admin;
@@ -33,6 +34,7 @@ public class AdminLoginActivity extends AppCompatActivity {
         }
         binding.loginBtn.setOnClickListener(this::onClick);
         binding.forgotPasswordTv.setOnClickListener(this::onClick);
+        binding.registerTv.setOnClickListener(this::onClick);
     }
 
     private void onClick(View view) {
@@ -43,6 +45,10 @@ public class AdminLoginActivity extends AppCompatActivity {
             case R.id.forgot_password_tv:
                 Intent intent = new Intent(AdminLoginActivity.this, ChangeOrForgotPasswordAdminActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.register_tv:
+                Intent intent1 = new Intent(AdminLoginActivity.this, AdminRegisterActivity.class);
+                startActivity(intent1);
                 break;
         }
     }

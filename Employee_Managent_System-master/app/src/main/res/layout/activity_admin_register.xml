@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".Activity.Login.AdminLoginActivity">
+    tools:context=".Activity.Register.AdminRegisterActivity"
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/header_tv"
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:fontFamily="sans-serif-medium"
-        android:text="Admin Login"
+        android:text="Admin Register"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,9 +47,40 @@
             android:id="@+id/user_id_edt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter your 8-digit User-Id"
-            android:inputType="number"
-            android:maxLength="8" />
+            android:hint="Enter your User-Id"
+            android:inputType="number" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/company_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Company Name"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_id_til" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/company_name_til"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeColor="@color/colorPrimaryDark"
+        app:endIconMode="clear_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/company_name_tv">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/company_name_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter your company name"
+            android:inputType="number" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -63,7 +94,7 @@
         android:textColor="@color/colorPrimary"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_id_til" />
+        app:layout_constraintTop_toBottomOf="@+id/company_name_til" />
 
 
     <com.google.android.material.textfield.TextInputLayout
@@ -82,64 +113,51 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="*********"
-            android:inputType="textPassword"
-            android:maxLength="8" />
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/cnfPassword_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Confirm Password"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/password_til" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/cnfPassword_til"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:boxStrokeColor="@color/colorPrimaryDark"
+        app:endIconMode="password_toggle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cnfPassword_tv">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/cnfPassword_edt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="*********"
+            android:inputType="textPassword" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <TextView
-        android:id="@+id/forgot_password_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Change or Forgot Password ?"
-        android:textColor="@color/colorPrimary"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password_til" />
-
-
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/login_btn"
+        android:id="@+id/register_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         app:cornerRadius="8dp"
-        android:text="Login"
+        android:text="Register"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/forgot_password_tv" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/login_btn"
-        android:gravity="center"
-        android:layout_marginTop="16dp">
-
-        <TextView
-            android:id="@+id/if_not_register_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Do not registered?"
-            android:textSize="16sp"/>
-
-        <TextView
-            android:id="@+id/register_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" Register"
-            android:textColor="@color/colorPrimary"
-            android:textSize="16sp"/>
-
-    </LinearLayout>
-
-
-
-
+        app:layout_constraintTop_toBottomOf="@+id/cnfPassword_til" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
