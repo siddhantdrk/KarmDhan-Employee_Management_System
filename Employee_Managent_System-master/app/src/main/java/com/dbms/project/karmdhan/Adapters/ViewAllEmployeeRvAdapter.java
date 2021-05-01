@@ -2,7 +2,6 @@ package com.dbms.project.karmdhan.Adapters;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dbms.project.karmdhan.DB.AdminOperations;
+import com.dbms.project.karmdhan.DB.ProjectOperations;
 import com.dbms.project.karmdhan.Model.Employee;
+import com.dbms.project.karmdhan.Model.Project;
 import com.dbms.project.karmdhan.R;
 
 import java.util.List;
@@ -45,25 +46,34 @@ public class ViewAllEmployeeRvAdapter extends RecyclerView.Adapter<ViewAllEmploy
         holder.employeeNumber.setText(String.valueOf(employeeList.get(position).getEmployeeNumber()));
         holder.employeeJobClass.setText(employeeList.get(position).getEmployeeJobClass());
         holder.removeBtn.setOnClickListener(view -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(context);
-            builder.setMessage("Are you sure ? you want remove this employee.");
-            builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
+            List<Project> projectList = new ProjectOperations(context).EmployeeIsALeaderForProjects(employeeList.get(position).getEmployeeNumber());
+            if (projectList == null || projectList.size() == 0) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                builder.setMessage("Are you sure ? you want remove this employee.");
+                builder.setPositiveButton("YES", (dialogInterface, i) -> {
                     adminOperations = new AdminOperations(context);
                     removeEmployee(employeeList.get(position).getEmployeeNumber(), position);
+                });
+                builder.setNegativeButton("NO", (dialogInterface, i) -> dialogInterface.dismiss());
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                String projectString = "";
+                for (Project project : projectList) {
+                    projectString = projectString + project.getProjectNumber() + " : " + project.getProjectName() + "\n";
                 }
-            });
-            builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
+                builder.setMessage("Sorry, you can't remove this employee as he is a leader for the following projects:\n" + projectString + "To remove employee First Change the  Leader of Above Projects.");
+                builder.setPositiveButton("OKAY", (dialogInterface, i) -> {
                     dialogInterface.dismiss();
-                }
-            });
-            AlertDialog alertDialog = builder.create();
-            alertDialog.show();
+                });
+                AlertDialog alertDialog = builder.create();
+                alertDialog.setCanceledOnTouchOutside(false);
+                alertDialog.show();
+            }
         });
         holder.bind(employeeList.get(position), onUpdateClickListener);
+
     }
 
 

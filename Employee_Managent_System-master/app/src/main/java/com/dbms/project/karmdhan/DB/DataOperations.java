@@ -60,8 +60,8 @@ public class DataOperations {
         projectList = new ArrayList<Project>();
         projectList.add(new Project(15, "Evergreen", 105));
         projectList.add(new Project(18, "Amber Wave", 104));
-        projectList.add(new Project(22, "Lit", 113));
-        projectList.add(new Project(25, "Employee", 101));
+        projectList.add(new Project(22, "KarmDhan", 113));
+        projectList.add(new Project(25, "CVMaker", 101));
 
         projectEmployeeList = new ArrayList<ProjectEmployee>();
         projectEmployeeList.add(new ProjectEmployee(15, 103, 84.50, 23.8));

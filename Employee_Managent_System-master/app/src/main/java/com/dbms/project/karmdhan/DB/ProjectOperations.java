@@ -126,4 +126,18 @@ public class ProjectOperations {
         }
         return projectCost;
     }
+
+    public List<Project> EmployeeIsALeaderForProjects(int employeeNum) {
+        List<Project> projectList = new ArrayList<>();
+        SQLiteDatabase database = projectDbHelper.getWritableDatabase();
+        Cursor cursor = database.rawQuery("select * from " + TABLE_PROJECT + " where " + COLUMN_PROJECT_LEADER_EMPLOYEE_NUMBER + " = ?", new String[]{String.valueOf(employeeNum)});
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    projectList.add(new Project(cursor.getInt(cursor.getColumnIndex(COLUMN_PROJECT_NUMBER)), cursor.getString(cursor.getColumnIndex(COLUMN_PROJECT_NAME)), cursor.getInt(cursor.getColumnIndex(COLUMN_PROJECT_LEADER_EMPLOYEE_NUMBER))));
+                } while (cursor.moveToNext());
+            }
+        }
+        return projectList;
+    }
 }

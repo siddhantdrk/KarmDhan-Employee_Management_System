@@ -28,7 +28,7 @@ public class AdminLoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         adminOperations = new AdminOperations(this);
         if (adminOperations.addAdmin(new Admin(12345678, "12345678"))) {
-            Toast.makeText(this, "Admin added successfully", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Welcome Admin", Toast.LENGTH_SHORT).show();
         } else {
             //Toast.makeText(this, "User ID already exists", Toast.LENGTH_SHORT).show();
         }
