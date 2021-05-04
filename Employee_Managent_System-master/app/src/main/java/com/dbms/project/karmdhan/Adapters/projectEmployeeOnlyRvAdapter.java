@@ -1,5 +1,6 @@
 package com.dbms.project.karmdhan.Adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,18 +53,25 @@ public class projectEmployeeOnlyRvAdapter extends RecyclerView.Adapter<projectEm
         holder.hoursBilled.setText(employeeList.get(position).getHoursBilled() + " Hrs");
         holder.chargePerHour.setText("$" + employeeList.get(position).getChargePerHour());
         holder.removeEmpBtn.setOnClickListener(view -> {
-            if (project.getProjectLeaderEmployeeNumber() != employeeList.get(position).getEmployeeNumber()) {
-                if (projectOperations.removeEmployeeFromProject(projectNum, employeeList.get(position).getEmployeeNumber())) {
-                    Toast.makeText(context, "Employee removed from Project successfully", Toast.LENGTH_SHORT).show();
-                    employeeList.remove(position);
-                    notifyItemRemoved(position);
-                    notifyDataSetChanged();
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setMessage("Are you sure ? you want remove this Employee from this Project.");
+            builder.setPositiveButton("YES", (dialogInterface, i) -> {
+                if (project.getProjectLeaderEmployeeNumber() != employeeList.get(position).getEmployeeNumber()) {
+                    if (projectOperations.removeEmployeeFromProject(projectNum, employeeList.get(position).getEmployeeNumber())) {
+                        Toast.makeText(context, "Employee removed from Project successfully", Toast.LENGTH_SHORT).show();
+                        employeeList.remove(position);
+                        notifyItemRemoved(position);
+                        notifyDataSetChanged();
+                    } else {
+                        Toast.makeText(context, "Oops something went wrong", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    Toast.makeText(context, "Oops something went wrong", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "You can't remove Leader. To do so First Change Leader !!", Toast.LENGTH_LONG).show();
                 }
-            } else {
-                Toast.makeText(context, "You can't remove Leader. To do so First Change Leader !!", Toast.LENGTH_LONG).show();
-            }
+            });
+            builder.setNegativeButton("NO", (dialogInterface, i) -> dialogInterface.dismiss());
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
         });
 
         holder.bind(new ProjectEmployee(projectNum, employeeList.get(position).getEmployeeNumber(), employeeList.get(position).getChargePerHour(), employeeList.get(position).getHoursBilled()), onUpdateClickListener);

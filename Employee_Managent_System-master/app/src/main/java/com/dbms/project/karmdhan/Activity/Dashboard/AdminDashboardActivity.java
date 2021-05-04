@@ -8,10 +8,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.dbms.project.karmdhan.Activity.AddEmployeeActivity;
-import com.dbms.project.karmdhan.Activity.AddProjectActivity;
-import com.dbms.project.karmdhan.Activity.ViewAllEmployeeActivity;
-import com.dbms.project.karmdhan.Activity.ViewAllProjectActivity;
+import com.dbms.project.karmdhan.Activity.Employee.AddEmployeeActivity;
+import com.dbms.project.karmdhan.Activity.Employee.ViewAllEmployeeActivity;
+import com.dbms.project.karmdhan.Activity.Project.AddProjectActivity;
+import com.dbms.project.karmdhan.Activity.Project.ViewAllProjectActivity;
 import com.dbms.project.karmdhan.Activity.WelcomeActivity;
 import com.dbms.project.karmdhan.DB.AdminOperations;
 import com.dbms.project.karmdhan.R;

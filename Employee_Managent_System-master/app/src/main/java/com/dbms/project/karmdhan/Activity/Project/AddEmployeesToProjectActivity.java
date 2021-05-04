@@ -1,4 +1,4 @@
-package com.dbms.project.karmdhan.Activity;
+package com.dbms.project.karmdhan.Activity.Project;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

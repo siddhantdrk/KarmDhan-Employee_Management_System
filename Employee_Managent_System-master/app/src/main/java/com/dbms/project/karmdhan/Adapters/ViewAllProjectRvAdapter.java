@@ -13,7 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.dbms.project.karmdhan.Activity.ProjectDetailsActivity;
+import com.dbms.project.karmdhan.Activity.Project.ProjectDetailsActivity;
 import com.dbms.project.karmdhan.DB.AdminOperations;
 import com.dbms.project.karmdhan.DB.EmployeeOperations;
 import com.dbms.project.karmdhan.Model.Project;

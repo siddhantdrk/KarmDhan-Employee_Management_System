@@ -10,24 +10,24 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activity.Register.AdminRegisterActivity"></activity>
-        <activity android:name=".Activity.UpdateProjectDetailsActivity" />
+        <activity android:name=".Activity.Project.UpdateProjectDetailsActivity" />
         <activity
-            android:name=".Activity.ProjectDetailsActivity"
+            android:name=".Activity.Project.ProjectDetailsActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.ViewAllProjectActivity"
+            android:name=".Activity.Project.ViewAllProjectActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.AddEmployeesToProjectActivity"
+            android:name=".Activity.Project.AddEmployeesToProjectActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.AddProjectActivity"
+            android:name=".Activity.Project.AddProjectActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.ViewAllEmployeeActivity"
+            android:name=".Activity.Employee.ViewAllEmployeeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.AddEmployeeActivity"
+            android:name=".Activity.Employee.AddEmployeeActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.ResetPassword.Admin.ChangeOrForgotPasswordAdminActivity"
