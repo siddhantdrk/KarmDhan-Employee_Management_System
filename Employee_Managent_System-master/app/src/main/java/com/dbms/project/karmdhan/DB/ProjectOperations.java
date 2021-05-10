@@ -3,6 +3,7 @@ package com.dbms.project.karmdhan.DB;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -32,7 +33,7 @@ public class ProjectOperations {
         this.context = context;
     }
 
-    public boolean addProject(Project project, ProjectEmployee projectEmployee) {
+    public boolean addProject(Project project, ProjectEmployee projectEmployee) throws SQLiteConstraintException {
         SQLiteDatabase database = projectDbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_PROJECT_NUMBER, project.getProjectNumber());

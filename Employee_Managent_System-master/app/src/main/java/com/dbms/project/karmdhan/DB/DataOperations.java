@@ -1,7 +1,9 @@
 package com.dbms.project.karmdhan.DB;
 
 import android.content.Context;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.dbms.project.karmdhan.Authentication.PasswordAuthentication;
 import com.dbms.project.karmdhan.Model.Employee;
@@ -52,7 +54,11 @@ public class DataOperations {
     public void addEmployeeData(List<Employee> employeeList) {
         adminOperations = new AdminOperations(context);
         for (int i = 0; i < employeeList.size(); i++) {
-            adminOperations.addEmployee(employeeList.get(i));
+            try {
+                adminOperations.addEmployee(employeeList.get(i));
+            } catch (SQLiteConstraintException sqLiteConstraintException) {
+                Log.e("addEmployeeData", sqLiteConstraintException.getMessage());
+            }
         }
     }
 
@@ -96,7 +102,11 @@ public class DataOperations {
             if (j >= projectList.size()) {
                 j = 0;
             }
-            projectOperations.addProject(projectList.get(j), projectEmployeeList.get(i));
+            try {
+                projectOperations.addProject(projectList.get(j), projectEmployeeList.get(i));
+            } catch (SQLiteConstraintException sqLiteConstraintException) {
+                Log.e("addProjectData", sqLiteConstraintException.getMessage());
+            }
         }
     }
 

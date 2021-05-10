@@ -47,6 +47,7 @@
             android:id="@+id/user_id_edt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLength="8"
             android:hint="Enter your User-Id"
             android:inputType="number" />
 
