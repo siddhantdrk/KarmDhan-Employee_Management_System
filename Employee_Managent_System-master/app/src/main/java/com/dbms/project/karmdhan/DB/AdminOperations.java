@@ -73,7 +73,7 @@ public class AdminOperations {
         ContentValues employeeValues = new ContentValues();
         employeeValues.put(COLUMN_EMPLOYEE_NUMBER, employee.getEmployeeNumber());
         employeeValues.put(COLUMN_EMPLOYEE_NAME, employee.getEmployeeName());
-        long result1 = database.insert(TABLE_EMPLOYEE, null, employeeValues);
+        long result1 = database.insertOrThrow(TABLE_EMPLOYEE, null, employeeValues);
         ContentValues jobClassValues = new ContentValues();
         jobClassValues.put(COLUMN_EMPLOYEE_NUMBER, employee.getEmployeeNumber());
         jobClassValues.put(COLUMN_JOB_CLASS, employee.getEmployeeJobClass());
@@ -81,7 +81,7 @@ public class AdminOperations {
         ContentValues passwordValues = new ContentValues();
         passwordValues.put(COLUMN_EMPLOYEE_NUMBER, employee.getEmployeeNumber());
         passwordValues.put(COLUMN_EMPLOYEE_PASSWORD, employee.getEmployeePassword());
-        long result3 = database.insert(TABLE_EMPLOYEE_PASSWORD, null, passwordValues);
+        long result3 = database.insertOrThrow(TABLE_EMPLOYEE_PASSWORD, null, passwordValues);
         return result1 != -1 && result2 != -1 && result3 != -1;
     }
 

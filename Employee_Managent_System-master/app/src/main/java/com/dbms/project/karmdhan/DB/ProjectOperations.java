@@ -39,13 +39,13 @@ public class ProjectOperations {
         contentValues.put(COLUMN_PROJECT_NUMBER, project.getProjectNumber());
         contentValues.put(COLUMN_PROJECT_NAME, project.getProjectName());
         contentValues.put(COLUMN_PROJECT_LEADER_EMPLOYEE_NUMBER, project.getProjectLeaderEmployeeNumber());
-        long result = database.insert(TABLE_PROJECT, null, contentValues);
+        long result = database.insertOrThrow(TABLE_PROJECT, null, contentValues);
         ContentValues contentValues1 = new ContentValues();
         contentValues1.put(COLUMN_PROJECT_NUMBER, projectEmployee.getProjectNumber());
         contentValues1.put(COLUMN_EMPLOYEE_NUMBER, projectEmployee.getEmployeeNumber());
         contentValues1.put(COLUMN_CHARGE_PER_HOUR, projectEmployee.getChargePerHour());
         contentValues1.put(COLUMN_HOURS_BILLED, projectEmployee.getHoursBilled());
-        long result1 = database.insert(TABLE_PROJECT_EMPLOYEE, null, contentValues1);
+        long result1 = database.insertOrThrow(TABLE_PROJECT_EMPLOYEE, null, contentValues1);
         return result != -1 && result1 != -1;
     }
 
