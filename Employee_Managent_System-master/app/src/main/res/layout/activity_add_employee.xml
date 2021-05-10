@@ -35,6 +35,7 @@
             android:id="@+id/employee_number_edt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxLength="8"
             android:hint="Employee Number"
             android:inputType="number" />
 
