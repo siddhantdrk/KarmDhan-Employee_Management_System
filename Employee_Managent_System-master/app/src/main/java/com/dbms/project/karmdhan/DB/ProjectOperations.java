@@ -3,7 +3,6 @@ package com.dbms.project.karmdhan.DB;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -33,19 +32,19 @@ public class ProjectOperations {
         this.context = context;
     }
 
-    public boolean addProject(Project project, ProjectEmployee projectEmployee) throws SQLiteConstraintException {
+    public boolean addProject(Project project, ProjectEmployee projectEmployee) {
         SQLiteDatabase database = projectDbHelper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_PROJECT_NUMBER, project.getProjectNumber());
         contentValues.put(COLUMN_PROJECT_NAME, project.getProjectName());
         contentValues.put(COLUMN_PROJECT_LEADER_EMPLOYEE_NUMBER, project.getProjectLeaderEmployeeNumber());
-        long result = database.insertOrThrow(TABLE_PROJECT, null, contentValues);
+        long result = database.insert(TABLE_PROJECT, null, contentValues);
         ContentValues contentValues1 = new ContentValues();
         contentValues1.put(COLUMN_PROJECT_NUMBER, projectEmployee.getProjectNumber());
         contentValues1.put(COLUMN_EMPLOYEE_NUMBER, projectEmployee.getEmployeeNumber());
         contentValues1.put(COLUMN_CHARGE_PER_HOUR, projectEmployee.getChargePerHour());
         contentValues1.put(COLUMN_HOURS_BILLED, projectEmployee.getHoursBilled());
-        long result1 = database.insertOrThrow(TABLE_PROJECT_EMPLOYEE, null, contentValues1);
+        long result1 = database.insert(TABLE_PROJECT_EMPLOYEE, null, contentValues1);
         return result != -1 && result1 != -1;
     }
 

@@ -102,11 +102,7 @@ public class DataOperations {
             if (j >= projectList.size()) {
                 j = 0;
             }
-            try {
-                projectOperations.addProject(projectList.get(j), projectEmployeeList.get(i));
-            } catch (SQLiteConstraintException sqLiteConstraintException) {
-                Log.e("addProjectData", sqLiteConstraintException.getMessage());
-            }
+            projectOperations.addProject(projectList.get(j), projectEmployeeList.get(i));
         }
     }
 
