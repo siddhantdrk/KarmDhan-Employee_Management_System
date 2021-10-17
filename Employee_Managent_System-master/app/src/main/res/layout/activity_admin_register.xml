@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F4ECA1"
     tools:context=".Activity.Register.AdminRegisterActivity"
     android:padding="16dp">
 
@@ -37,6 +38,8 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:hintAnimationEnabled="false"
+        app:startIconDrawable="@drawable/ic_baseline_perm_identity_24"
         app:boxStrokeColor="@color/colorPrimaryDark"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,8 +76,10 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:hintAnimationEnabled="false"
         app:boxStrokeColor="@color/colorPrimaryDark"
         app:endIconMode="password_toggle"
+        app:startIconDrawable="@drawable/ic_baseline_lock_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_tv">
@@ -105,7 +110,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:boxStrokeColor="@color/colorPrimaryDark"
+        app:hintAnimationEnabled="false"
         app:endIconMode="password_toggle"
+        app:startIconDrawable="@drawable/ic_baseline_lock_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cnfPassword_tv">
